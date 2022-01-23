@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/paper.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1642860587192,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642863750543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { css } from \"@emotion/css\";\n \n export const paperClassName = css`\n   border: 1px solid #ccc;\n-  padding: 1rem;\n+  padding: 2rem;\n   border-radius: 1rem;\n   margin: 1rem auto;\n   background-color: var(--paper);\n `;\n"
+                }
+            ],
+            "date": 1642860587192,
+            "name": "Commit-0",
+            "content": "import { css } from \"@emotion/css\";\n\nexport const paperClassName = css`\n  border: 1px solid #ccc;\n  padding: 1rem;\n  border-radius: 1rem;\n  margin: 1rem auto;\n  background-color: var(--paper);\n`;\n"
+        }
+    ]
+}

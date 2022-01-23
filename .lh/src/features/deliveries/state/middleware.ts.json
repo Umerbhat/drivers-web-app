@@ -1,0 +1,94 @@
+{
+    "sourceFile": "src/features/deliveries/state/middleware.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 19,
+            "patches": [
+                {
+                    "date": 1642838504638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642838822441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n import { createAsyncThunk } from '@reduxjs/toolkit';\n import { fetchDeliveries } from '../../../api';\n+import {  AppThunk } from '../../../store';\n+import { incrementByAmount } from './actions';\n+import { selectCount } from './selectors';\n \n \n export const incrementAsync = createAsyncThunk(\n   'counter/fetchCount',\n@@ -8,5 +11,17 @@\n     const response = await fetchDeliveries(id);\n     // The value we return becomes the `fulfilled` action payload\n     return response.data;\n   }\n-);\n\\ No newline at end of file\n+);\n+\n+// We can also write thunks by hand, which may contain both sync and async logic.\n+// Here's an example of conditionally dispatching actions based on current state.\n+export const incrementIfOdd = (amount: number): AppThunk => (\n+    dispatch,\n+    getState\n+  ) => {\n+    const currentValue = selectCount(getState());\n+    if (currentValue % 2 === 1) {\n+      dispatch(incrementByAmount(amount));\n+    }\n+  };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642844576257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createAsyncThunk } from '@reduxjs/toolkit';\n import { fetchDeliveries } from '../../../api';\n import {  AppThunk } from '../../../store';\n-import { incrementByAmount } from './actions';\n+import { incrementByAmount } from './reducer';\n import { selectCount } from './selectors';\n \n \n export const incrementAsync = createAsyncThunk(\n"
+                },
+                {
+                    "date": 1642846374577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,14 @@\n import { createAsyncThunk } from '@reduxjs/toolkit';\n import { fetchDeliveries } from '../../../api';\n import {  AppThunk } from '../../../store';\n+import { FETCH_DELIVERIES } from './actions';\n import { incrementByAmount } from './reducer';\n import { selectCount } from './selectors';\n \n \n-export const incrementAsync = createAsyncThunk(\n-  'counter/fetchCount',\n+export const getDeliveries = createAsyncThunk(\n+ FETCH_DELIVERIES,\n   async (id: number) => {\n     const response = await fetchDeliveries(id);\n     // The value we return becomes the `fulfilled` action payload\n     return response.data;\n"
+                },
+                {
+                    "date": 1642847291343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createAsyncThunk } from '@reduxjs/toolkit';\n import { fetchDeliveries } from '../../../api';\n import {  AppThunk } from '../../../store';\n import { FETCH_DELIVERIES } from './actions';\n-import { incrementByAmount } from './reducer';\n+import { resetActiveDelivery } from './reducer';\n import { selectCount } from './selectors';\n \n \n export const getDeliveries = createAsyncThunk(\n@@ -22,7 +22,7 @@\n     getState\n   ) => {\n     const currentValue = selectCount(getState());\n     if (currentValue % 2 === 1) {\n-      dispatch(incrementByAmount(amount));\n+      dispatch(resetActiveDelivery());\n     }\n   };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642847783297,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,15 +2,15 @@\n import { fetchDeliveries } from '../../../api';\n import {  AppThunk } from '../../../store';\n import { FETCH_DELIVERIES } from './actions';\n import { resetActiveDelivery } from './reducer';\n-import { selectCount } from './selectors';\n+import { activeDeliveryId } from './selectors';\n \n \n export const getDeliveries = createAsyncThunk(\n  FETCH_DELIVERIES,\n-  async (id: number) => {\n-    const response = await fetchDeliveries(id);\n+  async () => {\n+    const response = await fetchDeliveries();\n     // The value we return becomes the `fulfilled` action payload\n     return response.data;\n   }\n );\n@@ -20,9 +20,9 @@\n export const incrementIfOdd = (amount: number): AppThunk => (\n     dispatch,\n     getState\n   ) => {\n-    const currentValue = selectCount(getState());\n+    const currentValue = activeDeliveryId(getState());\n     if (currentValue % 2 === 1) {\n       dispatch(resetActiveDelivery());\n     }\n   };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642847802436,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,8 @@\n     dispatch,\n     getState\n   ) => {\n     const currentValue = activeDeliveryId(getState());\n-    if (currentValue % 2 === 1) {\n+    if (currentValue === \"a\") {\n       dispatch(resetActiveDelivery());\n     }\n   };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642850666098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n  FETCH_DELIVERIES,\n   async () => {\n     const response = await fetchDeliveries();\n     // The value we return becomes the `fulfilled` action payload\n-    return response.data;\n+    return response;\n   }\n );\n \n // We can also write thunks by hand, which may contain both sync and async logic.\n"
+                },
+                {
+                    "date": 1642850675374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n  FETCH_DELIVERIES,\n   async () => {\n     const response = await fetchDeliveries();\n     // The value we return becomes the `fulfilled` action payload\n+    console.log({response})\n     return response;\n   }\n );\n \n"
+                },
+                {
+                    "date": 1642850845430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,13 @@\n  FETCH_DELIVERIES,\n   async () => {\n     const response = await fetchDeliveries();\n     // The value we return becomes the `fulfilled` action payload\n-    console.log({response})\n-    return response;\n+\n+        if (!response.ok) {\n+          throw new Error(`HTTP error! status: ${response.status}`);\n+        }\n+        return response.json();\n   }\n );\n \n // We can also write thunks by hand, which may contain both sync and async logic.\n"
+                },
+                {
+                    "date": 1642851287539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,32 +1,37 @@\n-import { createAsyncThunk } from '@reduxjs/toolkit';\n-import { fetchDeliveries } from '../../../api';\n-import {  AppThunk } from '../../../store';\n-import { FETCH_DELIVERIES } from './actions';\n-import { resetActiveDelivery } from './reducer';\n-import { activeDeliveryId } from './selectors';\n+import { createAsyncThunk } from \"@reduxjs/toolkit\";\n+import { fetchDeliveries, fetchDeliveryDetails } from \"../../../api\";\n+import { AppThunk } from \"../../../store\";\n+import { FETCH_DELIVERIES } from \"./actions\";\n+import { resetActiveDelivery } from \"./reducer\";\n+import { activeDeliveryId } from \"./selectors\";\n \n+export const getDeliveries = createAsyncThunk(FETCH_DELIVERIES, async () => {\n+  const response = await fetchDeliveries();\n+  // The value we return becomes the `fulfilled` action payload\n \n-export const getDeliveries = createAsyncThunk(\n- FETCH_DELIVERIES,\n-  async () => {\n-    const response = await fetchDeliveries();\n+  if (!response.ok) {\n+    throw new Error(`HTTP error! status: ${response.status}`);\n+  }\n+  return response.json();\n+});\n+\n+export const getDeliveryDetails = createAsyncThunk(FETCH_DELIVERIES, async (id: string) => {\n+    const response = await fetchDeliveryDetails(id);\n     // The value we return becomes the `fulfilled` action payload\n+  \n+    if (!response.ok) {\n\\ No newline at end of file\n+      throw new Error(`HTTP error! status: ${response.status}`);\n+    }\n+    return response.json();\n+  });\n \n-        if (!response.ok) {\n-          throw new Error(`HTTP error! status: ${response.status}`);\n-        }\n-        return response.json();\n-  }\n-);\n-\n // We can also write thunks by hand, which may contain both sync and async logic.\n // Here's an example of conditionally dispatching actions based on current state.\n-export const incrementIfOdd = (amount: number): AppThunk => (\n-    dispatch,\n-    getState\n-  ) => {\n+export const incrementIfOdd =\n+  (amount: number): AppThunk =>\n+  (dispatch, getState) => {\n     const currentValue = activeDeliveryId(getState());\n     if (currentValue === \"a\") {\n       dispatch(resetActiveDelivery());\n     }\n-  };\n+  };\n"
+                },
+                {
+                    "date": 1642851357293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,8 @@\n import { activeDeliveryId } from \"./selectors\";\n \n export const getDeliveries = createAsyncThunk(FETCH_DELIVERIES, async () => {\n   const response = await fetchDeliveries();\n-  // The value we return becomes the `fulfilled` action payload\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n@@ -33,5 +32,5 @@\n     const currentValue = activeDeliveryId(getState());\n     if (currentValue === \"a\") {\n       dispatch(resetActiveDelivery());\n     }\n-  };\n\\ No newline at end of file\n+  };\n"
+                },
+                {
+                    "date": 1642851374937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,20 +13,20 @@\n   }\n   return response.json();\n });\n \n-export const getDeliveryDetails = createAsyncThunk(FETCH_DELIVERIES, async (id: string) => {\n+export const getDeliveryDetails = createAsyncThunk(\n+  FETCH_DELIVERIES,\n+  async (id: string) => {\n     const response = await fetchDeliveryDetails(id);\n-    // The value we return becomes the `fulfilled` action payload\n-  \n+\n     if (!response.ok) {\n       throw new Error(`HTTP error! status: ${response.status}`);\n     }\n     return response.json();\n-  });\n+  }\n+);\n \n-// We can also write thunks by hand, which may contain both sync and async logic.\n-// Here's an example of conditionally dispatching actions based on current state.\n export const incrementIfOdd =\n   (amount: number): AppThunk =>\n   (dispatch, getState) => {\n     const currentValue = activeDeliveryId(getState());\n"
+                },
+                {
+                    "date": 1642861561991,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   return response.json();\n });\n \n export const getDeliveryDetails = createAsyncThunk(\n-  FETCH_DELIVERIES,\n+    FETCH_DELIVERY,\n   async (id: string) => {\n     const response = await fetchDeliveryDetails(id);\n \n     if (!response.ok) {\n"
+                },
+                {
+                    "date": 1642918610634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import { createAsyncThunk } from \"@reduxjs/toolkit\";\n import { fetchDeliveries, fetchDeliveryDetails } from \"../../../api\";\n import { AppThunk } from \"../../../store\";\n-import { FETCH_DELIVERIES } from \"./actions\";\n+import { FETCH_DELIVERIES, FETCH_DELIVERY } from \"./actions\";\n import { resetActiveDelivery } from \"./reducer\";\n-import { activeDeliveryId } from \"./selectors\";\n+import { getActiveDeliveryId } from \"./selectors\";\n \n export const getDeliveries = createAsyncThunk(FETCH_DELIVERIES, async () => {\n   const response = await fetchDeliveries();\n \n@@ -28,9 +28,9 @@\n \n export const incrementIfOdd =\n   (amount: number): AppThunk =>\n   (dispatch, getState) => {\n-    const currentValue = activeDeliveryId(getState());\n+    const currentValue = getActiveDeliveryId(getState());\n     if (currentValue === \"a\") {\n       dispatch(resetActiveDelivery());\n     }\n   };\n"
+                },
+                {
+                    "date": 1642925446576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n import { createAsyncThunk } from \"@reduxjs/toolkit\";\n import { fetchDeliveries, fetchDeliveryDetails } from \"../../../api\";\n+import { postFinishDelivery } from \"../../../api/services/deliveries.services\";\n+import { TPostStatusParams } from \"../../../api/types\";\n import { AppThunk } from \"../../../store\";\n-import { FETCH_DELIVERIES, FETCH_DELIVERY } from \"./actions\";\n+import { FETCH_DELIVERIES, FETCH_DELIVERY, POST_DELIVERY_STATUS } from \"./actions\";\n import { resetActiveDelivery } from \"./reducer\";\n import { getActiveDeliveryId } from \"./selectors\";\n \n export const getDeliveries = createAsyncThunk(FETCH_DELIVERIES, async () => {\n@@ -25,8 +27,20 @@\n     return response.json();\n   }\n );\n \n+export const setDeliveryStatus = createAsyncThunk(\n+    POST_DELIVERY_STATUS,\n+  async (params: TPostStatusParams) => {\n+    const response = await postFinishDelivery(params);\n+\n+    if (!response.ok) {\n+      throw new Error(`HTTP error! status: ${response.status}`);\n+    }\n+    return response.json();\n+  }\n+);\n+\n export const incrementIfOdd =\n   (amount: number): AppThunk =>\n   (dispatch, getState) => {\n     const currentValue = getActiveDeliveryId(getState());\n"
+                },
+                {
+                    "date": 1642933992709,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { fetchDeliveries, fetchDeliveryDetails } from \"../../../api\";\n import { postFinishDelivery } from \"../../../api/services/deliveries.services\";\n import { TPostStatusParams } from \"../../../api/types\";\n import { AppThunk } from \"../../../store\";\n-import { FETCH_DELIVERIES, FETCH_DELIVERY, POST_DELIVERY_STATUS } from \"./actions\";\n+import { FETCH_DELIVERIES, FETCH_DELIVERY, POST_DELIVERY_STATUS } from \"./constants\";\n import { resetActiveDelivery } from \"./reducer\";\n import { getActiveDeliveryId } from \"./selectors\";\n \n export const getDeliveries = createAsyncThunk(FETCH_DELIVERIES, async () => {\n"
+                },
+                {
+                    "date": 1642934411392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { postFinishDelivery } from \"../../../api/services/deliveries.services\";\n import { TPostStatusParams } from \"../../../api/types\";\n import { AppThunk } from \"../../../store\";\n import { FETCH_DELIVERIES, FETCH_DELIVERY, POST_DELIVERY_STATUS } from \"./constants\";\n-import { resetActiveDelivery } from \"./reducer\";\n+import { resetActiveDelivery } from \"./slice\";\n import { getActiveDeliveryId } from \"./selectors\";\n \n export const getDeliveries = createAsyncThunk(FETCH_DELIVERIES, async () => {\n   const response = await fetchDeliveries();\n"
+                },
+                {
+                    "date": 1642940466966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,15 @@\n import { createAsyncThunk } from \"@reduxjs/toolkit\";\n-import { fetchDeliveries, fetchDeliveryDetails } from \"../../../api\";\n+import { fetchDeliveryList, fetchDeliveryDetails } from \"../../../api\";\n import { postFinishDelivery } from \"../../../api/services/deliveries.services\";\n import { TPostStatusParams } from \"../../../api/types\";\n import { AppThunk } from \"../../../store\";\n import { FETCH_DELIVERIES, FETCH_DELIVERY, POST_DELIVERY_STATUS } from \"./constants\";\n import { resetActiveDelivery } from \"./slice\";\n import { getActiveDeliveryId } from \"./selectors\";\n \n-export const getDeliveries = createAsyncThunk(FETCH_DELIVERIES, async () => {\n-  const response = await fetchDeliveries();\n+export const getDeliveryList = createAsyncThunk(FETCH_DELIVERIES, async () => {\n+  const response = await fetchDeliveryList();\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642940493277,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { createAsyncThunk } from \"@reduxjs/toolkit\";\n import { fetchDeliveryList, fetchDeliveryDetails } from \"../../../api\";\n-import { postFinishDelivery } from \"../../../api/services/deliveries.services\";\n+import { postFinishDelivery } from \"../../../api/services/deliveryList.services\";\n import { TPostStatusParams } from \"../../../api/types\";\n import { AppThunk } from \"../../../store\";\n import { FETCH_DELIVERIES, FETCH_DELIVERY, POST_DELIVERY_STATUS } from \"./constants\";\n import { resetActiveDelivery } from \"./slice\";\n"
+                }
+            ],
+            "date": 1642838504638,
+            "name": "Commit-0",
+            "content": "import { createAsyncThunk } from '@reduxjs/toolkit';\nimport { fetchDeliveries } from '../../../api';\n\n\nexport const incrementAsync = createAsyncThunk(\n  'counter/fetchCount',\n  async (id: number) => {\n    const response = await fetchDeliveries(id);\n    // The value we return becomes the `fulfilled` action payload\n    return response.data;\n  }\n);"
+        }
+    ]
+}

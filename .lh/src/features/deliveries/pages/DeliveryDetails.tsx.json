@@ -1,0 +1,218 @@
+{
+    "sourceFile": "src/features/deliveries/pages/DeliveryDetails.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 50,
+            "patches": [
+                {
+                    "date": 1642839301283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642860843186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,12 @@\n-import React from 'react';\n+import React from \"react\";\n+import { useAppDispatch, useAppSelector } from \"../../../store/hooks\";\n+import { InfoCard } from \"../components/InfoCard\";\n+import { deliveriesData, deliveriesDataStatus } from \"../state/selectors\";\n+import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n-\n-  return (\n-    <div>\n-     details per item\n-    </div>\n-  );\n+  const { ids: listIds, entities } = useAppSelector(deliveriesData);\n+  const status = useAppSelector(deliveriesDataStatus);\n+  const dispatch = useAppDispatch();\n+  return <div><InfoCard/></div>;\n }\n"
+                },
+                {
+                    "date": 1642861032833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,18 @@\n import React from \"react\";\n+import { useParams } from \"react-router-dom\";\n import { useAppDispatch, useAppSelector } from \"../../../store/hooks\";\n import { InfoCard } from \"../components/InfoCard\";\n import { deliveriesData, deliveriesDataStatus } from \"../state/selectors\";\n import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n-  const status = useAppSelector(deliveriesDataStatus);\n+  const status = useAppSelector(getDeliveryStatus);\n+  const params = useParams();\n   const dispatch = useAppDispatch();\n-  return <div><InfoCard/></div>;\n+  console.log(params,\"params\")\n+  return <div>\n+    {status === 'loading' && <div>Loading...</div>}\n+    {/* <InfoCard details={}/> */}\n+    </div>;\n }\n"
+                },
+                {
+                    "date": 1642861040523,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from \"react\";\n import { useParams } from \"react-router-dom\";\n import { useAppDispatch, useAppSelector } from \"../../../store/hooks\";\n import { InfoCard } from \"../components/InfoCard\";\n-import { deliveriesData, deliveriesDataStatus } from \"../state/selectors\";\n+import { deliveriesData, deliveriesDataStatus, getDeliveryStatus } from \"../state/selectors\";\n import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n"
+                },
+                {
+                    "date": 1642861127118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,12 +7,12 @@\n \n export function DeliveryDetails() {\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n-  const params = useParams();\n+  const {deliveryId} = useParams();\n   const dispatch = useAppDispatch();\n   console.log(params,\"params\")\n   return <div>\n     {status === 'loading' && <div>Loading...</div>}\n-    {/* <InfoCard details={}/> */}\n+   {deliveryId? <InfoCard details={entities[deliveryId]}/>: null}\n     </div>;\n }\n"
+                },
+                {
+                    "date": 1642861133213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,8 @@\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const {deliveryId} = useParams();\n   const dispatch = useAppDispatch();\n-  console.log(params,\"params\")\n   return <div>\n     {status === 'loading' && <div>Loading...</div>}\n    {deliveryId? <InfoCard details={entities[deliveryId]}/>: null}\n     </div>;\n"
+                },
+                {
+                    "date": 1642861221831,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,29 @@\n-import React from \"react\";\n+import React, { useEffect } from \"react\";\n import { useParams } from \"react-router-dom\";\n import { useAppDispatch, useAppSelector } from \"../../../store/hooks\";\n import { InfoCard } from \"../components/InfoCard\";\n-import { deliveriesData, deliveriesDataStatus, getDeliveryStatus } from \"../state/selectors\";\n+import { getDeliveryDetails } from \"../state/middleware\";\n+import {\n+  deliveriesData,\n+  deliveriesDataStatus,\n+  getDeliveryStatus,\n+} from \"../state/selectors\";\n import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n-  const {deliveryId} = useParams();\n+  const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n-  return <div>\n-    {status === 'loading' && <div>Loading...</div>}\n-   {deliveryId? <InfoCard details={entities[deliveryId]}/>: null}\n-    </div>;\n+  useEffect(() => {\n+    if (deliveryId) {\n+      dispatch(getDeliveryDetails(deliveryId));\n+    }\n+  }, [deliveryId, dispatch]);\n+  return (\n+    <div>\n+      {status === \"loading\" && <div>Loading...</div>}\n+      {deliveryId ? <InfoCard details={entities[deliveryId]} /> : null}\n+    </div>\n+  );\n }\n"
+                },
+                {
+                    "date": 1642861876861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n   useEffect(() => {\n+    console.log(deliveryId,\"deliveryId\")\n     if (deliveryId) {\n       dispatch(getDeliveryDetails(deliveryId));\n     }\n   }, [deliveryId, dispatch]);\n"
+                },
+                {
+                    "date": 1642861903415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,14 +10,15 @@\n } from \"../state/selectors\";\n import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n+  console.log(deliveryId,\"deliveryId\")\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n   useEffect(() => {\n-    console.log(deliveryId,\"deliveryId\")\n+\n     if (deliveryId) {\n       dispatch(getDeliveryDetails(deliveryId));\n     }\n   }, [deliveryId, dispatch]);\n"
+                },
+                {
+                    "date": 1642861929512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,19 +10,19 @@\n } from \"../state/selectors\";\n import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n-  console.log(deliveryId,\"deliveryId\")\n+\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n   useEffect(() => {\n-\n+    console.log(deliveryId)\n     if (deliveryId) {\n       dispatch(getDeliveryDetails(deliveryId));\n     }\n-  }, [deliveryId, dispatch]);\n+  }, []);\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {deliveryId ? <InfoCard details={entities[deliveryId]} /> : null}\n"
+                },
+                {
+                    "date": 1642861947927,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,8 @@\n } from \"../state/selectors\";\n import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n-\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n"
+                },
+                {
+                    "date": 1642861986162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,14 +14,15 @@\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n+\n   useEffect(() => {\n     console.log(deliveryId)\n     if (deliveryId) {\n       dispatch(getDeliveryDetails(deliveryId));\n     }\n-  }, []);\n+  }, [deliveryId,dispatch ]);\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {deliveryId ? <InfoCard details={entities[deliveryId]} /> : null}\n"
+                },
+                {
+                    "date": 1642861996772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,13 +16,13 @@\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n \n   useEffect(() => {\n-    console.log(deliveryId)\n+    console.log(deliveryId);\n     if (deliveryId) {\n       dispatch(getDeliveryDetails(deliveryId));\n     }\n-  }, [deliveryId,dispatch ]);\n+  }, [deliveryId, dispatch]);\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {deliveryId ? <InfoCard details={entities[deliveryId]} /> : null}\n"
+                },
+                {
+                    "date": 1642862012798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n-\n+  console.log(deliveryId);\n   useEffect(() => {\n     console.log(deliveryId);\n     if (deliveryId) {\n       dispatch(getDeliveryDetails(deliveryId));\n"
+                },
+                {
+                    "date": 1642862048650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n } from \"../state/selectors\";\n import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n+  console.log(\"deliveryId\");\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n"
+                },
+                {
+                    "date": 1642862054693,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,11 @@\n } from \"../state/selectors\";\n import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n+\n+  const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   console.log(\"deliveryId\");\n-  const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n   console.log(deliveryId);\n"
+                },
+                {
+                    "date": 1642862066727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,10 @@\n \n export function DeliveryDetails() {\n \n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n+  const status = useAppSelector(getDeliveryStatus);\n   console.log(\"deliveryId\");\n-  const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n   console.log(deliveryId);\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1642862081479,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,10 @@\n export function DeliveryDetails() {\n \n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n+  const { deliveryId } = useParams();\n   console.log(\"deliveryId\");\n-  const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n   console.log(deliveryId);\n   useEffect(() => {\n     console.log(deliveryId);\n"
+                },
+                {
+                    "date": 1642862097195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,10 +14,10 @@\n \n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n+  const dispatch = useAppDispatch();\n   console.log(\"deliveryId\");\n-  const dispatch = useAppDispatch();\n   console.log(deliveryId);\n   useEffect(() => {\n     console.log(deliveryId);\n     if (deliveryId) {\n"
+                },
+                {
+                    "date": 1642862181795,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,10 @@\n   console.log(\"deliveryId\");\n   console.log(deliveryId);\n   useEffect(() => {\n     console.log(deliveryId);\n-    if (deliveryId) {\n-      dispatch(getDeliveryDetails(deliveryId));\n+    if (true) {\n+      dispatch(getDeliveryDetails(\"2\"));\n     }\n   }, [deliveryId, dispatch]);\n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1642862199328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     console.log(deliveryId);\n     if (true) {\n       dispatch(getDeliveryDetails(\"2\"));\n     }\n-  }, [deliveryId, dispatch]);\n+  }, []);\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {deliveryId ? <InfoCard details={entities[deliveryId]} /> : null}\n"
+                },
+                {
+                    "date": 1642862238800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   const dispatch = useAppDispatch();\n   console.log(\"deliveryId\");\n   console.log(deliveryId);\n   useEffect(() => {\n-    console.log(deliveryId);\n+    console.log(\"2\");\n     if (true) {\n       dispatch(getDeliveryDetails(\"2\"));\n     }\n   }, []);\n"
+                },
+                {
+                    "date": 1642862293098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,8 @@\n   }, []);\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n-      {deliveryId ? <InfoCard details={entities[deliveryId]} /> : null}\n+      {/* {deliveryId ? <InfoCard details={entities[deliveryId]} /> : null} */}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642862522489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,11 +23,12 @@\n     if (true) {\n       dispatch(getDeliveryDetails(\"2\"));\n     }\n   }, []);\n+  const details = deliveryId?entities[deliveryId]:null\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n-      {/* {deliveryId ? <InfoCard details={entities[deliveryId]} /> : null} */}\n+      {details ? <InfoCard details={details} /> : null}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642862539576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,22 +10,20 @@\n } from \"../state/selectors\";\n import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n-\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n   console.log(\"deliveryId\");\n   console.log(deliveryId);\n   useEffect(() => {\n-    console.log(\"2\");\n-    if (true) {\n+    if (deliveryId) {\n       dispatch(getDeliveryDetails(\"2\"));\n     }\n-  }, []);\n-  const details = deliveryId?entities[deliveryId]:null\n+  }, [deliveryId, dispatch]);\n+  const details = deliveryId ? entities[deliveryId] : null;\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {details ? <InfoCard details={details} /> : null}\n"
+                },
+                {
+                    "date": 1642863274540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,9 @@\n       dispatch(getDeliveryDetails(\"2\"));\n     }\n   }, [deliveryId, dispatch]);\n   const details = deliveryId ? entities[deliveryId] : null;\n+  console.log(details,\"details\")\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {details ? <InfoCard details={details} /> : null}\n"
+                },
+                {
+                    "date": 1642863334053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   console.log(\"deliveryId\");\n   console.log(deliveryId);\n   useEffect(() => {\n     if (deliveryId) {\n-      dispatch(getDeliveryDetails(\"2\"));\n+      dispatch(getDeliveryDetails(deliveryId));\n     }\n   }, [deliveryId, dispatch]);\n   const details = deliveryId ? entities[deliveryId] : null;\n   console.log(details,\"details\")\n"
+                },
+                {
+                    "date": 1642864710966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,12 +22,12 @@\n       dispatch(getDeliveryDetails(deliveryId));\n     }\n   }, [deliveryId, dispatch]);\n   const details = deliveryId ? entities[deliveryId] : null;\n-  console.log(details,\"details\")\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {details ? <InfoCard details={details} /> : null}\n+      {details ? <InfoCard details={details} /> : null}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642864719547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n } from \"../state/selectors\";\n import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n-  const { ids: listIds, entities } = useAppSelector(deliveriesData);\n+  const { entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n   console.log(\"deliveryId\");\n"
+                },
+                {
+                    "date": 1642864753032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import React, { useEffect } from \"react\";\n import { useParams } from \"react-router-dom\";\n import { useAppDispatch, useAppSelector } from \"../../../store/hooks\";\n import { InfoCard } from \"../components/InfoCard\";\n+import { ItemActions } from \"../components/ItemActions\";\n import { getDeliveryDetails } from \"../state/middleware\";\n import {\n   deliveriesData,\n   deliveriesDataStatus,\n@@ -26,8 +27,8 @@\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {details ? <InfoCard details={details} /> : null}\n-      {details ? <InfoCard details={details} /> : null}\n+      {details ? <ItemActions /> : null}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642865550995,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,8 @@\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {details ? <InfoCard details={details} /> : null}\n-      {details ? <ItemActions /> : null}\n+      {details ? <ItemActions type=\"success\" /> : null}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642865577327,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,8 @@\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {details ? <InfoCard details={details} /> : null}\n-      {details ? <ItemActions type=\"success\" /> : null}\n+      {details ? <ItemActions/> : null}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642917726154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,10 @@\n   const details = deliveryId ? entities[deliveryId] : null;\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n+      {details ? <ItemActions/> : null}\n       {details ? <InfoCard details={details} /> : null}\n-      {details ? <ItemActions/> : null}\n+  \n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642918156476,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,10 +15,8 @@\n   const { entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n-  console.log(\"deliveryId\");\n-  console.log(deliveryId);\n   useEffect(() => {\n     if (deliveryId) {\n       dispatch(getDeliveryDetails(deliveryId));\n     }\n"
+                },
+                {
+                    "date": 1642918578066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,18 +3,21 @@\n import { useAppDispatch, useAppSelector } from \"../../../store/hooks\";\n import { InfoCard } from \"../components/InfoCard\";\n import { ItemActions } from \"../components/ItemActions\";\n import { getDeliveryDetails } from \"../state/middleware\";\n+import { setActiveDelivery } from \"../state/reducer\";\n import {\n   deliveriesData,\n   deliveriesDataStatus,\n+  getActiveDeliveryId,\n   getDeliveryStatus,\n } from \"../state/selectors\";\n import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n   const { entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n+  const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n   useEffect(() => {\n     if (deliveryId) {\n@@ -24,10 +27,9 @@\n   const details = deliveryId ? entities[deliveryId] : null;\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n-      {details ? <ItemActions/> : null}\n+      {details && deliveryId? <ItemActions makeActive = {() => dispatch(setActiveDelivery(deliveryId))} /> : null}\n       {details ? <InfoCard details={details} /> : null}\n-  \n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642918666256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n   const details = deliveryId ? entities[deliveryId] : null;\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n-      {details && deliveryId? <ItemActions makeActive = {() => dispatch(setActiveDelivery(deliveryId))} /> : null}\n+      {details && deliveryId? <ItemActions activeDeliveryId={activeDeliveryId} makeActive = {() => dispatch(setActiveDelivery(deliveryId))} /> : null}\n       {details ? <InfoCard details={details} /> : null}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642919379094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,15 @@\n   const details = deliveryId ? entities[deliveryId] : null;\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n-      {details && deliveryId? <ItemActions activeDeliveryId={activeDeliveryId} makeActive = {() => dispatch(setActiveDelivery(deliveryId))} /> : null}\n+      {details && deliveryId ? (\n+        <ItemActions\n+          isActive={activeDeliveryId === deliveryId}\n+          activeDeliveryId={activeDeliveryId }\n+          makeActive={() => dispatch(setActiveDelivery(deliveryId))}\n+        />\n+      ) : null}\n       {details ? <InfoCard details={details} /> : null}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642920372285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,13 +6,11 @@\n import { getDeliveryDetails } from \"../state/middleware\";\n import { setActiveDelivery } from \"../state/reducer\";\n import {\n   deliveriesData,\n-  deliveriesDataStatus,\n   getActiveDeliveryId,\n   getDeliveryStatus,\n } from \"../state/selectors\";\n-import { DeliveryItem } from \"../types\";\n \n export function DeliveryDetails() {\n   const { entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n"
+                },
+                {
+                    "date": 1642920399629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,14 +22,15 @@\n       dispatch(getDeliveryDetails(deliveryId));\n     }\n   }, [deliveryId, dispatch]);\n   const details = deliveryId ? entities[deliveryId] : null;\n+  const isActiveDelivery = activeDeliveryId === deliveryId\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {details && deliveryId ? (\n         <ItemActions\n-          isActive={activeDeliveryId === deliveryId}\n+          isActive={isActiveDelivery}\n           activeDeliveryId={activeDeliveryId }\n           makeActive={() => dispatch(setActiveDelivery(deliveryId))}\n         />\n       ) : null}\n"
+                },
+                {
+                    "date": 1642921001181,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,8 @@\n           activeDeliveryId={activeDeliveryId }\n           makeActive={() => dispatch(setActiveDelivery(deliveryId))}\n         />\n       ) : null}\n-      {details ? <InfoCard details={details} /> : null}\n+      {details ? <InfoCard details={details}  isActive={isActiveDelivery}/> : null}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642923927615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,9 @@\n   const isActiveDelivery = activeDeliveryId === deliveryId\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n+      <Link to=\"/\">Back to list</Link>\n       {details && deliveryId ? (\n         <ItemActions\n           isActive={isActiveDelivery}\n           activeDeliveryId={activeDeliveryId }\n"
+                },
+                {
+                    "date": 1642923934860,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React, { useEffect } from \"react\";\n-import { useParams } from \"react-router-dom\";\n+import { Link, useParams } from \"react-router-dom\";\n import { useAppDispatch, useAppSelector } from \"../../../store/hooks\";\n import { InfoCard } from \"../components/InfoCard\";\n import { ItemActions } from \"../components/ItemActions\";\n import { getDeliveryDetails } from \"../state/middleware\";\n"
+                },
+                {
+                    "date": 1642923994849,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,8 @@\n   const isActiveDelivery = activeDeliveryId === deliveryId\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n-      <Link to=\"/\">Back to list</Link>\n       {details && deliveryId ? (\n         <ItemActions\n           isActive={isActiveDelivery}\n           activeDeliveryId={activeDeliveryId }\n"
+                },
+                {
+                    "date": 1642925748085,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n import React, { useEffect } from \"react\";\n import { Link, useParams } from \"react-router-dom\";\n+import { TPostStatusParams } from \"../../../api/types\";\n import { useAppDispatch, useAppSelector } from \"../../../store/hooks\";\n import { InfoCard } from \"../components/InfoCard\";\n import { ItemActions } from \"../components/ItemActions\";\n-import { getDeliveryDetails } from \"../state/middleware\";\n+import { getDeliveryDetails, setDeliveryStatus } from \"../state/middleware\";\n import { setActiveDelivery } from \"../state/reducer\";\n import {\n   deliveriesData,\n   getActiveDeliveryId,\n@@ -22,19 +23,31 @@\n       dispatch(getDeliveryDetails(deliveryId));\n     }\n   }, [deliveryId, dispatch]);\n   const details = deliveryId ? entities[deliveryId] : null;\n-  const isActiveDelivery = activeDeliveryId === deliveryId\n+  const isActiveDelivery = activeDeliveryId === deliveryId;\n   return (\n     <div>\n       {status === \"loading\" && <div>Loading...</div>}\n       {details && deliveryId ? (\n         <ItemActions\n           isActive={isActiveDelivery}\n-          activeDeliveryId={activeDeliveryId }\n+          activeDeliveryId={activeDeliveryId}\n           makeActive={() => dispatch(setActiveDelivery(deliveryId))}\n+          markStatus={(status: TPostStatusParams[\"status\"]) =>\n+            dispatch(\n+              setDeliveryStatus({\n+                deliveryId,\n+                status,\n+                latitude: details.latitude,\n+                longitude: details.longitude,\n+              })\n+            )\n+          }\n         />\n       ) : null}\n-      {details ? <InfoCard details={details}  isActive={isActiveDelivery}/> : null}\n+      {details ? (\n+        <InfoCard details={details} isActive={isActiveDelivery} />\n+      ) : null}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642931963008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import React, { useEffect } from \"react\";\n import { Link, useParams } from \"react-router-dom\";\n import { TPostStatusParams } from \"../../../api/types\";\n+import { Loader } from \"../../../components/Loader\";\n import { useAppDispatch, useAppSelector } from \"../../../store/hooks\";\n import { InfoCard } from \"../components/InfoCard\";\n import { ItemActions } from \"../components/ItemActions\";\n import { getDeliveryDetails, setDeliveryStatus } from \"../state/middleware\";\n@@ -26,9 +27,9 @@\n   const details = deliveryId ? entities[deliveryId] : null;\n   const isActiveDelivery = activeDeliveryId === deliveryId;\n   return (\n     <div>\n-      {status === \"loading\" && <div>Loading...</div>}\n+      {status === \"loading\" && <Loader/>}\n       {details && deliveryId ? (\n         <ItemActions\n           isActive={isActiveDelivery}\n           activeDeliveryId={activeDeliveryId}\n"
+                },
+                {
+                    "date": 1642934412894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import { useAppDispatch, useAppSelector } from \"../../../store/hooks\";\n import { InfoCard } from \"../components/InfoCard\";\n import { ItemActions } from \"../components/ItemActions\";\n import { getDeliveryDetails, setDeliveryStatus } from \"../state/middleware\";\n-import { setActiveDelivery } from \"../state/reducer\";\n+import { setActiveDelivery } from \"../state/slice\";\n import {\n   deliveriesData,\n   getActiveDeliveryId,\n   getDeliveryStatus,\n"
+                },
+                {
+                    "date": 1642939094639,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useEffect } from \"react\";\n import { Link, useParams } from \"react-router-dom\";\n-import { TPostStatusParams } from \"../../../api/types\";\n+import { TDeliveryItemDetails, TPostStatusParams } from \"../../../api/types\";\n import { Loader } from \"../../../components/Loader\";\n import { useAppDispatch, useAppSelector } from \"../../../store/hooks\";\n import { InfoCard } from \"../components/InfoCard\";\n import { ItemActions } from \"../components/ItemActions\";\n@@ -23,9 +23,9 @@\n     if (deliveryId) {\n       dispatch(getDeliveryDetails(deliveryId));\n     }\n   }, [deliveryId, dispatch]);\n-  const details = deliveryId ? entities[deliveryId] : null;\n+  const details = deliveryId ? entities[deliveryId] as TDeliveryItemDetails : null;\n   const isActiveDelivery = activeDeliveryId === deliveryId;\n   return (\n     <div>\n       {status === \"loading\" && <Loader/>}\n"
+                },
+                {
+                    "date": 1642939107875,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,13 +23,15 @@\n     if (deliveryId) {\n       dispatch(getDeliveryDetails(deliveryId));\n     }\n   }, [deliveryId, dispatch]);\n-  const details = deliveryId ? entities[deliveryId] as TDeliveryItemDetails : null;\n+  const details = deliveryId\n+    ? (entities[deliveryId] as TDeliveryItemDetails)\n+    : null;\n   const isActiveDelivery = activeDeliveryId === deliveryId;\n   return (\n     <div>\n-      {status === \"loading\" && <Loader/>}\n+      {status === \"loading\" && <Loader />}\n       {details && deliveryId ? (\n         <ItemActions\n           isActive={isActiveDelivery}\n           activeDeliveryId={activeDeliveryId}\n"
+                },
+                {
+                    "date": 1642939700208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,15 +7,15 @@\n import { ItemActions } from \"../components/ItemActions\";\n import { getDeliveryDetails, setDeliveryStatus } from \"../state/middleware\";\n import { setActiveDelivery } from \"../state/slice\";\n import {\n-  deliveriesData,\n+  getDeliveriesData,\n   getActiveDeliveryId,\n   getDeliveryStatus,\n } from \"../state/selectors\";\n \n export function DeliveryDetails() {\n-  const { entities } = useAppSelector(deliveriesData);\n+  const { entities } = useAppSelector(getDeliveriesData);\n   const status = useAppSelector(getDeliveryStatus);\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n"
+                },
+                {
+                    "date": 1642939992931,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,14 +9,14 @@\n import { setActiveDelivery } from \"../state/slice\";\n import {\n   getDeliveriesData,\n   getActiveDeliveryId,\n-  getDeliveryStatus,\n+  getDeliveryApiStatus,\n } from \"../state/selectors\";\n \n export function DeliveryDetails() {\n   const { entities } = useAppSelector(getDeliveriesData);\n-  const status = useAppSelector(getDeliveryStatus);\n+  const status = useAppSelector(getDeliveryApiStatus);\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1642940466901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,15 +7,15 @@\n import { ItemActions } from \"../components/ItemActions\";\n import { getDeliveryDetails, setDeliveryStatus } from \"../state/middleware\";\n import { setActiveDelivery } from \"../state/slice\";\n import {\n-  getDeliveriesData,\n+  getDeliveryListData,\n   getActiveDeliveryId,\n   getDeliveryApiStatus,\n } from \"../state/selectors\";\n \n export function DeliveryDetails() {\n-  const { entities } = useAppSelector(getDeliveriesData);\n+  const { entities } = useAppSelector(getDeliveryListData);\n   const status = useAppSelector(getDeliveryApiStatus);\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n   const { deliveryId } = useParams();\n   const dispatch = useAppDispatch();\n"
+                }
+            ],
+            "date": 1642839301283,
+            "name": "Commit-0",
+            "content": "import React from 'react';\n\nexport function DeliveryDetails() {\n\n  return (\n    <div>\n     details per item\n    </div>\n  );\n}\n"
+        }
+    ]
+}

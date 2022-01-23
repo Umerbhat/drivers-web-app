@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/features/deliveries/types.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1642853960541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642853967295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n-export type DeliveryItem =  {\n-    id: string;\n-    address: string;\n-    city: string;\n-    zipCode: string;\n-    latitude: number;\n-    longitude: number;\n-    customer: string;\n-  }\n\\ No newline at end of file\n+export type DeliveryItem = {\n+  id: string;\n+  address: string;\n+  city: string;\n+  zipCode: string;\n+  latitude: number;\n+  longitude: number;\n+  customer: string;\n+};\n"
+                }
+            ],
+            "date": 1642853960541,
+            "name": "Commit-0",
+            "content": "export type DeliveryItem =  {\n    id: string;\n    address: string;\n    city: string;\n    zipCode: string;\n    latitude: number;\n    longitude: number;\n    customer: string;\n  }"
+        }
+    ]
+}

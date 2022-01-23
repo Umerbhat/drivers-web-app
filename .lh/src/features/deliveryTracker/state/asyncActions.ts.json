@@ -1,0 +1,74 @@
+{
+    "sourceFile": "src/features/deliveryTracker/state/asyncActions.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 14,
+            "patches": [
+                {
+                    "date": 1642944921789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642951680804,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n import { TPostStatusParams } from \"../../../api/types\";\n import { FETCH_DELIVERY_LIST, FETCH_DELIVERY, POST_DELIVERY_STATUS } from \"./constants\";\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n+  console.log(\"celled\")\n   const response = await fetchDeliveryList();\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n"
+                },
+                {
+                    "date": 1642951689469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,11 @@\n import { TPostStatusParams } from \"../../../api/types\";\n import { FETCH_DELIVERY_LIST, FETCH_DELIVERY, POST_DELIVERY_STATUS } from \"./constants\";\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n+\n+  const response = await fetchDeliveryList();\n   console.log(\"celled\")\n-  const response = await fetchDeliveryList();\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642952506570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n \n   const response = await fetchDeliveryList();\n-  console.log(\"celled\")\n+  console.log(response, \"celled\")\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642952527250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n \n   const response = await fetchDeliveryList();\n-  console.log(response, \"celled\")\n+  console.log(response.json(), \"celled\")\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642952543222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n \n   const response = await fetchDeliveryList();\n-  console.log(response.json(), \"celled\")\n+  console.log(response, \"celled\")\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642956341118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n \n   const response = await fetchDeliveryList();\n-  console.log(response, \"celled\")\n+  console.log(response.json(), \"celled\")\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642956367386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n \n   const response = await fetchDeliveryList();\n-  console.log(response.json(), \"celled\")\n+  console.log(response.status, \"celled\")\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642956376350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n \n   const response = await fetchDeliveryList();\n-  console.log(response.status, \"celled\")\n+  console.log(response.ok, \"celled\")\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642956390751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n \n   const response = await fetchDeliveryList();\n-  console.log(response.ok, \"celled\")\n+  console.log(response.body, \"celled\")\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642956419605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n \n   const response = await fetchDeliveryList();\n-  console.log(response.body, \"celled\")\n+  console.log(response.url, \"celled\")\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642956429826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n \n   const response = await fetchDeliveryList();\n-  console.log(response.url, \"celled\")\n+  console.log(response.json, \"celled\")\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642956437118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n \n   const response = await fetchDeliveryList();\n-  console.log(response.json, \"celled\")\n+  console.log(response.json(), \"celled\")\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642956452713,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,8 @@\n \n export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n \n   const response = await fetchDeliveryList();\n-  console.log(response.json(), \"celled\")\n \n   if (!response.ok) {\n     throw new Error(`HTTP error! status: ${response.status}`);\n   }\n"
+                },
+                {
+                    "date": 1642963347505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,22 +1,28 @@\n import { createAsyncThunk } from \"@reduxjs/toolkit\";\n import { fetchDeliveryList, fetchDeliveryDetails } from \"../../../api\";\n import { postFinishDelivery } from \"../../../api/services/deliveryList.services\";\n import { TPostStatusParams } from \"../../../api/types\";\n-import { FETCH_DELIVERY_LIST, FETCH_DELIVERY, POST_DELIVERY_STATUS } from \"./constants\";\n+import {\n+  FETCH_DELIVERY_LIST,\n+  FETCH_DELIVERY,\n+  POST_DELIVERY_STATUS,\n+} from \"./constants\";\n \n-export const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n+export const getDeliveryList = createAsyncThunk(\n+  FETCH_DELIVERY_LIST,\n+  async () => {\n+    const response = await fetchDeliveryList();\n \n-  const response = await fetchDeliveryList();\n-\n-  if (!response.ok) {\n-    throw new Error(`HTTP error! status: ${response.status}`);\n+    if (!response.ok) {\n+      throw new Error(`HTTP error! status: ${response.status}`);\n+    }\n+    return response.json();\n   }\n-  return response.json();\n-});\n+);\n \n export const getDeliveryDetails = createAsyncThunk(\n-    FETCH_DELIVERY,\n+  FETCH_DELIVERY,\n   async (id: string) => {\n     const response = await fetchDeliveryDetails(id);\n \n     if (!response.ok) {\n@@ -26,9 +32,9 @@\n   }\n );\n \n export const setDeliveryStatus = createAsyncThunk(\n-    POST_DELIVERY_STATUS,\n+  POST_DELIVERY_STATUS,\n   async (params: TPostStatusParams) => {\n     const response = await postFinishDelivery(params);\n \n     if (!response.ok) {\n"
+                }
+            ],
+            "date": 1642944921789,
+            "name": "Commit-0",
+            "content": "import { createAsyncThunk } from \"@reduxjs/toolkit\";\nimport { fetchDeliveryList, fetchDeliveryDetails } from \"../../../api\";\nimport { postFinishDelivery } from \"../../../api/services/deliveryList.services\";\nimport { TPostStatusParams } from \"../../../api/types\";\nimport { FETCH_DELIVERY_LIST, FETCH_DELIVERY, POST_DELIVERY_STATUS } from \"./constants\";\n\nexport const getDeliveryList = createAsyncThunk(FETCH_DELIVERY_LIST, async () => {\n  const response = await fetchDeliveryList();\n\n  if (!response.ok) {\n    throw new Error(`HTTP error! status: ${response.status}`);\n  }\n  return response.json();\n});\n\nexport const getDeliveryDetails = createAsyncThunk(\n    FETCH_DELIVERY,\n  async (id: string) => {\n    const response = await fetchDeliveryDetails(id);\n\n    if (!response.ok) {\n      throw new Error(`HTTP error! status: ${response.status}`);\n    }\n    return response.json();\n  }\n);\n\nexport const setDeliveryStatus = createAsyncThunk(\n    POST_DELIVERY_STATUS,\n  async (params: TPostStatusParams) => {\n    const response = await postFinishDelivery(params);\n\n    if (!response.ok) {\n      throw new Error(`HTTP error! status: ${response.status}`);\n    }\n    return response.json();\n  }\n);\n"
+        }
+    ]
+}

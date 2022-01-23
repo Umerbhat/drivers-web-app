@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/features/trackDelivery/state/types.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1642941162071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1642941162071,
+            "name": "Commit-0",
+            "content": "import { EntityState } from \"@reduxjs/toolkit\";\nimport { TDeliveryItemDetails } from \"../../../api/types\";\n\nexport type TApiStatus = \"idle\" | \"loading\" | \"failed\" | \"success\";\nexport type TDeliveryListState  = {\n    data: EntityState<TDeliveryItemDetails | {}>;\n    status: TApiStatus;\n    deliveryStatus: TApiStatus;\n    activeDeliveryId: null | string;\n  }"
+        }
+    ]
+}

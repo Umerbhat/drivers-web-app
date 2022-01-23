@@ -1,0 +1,98 @@
+{
+    "sourceFile": "src/components/Tag.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 20,
+            "patches": [
+                {
+                    "date": 1642920759534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642920767562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,12 +6,12 @@\n      type: \"success\" | \"danger\" | \"warning\"\n };\n \n \n-export const Tag = ({labels, type}: Props) => {\n+export const Tag = ({label, type}: Props) => {\n   return <span className={cx(css`\n   padding: 0.5rem 1rem;\n   font-weight: bold;\n   border-radius: 0.2rem;\n   display: 'inline-block';\n-  `)}>{labels}</span>;\n+  `)}>{label}</span>;\n };\n"
+                },
+                {
+                    "date": 1642920971338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,46 @@\n-import { cx, css } from '@emotion/css';\n-import React from 'react';\n+import { cx, css } from \"@emotion/css\";\n+import React from \"react\";\n \n type Props = {\n-    label: string;\n-     type: \"success\" | \"danger\" | \"warning\"\n+  label: string;\n+  type: \"success\" | \"danger\" | \"warning\";\n };\n \n+const getTypeClassName = (type: Props[\"type\"]) => {\n+  if (type === \"success\") {\n+    return css`\n+      color: #fff;\n+      background-color: green;\n+    `;\n+  }\n+  if (type === \"danger\") {\n+    return css`\n+      color: #fff;\n+      background-color: red;\n+    `;\n+  }\n+  if (type === \"warning\") {\n+    return css`\n+      color: var(---text);\n+      background-color: yellow;\n+    `;\n+  }\n+};\n \n-export const Tag = ({label, type}: Props) => {\n-  return <span className={cx(css`\n-  padding: 0.5rem 1rem;\n-  font-weight: bold;\n-  border-radius: 0.2rem;\n-  display: 'inline-block';\n-  `)}>{label}</span>;\n+export const Tag = ({ label, type }: Props) => {\n+  return (\n+    <span\n+      className={cx(\n+        css`\n+          padding: 0.5rem 1rem;\n+          font-weight: bold;\n+          border-radius: 0.2rem;\n+          display: \"inline-block\";\n+        `,\n+        getTypeClassName(type)\n+      )}\n+    >\n+      {label}\n+    </span>\n+  );\n };\n"
+                },
+                {
+                    "date": 1642921154149,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n         css`\n           padding: 0.5rem 1rem;\n           font-weight: bold;\n           border-radius: 0.2rem;\n-          display: \"inline-block\";\n+          display: inline-block;\n         `,\n         getTypeClassName(type)\n       )}\n     >\n"
+                },
+                {
+                    "date": 1642921181748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,8 +35,9 @@\n           padding: 0.5rem 1rem;\n           font-weight: bold;\n           border-radius: 0.2rem;\n           display: inline-block;\n+          font-size: 14px;\n         `,\n         getTypeClassName(type)\n       )}\n     >\n"
+                },
+                {
+                    "date": 1642921188550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n       className={cx(\n         css`\n           padding: 0.5rem 1rem;\n           font-weight: bold;\n-          border-radius: 0.2rem;\n+          border-radius: 0.5rem;\n           display: inline-block;\n           font-size: 14px;\n         `,\n         getTypeClassName(type)\n"
+                },
+                {
+                    "date": 1642921194543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n       className={cx(\n         css`\n           padding: 0.5rem 1rem;\n           font-weight: bold;\n-          border-radius: 0.5rem;\n+          border-radius: 1rem;\n           display: inline-block;\n           font-size: 14px;\n         `,\n         getTypeClassName(type)\n"
+                },
+                {
+                    "date": 1642921248343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,9 @@\n           font-weight: bold;\n           border-radius: 1rem;\n           display: inline-block;\n           font-size: 14px;\n+          box-shadow: 0px 0px 3px 1px #000;\n         `,\n         getTypeClassName(type)\n       )}\n     >\n"
+                },
+                {
+                    "date": 1642921479242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n           font-weight: bold;\n           border-radius: 1rem;\n           display: inline-block;\n           font-size: 14px;\n-          box-shadow: 0px 0px 3px 1px #000;\n+          line-height: 1;\n         `,\n         getTypeClassName(type)\n       )}\n     >\n"
+                },
+                {
+                    "date": 1642921671013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   }\n   if (type === \"warning\") {\n     return css`\n       color: var(---text);\n-      background-color: yellow;\n+      background-color: orange;\n     `;\n   }\n };\n \n@@ -33,9 +33,9 @@\n       className={cx(\n         css`\n           padding: 0.5rem 1rem;\n           font-weight: bold;\n-          border-radius: 1rem;\n+          border-radius: 0.6rem;\n           display: inline-block;\n           font-size: 14px;\n           line-height: 1;\n         `,\n"
+                },
+                {
+                    "date": 1642921848901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,24 +8,16 @@\n \n const getTypeClassName = (type: Props[\"type\"]) => {\n   if (type === \"success\") {\n     return css`\n-      color: #fff;\n       background-color: green;\n     `;\n   }\n   if (type === \"danger\") {\n     return css`\n-      color: #fff;\n       background-color: red;\n     `;\n   }\n-  if (type === \"warning\") {\n-    return css`\n-      color: var(---text);\n-      background-color: orange;\n-    `;\n-  }\n };\n \n export const Tag = ({ label, type }: Props) => {\n   return (\n"
+                },
+                {
+                    "date": 1642921855008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import React from \"react\";\n \n type Props = {\n   label: string;\n-  type: \"success\" | \"danger\" | \"warning\";\n+  type: \"success\" | \"danger\" ;\n };\n \n const getTypeClassName = (type: Props[\"type\"]) => {\n   if (type === \"success\") {\n@@ -29,8 +29,9 @@\n           border-radius: 0.6rem;\n           display: inline-block;\n           font-size: 14px;\n           line-height: 1;\n+          color: #fff;\n         `,\n         getTypeClassName(type)\n       )}\n     >\n"
+                },
+                {
+                    "date": 1642930190584,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,8 @@\n     <span\n       className={cx(\n         css`\n           padding: 0.5rem 1rem;\n-          font-weight: bold;\n           border-radius: 0.6rem;\n           display: inline-block;\n           font-size: 14px;\n           line-height: 1;\n"
+                },
+                {
+                    "date": 1642930205374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n     <span\n       className={cx(\n         css`\n           padding: 0.5rem 1rem;\n+          font-weight: medium;\n           border-radius: 0.6rem;\n           display: inline-block;\n           font-size: 14px;\n           line-height: 1;\n"
+                },
+                {
+                    "date": 1642930227040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n     <span\n       className={cx(\n         css`\n           padding: 0.5rem 1rem;\n-          font-weight: medium;\n+          font-weight: 500;\n           border-radius: 0.6rem;\n           display: inline-block;\n           font-size: 14px;\n           line-height: 1;\n"
+                },
+                {
+                    "date": 1642930701752,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,8 +30,9 @@\n           display: inline-block;\n           font-size: 14px;\n           line-height: 1;\n           color: #fff;\n+          text-transform: capitalize;\n         `,\n         getTypeClassName(type)\n       )}\n     >\n"
+                },
+                {
+                    "date": 1642932394492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import React from \"react\";\n \n type Props = {\n   label: string;\n-  type: \"success\" | \"danger\" ;\n+  type: \"success\" | \"danger\";\n };\n \n const getTypeClassName = (type: Props[\"type\"]) => {\n   if (type === \"success\") {\n"
+                },
+                {
+                    "date": 1642933664161,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,12 @@\n import { cx, css } from \"@emotion/css\";\n import React from \"react\";\n+import { TColorType } from \"./types\";\n+import { getTypeColor } from \"./utils\";\n \n type Props = {\n   label: string;\n-  type: \"success\" | \"danger\";\n+  type: TColorType;\n };\n \n const getTypeClassName = (type: Props[\"type\"]) => {\n   if (type === \"success\") {\n@@ -21,21 +23,19 @@\n \n export const Tag = ({ label, type }: Props) => {\n   return (\n     <span\n-      className={cx(\n-        css`\n-          padding: 0.5rem 1rem;\n-          font-weight: 500;\n-          border-radius: 0.6rem;\n-          display: inline-block;\n-          font-size: 14px;\n-          line-height: 1;\n-          color: #fff;\n-          text-transform: capitalize;\n-        `,\n-        getTypeClassName(type)\n-      )}\n+      className={css`\n+        padding: 0.5rem 1rem;\n+        font-weight: 500;\n+        border-radius: 0.6rem;\n+        display: inline-block;\n+        font-size: 14px;\n+        line-height: 1;\n+        color: #fff;\n+        text-transform: capitalize;\n+        background-color: ${getTypeColor(type)};\n+      `}\n     >\n       {label}\n     </span>\n   );\n"
+                },
+                {
+                    "date": 1642933677197,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,21 +7,8 @@\n   label: string;\n   type: TColorType;\n };\n \n-const getTypeClassName = (type: Props[\"type\"]) => {\n-  if (type === \"success\") {\n-    return css`\n-      background-color: green;\n-    `;\n-  }\n-  if (type === \"danger\") {\n-    return css`\n-      background-color: red;\n-    `;\n-  }\n-};\n-\n export const Tag = ({ label, type }: Props) => {\n   return (\n     <span\n       className={css`\n"
+                },
+                {
+                    "date": 1642933748980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n         border-radius: 0.6rem;\n         display: inline-block;\n         font-size: 14px;\n         line-height: 1;\n-        color: #fff;\n+        color: var(--contrast-primary-text);\n         text-transform: capitalize;\n         background-color: ${getTypeColor(type)};\n       `}\n     >\n"
+                },
+                {
+                    "date": 1642948566027,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { cx, css } from \"@emotion/css\";\n+import { css } from \"@emotion/css\";\n import React from \"react\";\n import { TColorType } from \"./types\";\n import { getTypeColor } from \"./utils\";\n \n"
+                }
+            ],
+            "date": 1642920759534,
+            "name": "Commit-0",
+            "content": "import { cx, css } from '@emotion/css';\nimport React from 'react';\n\ntype Props = {\n    label: string;\n     type: \"success\" | \"danger\" | \"warning\"\n};\n\n\nexport const Tag = ({labels, type}: Props) => {\n  return <span className={cx(css`\n  padding: 0.5rem 1rem;\n  font-weight: bold;\n  border-radius: 0.2rem;\n  display: 'inline-block';\n  `)}>{labels}</span>;\n};\n"
+        }
+    ]
+}

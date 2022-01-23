@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/Paper.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1642933319244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642933364715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,26 +1,18 @@\n-import React, {FC} from \"react\";\n+import React, { FC } from \"react\";\n import { css, cx } from \"@emotion/css\";\n \n type Props = {\n   className: string;\n };\n+export const paperClassName = css`\n+  border: 1px solid #ccc;\n+  padding: 2rem;\n+  border-radius: 1rem;\n+  margin: 1rem auto;\n+  background-color: var(--paper);\n+`;\n \n-export const Paper:FC<Props> = (props) => {\n+export const Paper: FC<Props> = (props) => {\n   const { children, className } = props;\n-  return (\n-    <div\n-      className={cx(\n-        css`\n-          border: 1px solid #ccc;\n-          padding: 2rem;\n-          border-radius: 1rem;\n-          margin: 1rem auto;\n-          background-color: var(--paper);\n-        `,\n-        className\n-      )}\n-    >\n-      {children}\n-    </div>\n-  );\n+  return <div className={cx(paperClassName, className)}>{children}</div>;\n };\n"
+                },
+                {
+                    "date": 1642933434424,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { FC } from \"react\";\n import { css, cx } from \"@emotion/css\";\n \n type Props = {\n-  className: string;\n+  className?: string;\n };\n export const paperClassName = css`\n   border: 1px solid #ccc;\n   padding: 2rem;\n"
+                }
+            ],
+            "date": 1642933319244,
+            "name": "Commit-0",
+            "content": "import React, {FC} from \"react\";\nimport { css, cx } from \"@emotion/css\";\n\ntype Props = {\n  className: string;\n};\n\nexport const Paper:FC<Props> = (props) => {\n  const { children, className } = props;\n  return (\n    <div\n      className={cx(\n        css`\n          border: 1px solid #ccc;\n          padding: 2rem;\n          border-radius: 1rem;\n          margin: 1rem auto;\n          background-color: var(--paper);\n        `,\n        className\n      )}\n    >\n      {children}\n    </div>\n  );\n};\n"
+        }
+    ]
+}

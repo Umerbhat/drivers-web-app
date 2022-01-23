@@ -1,0 +1,82 @@
+{
+    "sourceFile": "src/api/services/deliveries.services.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1642833771202,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642847763419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n // A mock function to mimic making an async request for data\n-export function fetchDeliveries(amount = 1) {\n+export function fetchDeliveries() {\n     return new Promise<{ data: number }>((resolve) =>\n-      setTimeout(() => resolve({ data: amount }), 500)\n+      setTimeout(() => resolve({data: [{id:1}, {id: 2}]}), 500)\n     );\n   }\n \n   export function fetchDeliveryDetails(id: number) {\n"
+                },
+                {
+                    "date": 1642847813998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n // A mock function to mimic making an async request for data\n export function fetchDeliveries() {\n     return new Promise<{ data: number }>((resolve) =>\n-      setTimeout(() => resolve({data: [{id:1}, {id: 2}]}), 500)\n+      setTimeout(() => resolve({data: [{id:1}, {id: 2}]} as any), 500)\n     );\n   }\n \n   export function fetchDeliveryDetails(id: number) {\n"
+                },
+                {
+                    "date": 1642847834219,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n // A mock function to mimic making an async request for data\n export function fetchDeliveries() {\n-    return new Promise<{ data: number }>((resolve) =>\n+    return new Promise<{ data: any }>((resolve) =>\n       setTimeout(() => resolve({data: [{id:1}, {id: 2}]} as any), 500)\n     );\n   }\n \n"
+                },
+                {
+                    "date": 1642848929053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,12 @@\n // A mock function to mimic making an async request for data\n export function fetchDeliveries() {\n-    return new Promise<{ data: any }>((resolve) =>\n-      setTimeout(() => resolve({data: [{id:1}, {id: 2}]} as any), 500)\n-    );\n-  }\n+  return new Promise<{ data: any }>((resolve) =>\n+    setTimeout(() => resolve({ data: [{ id: 1 }, { id: 2 }] } as any), 500)\n+  );\n+}\n \n-  export function fetchDeliveryDetails(id: number) {\n-    return new Promise<{ data: number }>((resolve) =>\n\\ No newline at end of file\n-      setTimeout(() => resolve({ data: id }), 500)\n-    );\n-  }\n-  \n+export function fetchDeliveryDetails(id: number) {\n+  return new Promise<{ data: number }>((resolve) =>\n+    setTimeout(() => resolve({ data: id }), 500)\n+  );\n+}\n"
+                },
+                {
+                    "date": 1642850616962,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n+import { API_BASE_URL } from \"../config\";\n+\n // A mock function to mimic making an async request for data\n export function fetchDeliveries() {\n-  return new Promise<{ data: any }>((resolve) =>\n-    setTimeout(() => resolve({ data: [{ id: 1 }, { id: 2 }] } as any), 500)\n-  );\n+  return fetch(API_BASE_URL+'/deliveries');\n }\n \n export function fetchDeliveryDetails(id: number) {\n   return new Promise<{ data: number }>((resolve) =>\n"
+                },
+                {
+                    "date": 1642851207203,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n export function fetchDeliveries() {\n   return fetch(API_BASE_URL+'/deliveries');\n }\n \n-export function fetchDeliveryDetails(id: number) {\n-  return new Promise<{ data: number }>((resolve) =>\n+export function fetchDeliveryDetails(id: string) {\n+  return new Promise<{ data: string }>((resolve) =>\n     setTimeout(() => resolve({ data: id }), 500)\n   );\n }\n"
+                },
+                {
+                    "date": 1642851265860,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,6 @@\n   return fetch(API_BASE_URL+'/deliveries');\n }\n \n export function fetchDeliveryDetails(id: string) {\n-  return new Promise<{ data: string }>((resolve) =>\n-    setTimeout(() => resolve({ data: id }), 500)\n-  );\n+  return fetch(API_BASE_URL+`/deliveries/${id}`);;\n }\n"
+                },
+                {
+                    "date": 1642861272772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,6 @@\n   return fetch(API_BASE_URL+'/deliveries');\n }\n \n export function fetchDeliveryDetails(id: string) {\n-  return fetch(API_BASE_URL+`/deliveries/${id}`);;\n+  return fetch(API_BASE_URL+`/delivery/${id}`);;\n }\n"
+                },
+                {
+                    "date": 1642861319746,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,6 @@\n   return fetch(API_BASE_URL+'/deliveries');\n }\n \n export function fetchDeliveryDetails(id: string) {\n-  return fetch(API_BASE_URL+`/delivery/${id}`);;\n+  return fetch(API_BASE_URL+`/deliveries/${id}`);;\n }\n"
+                },
+                {
+                    "date": 1642925135051,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,4 +7,16 @@\n \n export function fetchDeliveryDetails(id: string) {\n   return fetch(API_BASE_URL+`/deliveries/${id}`);;\n }\n+\n+export function postFinishDelivery(body: {\n+    deliveryId: string,\n+    status: 'delivered' | 'undelivered',\n+    latitude: number,\n+    longitude: number\n+}) {\n+    return fetch(API_BASE_URL+`/finishDelivery}`, {\n+        method: 'POST',\n+        body: JSON.stringify(body)\n+})\n+}\n"
+                },
+                {
+                    "date": 1642925141875,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,22 +1,22 @@\n import { API_BASE_URL } from \"../config\";\n \n // A mock function to mimic making an async request for data\n export function fetchDeliveries() {\n-  return fetch(API_BASE_URL+'/deliveries');\n+  return fetch(API_BASE_URL + \"/deliveries\");\n }\n \n export function fetchDeliveryDetails(id: string) {\n-  return fetch(API_BASE_URL+`/deliveries/${id}`);;\n+  return fetch(API_BASE_URL + `/deliveries/${id}`);\n }\n \n export function postFinishDelivery(body: {\n-    deliveryId: string,\n-    status: 'delivered' | 'undelivered',\n-    latitude: number,\n-    longitude: number\n+  deliveryId: string;\n+  status: \"delivered\" | \"undelivered\";\n+  latitude: number;\n+  longitude: number;\n }) {\n-    return fetch(API_BASE_URL+`/finishDelivery}`, {\n-        method: 'POST',\n-        body: JSON.stringify(body)\n-})\n+  return fetch(API_BASE_URL + `/finishDelivery}`, {\n+    method: \"POST\",\n+    body: JSON.stringify(body),\n+  });\n }\n"
+                },
+                {
+                    "date": 1642925364915,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,14 +8,9 @@\n export function fetchDeliveryDetails(id: string) {\n   return fetch(API_BASE_URL + `/deliveries/${id}`);\n }\n \n-export function postFinishDelivery(body: {\n-  deliveryId: string;\n-  status: \"delivered\" | \"undelivered\";\n-  latitude: number;\n-  longitude: number;\n-}) {\n+export function postFinishDelivery(body: TPostStatusParams) {\n   return fetch(API_BASE_URL + `/finishDelivery}`, {\n     method: \"POST\",\n     body: JSON.stringify(body),\n   });\n"
+                },
+                {
+                    "date": 1642926010120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import { API_BASE_URL } from \"../config\";\n+import { TPostStatusParams } from \"../types\";\n \n // A mock function to mimic making an async request for data\n export function fetchDeliveries() {\n   return fetch(API_BASE_URL + \"/deliveries\");\n@@ -9,9 +10,9 @@\n   return fetch(API_BASE_URL + `/deliveries/${id}`);\n }\n \n export function postFinishDelivery(body: TPostStatusParams) {\n-  return fetch(API_BASE_URL + `/finishDelivery}`, {\n+  return fetch(API_BASE_URL + `/finishDelivery`, {\n     method: \"POST\",\n     body: JSON.stringify(body),\n   });\n }\n"
+                },
+                {
+                    "date": 1642932410756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n import { API_BASE_URL } from \"../config\";\n import { TPostStatusParams } from \"../types\";\n \n-// A mock function to mimic making an async request for data\n export function fetchDeliveries() {\n   return fetch(API_BASE_URL + \"/deliveries\");\n }\n \n"
+                },
+                {
+                    "date": 1642940466902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { API_BASE_URL } from \"../config\";\n import { TPostStatusParams } from \"../types\";\n \n-export function fetchDeliveries() {\n+export function fetchDeliveryList() {\n   return fetch(API_BASE_URL + \"/deliveries\");\n }\n \n export function fetchDeliveryDetails(id: string) {\n"
+                },
+                {
+                    "date": 1642940493283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n import { API_BASE_URL } from \"../config\";\n import { TPostStatusParams } from \"../types\";\n \n export function fetchDeliveryList() {\n-  return fetch(API_BASE_URL + \"/deliveries\");\n+  return fetch(API_BASE_URL + \"/deliveryList\");\n }\n \n export function fetchDeliveryDetails(id: string) {\n-  return fetch(API_BASE_URL + `/deliveries/${id}`);\n+  return fetch(API_BASE_URL + `/deliveryList/${id}`);\n }\n \n export function postFinishDelivery(body: TPostStatusParams) {\n   return fetch(API_BASE_URL + `/finishDelivery`, {\n"
+                }
+            ],
+            "date": 1642833771202,
+            "name": "Commit-0",
+            "content": "// A mock function to mimic making an async request for data\nexport function fetchDeliveries(amount = 1) {\n    return new Promise<{ data: number }>((resolve) =>\n      setTimeout(() => resolve({ data: amount }), 500)\n    );\n  }\n\n  export function fetchDeliveryDetails(id: number) {\n    return new Promise<{ data: number }>((resolve) =>\n      setTimeout(() => resolve({ data: id }), 500)\n    );\n  }\n  "
+        }
+    ]
+}

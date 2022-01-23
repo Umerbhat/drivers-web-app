@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/features/deliveries/Details.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1642833384885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1642833384885,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\n\nimport { useAppSelector, useAppDispatch } from '../../app/hooks';\nimport {\n  decrement,\n  increment,\n  incrementByAmount,\n  incrementAsync,\n  incrementIfOdd,\n  selectCount,\n} from './reducer';\nimport styles from './Counter.module.css';\n\nexport function Details() {\n  const count = useAppSelector(selectCount);\n  const dispatch = useAppDispatch();\n  const [incrementAmount, setIncrementAmount] = useState('2');\n\n  const incrementValue = Number(incrementAmount) || 0;\n\n  return (\n    <div>\n     details per item\n    </div>\n  );\n}\n"
+        }
+    ]
+}

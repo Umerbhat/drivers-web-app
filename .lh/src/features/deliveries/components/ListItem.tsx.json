@@ -1,0 +1,338 @@
+{
+    "sourceFile": "src/features/deliveries/components/ListItem.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 80,
+            "patches": [
+                {
+                    "date": 1642854476528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642854842273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,12 @@\n import React from 'react';\n import { DeliveryItem } from '../types';\n \n-\n-export const ListItem = ({id, address, city, zipCode, latitude, longitude,customer}: DeliveryItem) => {\n+type Props = {\n+    listData: DeliveryItem\n+}\n+export const ListItem = ({listData}: Props) => {\n+  const {id, address, city, zipCode, latitude, longitude,customer} = listData\n   return <div>\n       <h4>\n       {customer}\n       </h4>\n"
+                },
+                {
+                    "date": 1642855951650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,6 +10,7 @@\n       <h4>\n       {customer}\n       </h4>\n       <p>{address}</p>\n+      <p>{city}, {zipCode}</p>\n   </div>;\n };\n"
+                },
+                {
+                    "date": 1642856057980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,18 @@\n+import { css } from '@emotion/css';\n import React from 'react';\n import { DeliveryItem } from '../types';\n \n type Props = {\n     listData: DeliveryItem\n }\n export const ListItem = ({listData}: Props) => {\n   const {id, address, city, zipCode, latitude, longitude,customer} = listData\n-  return <div>\n+  return <div className={css`\n+  border: 1px solid #ccc;\n+  padding: 1rem;\n+  border-radius: 1rem;\n+  `}>\n       <h4>\n       {customer}\n       </h4>\n       <p>{address}</p>\n"
+                },
+                {
+                    "date": 1642856085861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n   return <div className={css`\n   border: 1px solid #ccc;\n   padding: 1rem;\n   border-radius: 1rem;\n+  margin: 1rem auto;\n   `}>\n       <h4>\n       {customer}\n       </h4>\n"
+                },
+                {
+                    "date": 1642858145100,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n   border: 1px solid #ccc;\n   padding: 1rem;\n   border-radius: 1rem;\n   margin: 1rem auto;\n+  background-color: var(--paper);\n   `}>\n       <h4>\n       {customer}\n       </h4>\n"
+                },
+                {
+                    "date": 1642858330238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n   padding: 1rem;\n   border-radius: 1rem;\n   margin: 1rem auto;\n   background-color: var(--paper);\n+  cursor: pointer;\n   `}>\n       <h4>\n       {customer}\n       </h4>\n"
+                },
+                {
+                    "date": 1642858553616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,13 @@\n   border-radius: 1rem;\n   margin: 1rem auto;\n   background-color: var(--paper);\n   cursor: pointer;\n+  transition: 0.3s ease-out;\n+  &:hover {\n+      background-color: var(---primary-color);\n+      transition: 0.3s ease-in;\n+  }\n   `}>\n       <h4>\n       {customer}\n       </h4>\n"
+                },
+                {
+                    "date": 1642858607802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,13 +14,15 @@\n   margin: 1rem auto;\n   background-color: var(--paper);\n   cursor: pointer;\n   transition: 0.3s ease-out;\n-  &:hover {\n+  outline: 0;\n+  &:hover, &:focus {\n       background-color: var(---primary-color);\n       transition: 0.3s ease-in;\n   }\n-  `}>\n+\n+  `}   role=\"button\" tabIndex={0}>\n       <h4>\n       {customer}\n       </h4>\n       <p>{address}</p>\n"
+                },
+                {
+                    "date": 1642858660920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   cursor: pointer;\n   transition: 0.3s ease-out;\n   outline: 0;\n   &:hover, &:focus {\n-      background-color: var(---primary-color);\n+      background-color: var(--primary-color);\n       transition: 0.3s ease-in;\n   }\n \n   `}   role=\"button\" tabIndex={0}>\n"
+                },
+                {
+                    "date": 1642858674272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,9 @@\n   cursor: pointer;\n   transition: 0.3s ease-out;\n   outline: 0;\n   &:hover, &:focus {\n+      color: #fff;\n       background-color: var(--primary-color);\n       transition: 0.3s ease-in;\n   }\n \n"
+                },
+                {
+                    "date": 1642859152290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,32 +1,39 @@\n-import { css } from '@emotion/css';\n-import React from 'react';\n-import { DeliveryItem } from '../types';\n+import { css } from \"@emotion/css\";\n+import React from \"react\";\n+import { DeliveryItem } from \"../types\";\n \n type Props = {\n-    listData: DeliveryItem\n-}\n-export const ListItem = ({listData}: Props) => {\n-  const {id, address, city, zipCode, latitude, longitude,customer} = listData\n-  return <div className={css`\n-  border: 1px solid #ccc;\n-  padding: 1rem;\n-  border-radius: 1rem;\n-  margin: 1rem auto;\n-  background-color: var(--paper);\n-  cursor: pointer;\n-  transition: 0.3s ease-out;\n-  outline: 0;\n-  &:hover, &:focus {\n-      color: #fff;\n-      background-color: var(--primary-color);\n-      transition: 0.3s ease-in;\n-  }\n-\n-  `}   role=\"button\" tabIndex={0}>\n-      <h4>\n-      {customer}\n-      </h4>\n+  listData: DeliveryItem;\n+};\n+export const ListItem = ({ listData }: Props) => {\n+  const { id, address, city, zipCode, latitude, longitude, customer } =\n+    listData;\n+  return (\n+    <div\n+      className={css`\n+        border: 1px solid #ccc;\n+        padding: 1rem;\n+        border-radius: 1rem;\n+        margin: 1rem auto;\n+        background-color: var(--paper);\n+        cursor: pointer;\n+        transition: 0.3s ease-out;\n+        outline: 0;\n+        &:hover,\n+        &:focus {\n+          color: #fff;\n+          background-color: var(--primary-color);\n+          transition: 0.3s ease-in;\n+        }\n+      `}\n+      role=\"button\"\n+      tabIndex={0}\n+    >\n+      <h4>{customer}</h4>\n       <p>{address}</p>\n-      <p>{city}, {zipCode}</p>\n-  </div>;\n+      <p>\n+        {city}, {zipCode}\n+      </p>\n+    </div>\n+  );\n };\n"
+                },
+                {
+                    "date": 1642859183840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,9 @@\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n+          box-shadow: 0px 0px 6px 10px #ccc\n           transition: 0.3s ease-in;\n         }\n       `}\n       role=\"button\"\n"
+                },
+                {
+                    "date": 1642859222590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n-          box-shadow: 0px 0px 6px 10px #ccc\n+          box-shadow: 0px 0px 2px 10px #ccc;\n           transition: 0.3s ease-in;\n         }\n       `}\n       role=\"button\"\n"
+                },
+                {
+                    "date": 1642859265963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n-          box-shadow: 0px 0px 2px 10px #ccc;\n+          box-shadow: 0px 0px 2px 10px #fff;\n           transition: 0.3s ease-in;\n         }\n       `}\n       role=\"button\"\n"
+                },
+                {
+                    "date": 1642859284197,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n-          box-shadow: 0px 0px 2px 10px #fff;\n+          box-shadow: 0px 0px 10px 2px #fff;\n           transition: 0.3s ease-in;\n         }\n       `}\n       role=\"button\"\n"
+                },
+                {
+                    "date": 1642859297626,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n-          box-shadow: 0px 0px 10px 2px #fff;\n+          box-shadow: 0px 0px 10px 6px #fff;\n           transition: 0.3s ease-in;\n         }\n       `}\n       role=\"button\"\n"
+                },
+                {
+                    "date": 1642859320698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n-          box-shadow: 0px 0px 10px 6px #fff;\n+          box-shadow: 0px 0px 15px 6px var(----primary-color);\n           transition: 0.3s ease-in;\n         }\n       `}\n       role=\"button\"\n"
+                },
+                {
+                    "date": 1642859528059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n-          box-shadow: 0px 0px 15px 6px var(----primary-color);\n+          box-shadow: 0px 0px 15px 6px var(#ccc);\n           transition: 0.3s ease-in;\n         }\n       `}\n       role=\"button\"\n"
+                },
+                {
+                    "date": 1642859545332,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n+          border-color: #fff;\n           transition: 0.3s ease-in;\n         }\n       `}\n       role=\"button\"\n"
+                },
+                {
+                    "date": 1642859840214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n import { css } from \"@emotion/css\";\n-import React from \"react\";\n+import React, {MouseEvent} from \"react\";\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n   listData: DeliveryItem;\n+  onClick: (e: MouseEvent<HTMLDivElement>) => void;\n };\n export const ListItem = ({ listData }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     listData;\n"
+                },
+                {
+                    "date": 1642859885630,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n type Props = {\n   listData: DeliveryItem;\n   onClick: (e: MouseEvent<HTMLDivElement>) => void;\n };\n-export const ListItem = ({ listData }: Props) => {\n+export const ListItem = ({ listData, onClick: handleClick }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     listData;\n   return (\n     <div\n@@ -30,8 +30,9 @@\n         }\n       `}\n       role=\"button\"\n       tabIndex={0}\n+      onClick={handleClick}\n     >\n       <h4>{customer}</h4>\n       <p>{address}</p>\n       <p>\n"
+                },
+                {
+                    "date": 1642859977570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import { css } from \"@emotion/css\";\n import React, {MouseEvent} from \"react\";\n+import { Link } from \"react-router-dom\";\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n   listData: DeliveryItem;\n@@ -9,35 +10,32 @@\n export const ListItem = ({ listData, onClick: handleClick }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     listData;\n   return (\n-    <div\n+      <Link to={``}     \n       className={css`\n-        border: 1px solid #ccc;\n-        padding: 1rem;\n-        border-radius: 1rem;\n-        margin: 1rem auto;\n-        background-color: var(--paper);\n-        cursor: pointer;\n-        transition: 0.3s ease-out;\n-        outline: 0;\n-        &:hover,\n-        &:focus {\n-          color: #fff;\n-          background-color: var(--primary-color);\n-          box-shadow: 0px 0px 15px 6px var(#ccc);\n-          border-color: #fff;\n-          transition: 0.3s ease-in;\n-        }\n-      `}\n-      role=\"button\"\n-      tabIndex={0}\n-      onClick={handleClick}\n-    >\n+      border: 1px solid #ccc;\n+      padding: 1rem;\n+      border-radius: 1rem;\n+      margin: 1rem auto;\n+      background-color: var(--paper);\n+      cursor: pointer;\n+      transition: 0.3s ease-out;\n+      outline: 0;\n+      &:hover,\n+      &:focus {\n+        color: #fff;\n+        background-color: var(--primary-color);\n+        box-shadow: 0px 0px 15px 6px var(#ccc);\n+        border-color: #fff;\n+        transition: 0.3s ease-in;\n+      }\n+    `}>\n+\n       <h4>{customer}</h4>\n       <p>{address}</p>\n       <p>\n         {city}, {zipCode}\n       </p>\n-    </div>\n+    </Link>\n   );\n };\n"
+                },
+                {
+                    "date": 1642859986131,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,37 +1,37 @@\n import { css } from \"@emotion/css\";\n-import React, {MouseEvent} from \"react\";\n+import React, { MouseEvent } from \"react\";\n import { Link } from \"react-router-dom\";\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n   listData: DeliveryItem;\n-  onClick: (e: MouseEvent<HTMLDivElement>) => void;\n };\n export const ListItem = ({ listData, onClick: handleClick }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     listData;\n   return (\n-      <Link to={``}     \n+    <Link\n+      to={``}\n       className={css`\n-      border: 1px solid #ccc;\n-      padding: 1rem;\n-      border-radius: 1rem;\n-      margin: 1rem auto;\n-      background-color: var(--paper);\n-      cursor: pointer;\n-      transition: 0.3s ease-out;\n-      outline: 0;\n-      &:hover,\n-      &:focus {\n-        color: #fff;\n-        background-color: var(--primary-color);\n-        box-shadow: 0px 0px 15px 6px var(#ccc);\n-        border-color: #fff;\n-        transition: 0.3s ease-in;\n-      }\n-    `}>\n-\n+        border: 1px solid #ccc;\n+        padding: 1rem;\n+        border-radius: 1rem;\n+        margin: 1rem auto;\n+        background-color: var(--paper);\n+        cursor: pointer;\n+        transition: 0.3s ease-out;\n+        outline: 0;\n+        &:hover,\n+        &:focus {\n+          color: #fff;\n+          background-color: var(--primary-color);\n+          box-shadow: 0px 0px 15px 6px var(#ccc);\n+          border-color: #fff;\n+          transition: 0.3s ease-in;\n+        }\n+      `}\n+    >\n       <h4>{customer}</h4>\n       <p>{address}</p>\n       <p>\n         {city}, {zipCode}\n"
+                },
+                {
+                    "date": 1642860022968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,15 +5,16 @@\n \n type Props = {\n   listData: DeliveryItem;\n };\n-export const ListItem = ({ listData, onClick: handleClick }: Props) => {\n+export const ListItem = ({ listData }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     listData;\n   return (\n     <Link\n       to={``}\n       className={css`\n+        display: block;\n         border: 1px solid #ccc;\n         padding: 1rem;\n         border-radius: 1rem;\n         margin: 1rem auto;\n"
+                },
+                {
+                    "date": 1642860103485,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     listData;\n   return (\n     <Link\n-      to={``}\n+      to={`details/${id}`}\n       className={css`\n         display: block;\n         border: 1px solid #ccc;\n         padding: 1rem;\n"
+                },
+                {
+                    "date": 1642860325136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { css } from \"@emotion/css\";\n-import React, { MouseEvent } from \"react\";\n+import React from \"react\";\n import { Link } from \"react-router-dom\";\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n"
+                },
+                {
+                    "date": 1642860640156,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n import { Link } from \"react-router-dom\";\n+import { paperClassName } from \"../../../components/paper\";\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n   listData: DeliveryItem;\n@@ -13,13 +14,9 @@\n     <Link\n       to={`details/${id}`}\n       className={css`\n         display: block;\n-        border: 1px solid #ccc;\n-        padding: 1rem;\n-        border-radius: 1rem;\n-        margin: 1rem auto;\n-        background-color: var(--paper);\n+        ${paperClassName};\n         cursor: pointer;\n         transition: 0.3s ease-out;\n         outline: 0;\n         &:hover,\n"
+                },
+                {
+                    "date": 1642922586436,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,10 @@\n         ${paperClassName};\n         cursor: pointer;\n         transition: 0.3s ease-out;\n         outline: 0;\n+        color: inherit;\n+        text-decoration: none;\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642922686194,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,9 @@\n         transition: 0.3s ease-out;\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n+        width: 33.33.%;\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642922701351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: 33.33.%;\n+        display: block;\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642922709394,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,8 @@\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: 33.33.%;\n-        display: block;\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642922729698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         transition: 0.3s ease-out;\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n-        width: 33.33.%;\n+        width: 33.3.%;\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642922743047,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         transition: 0.3s ease-out;\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n-        width: 33.3.%;\n+        width: 33.3%;\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642922750596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         transition: 0.3s ease-out;\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n-        width: 33.3%;\n+        width: 33.33%;\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642922814232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         transition: 0.3s ease-out;\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n-        width: 33.33%;\n+        width: calc(33.33% - 2rem);\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642922892431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         transition: 0.3s ease-out;\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n-        width: calc(33.33% - 2rem);\n+        width: calc(33.33% - 4rem);\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642922899915,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         transition: 0.3s ease-out;\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n-        width: calc(33.33% - 4rem);\n+        width: calc(33.33% - 2rem);\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642922925951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         transition: 0.3s ease-out;\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n-        width: calc(33.33% - 2rem);\n+        width: calc(33.33% - 5rem);\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642923072046,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n   listData: DeliveryItem;\n+  isActive: boolean;\n };\n export const ListItem = ({ listData }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     listData;\n"
+                },
+                {
+                    "date": 1642923134010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n type Props = {\n   listData: DeliveryItem;\n   isActive: boolean;\n };\n-export const ListItem = ({ listData }: Props) => {\n+export const ListItem = ({ listData, isActive }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     listData;\n   return (\n     <Link\n@@ -22,8 +22,9 @@\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: calc(33.33% - 5rem);\n+        background-color: ${isActive && \"green\"}\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642923201290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: calc(33.33% - 5rem);\n-        background-color: ${isActive && \"green\"}\n+        border-color: ${isActive && \"green\"};\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642923243098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: calc(33.33% - 5rem);\n-        border-color: ${isActive && \"green\"};\n+        border-color: ${isActive && 'var(--primary-color)'};\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642923325194,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,10 +34,10 @@\n         }\n       `}\n     >\n       <h4>{customer}</h4>\n-      <p>{address}</p>\n-      <p>\n+      <p className={css`font-size: 14px;`}>{address}</p>\n+      <p className={css`font-size: 12px; color: var(--text-muted)`}>\n         {city}, {zipCode}\n       </p>\n     </Link>\n   );\n"
+                },
+                {
+                    "date": 1642923346439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n       `}\n     >\n       <h4>{customer}</h4>\n       <p className={css`font-size: 14px;`}>{address}</p>\n-      <p className={css`font-size: 12px; color: var(--text-muted)`}>\n+      <p className={css`font-size: 12px; color: var(---muted-text);`}>\n         {city}, {zipCode}\n       </p>\n     </Link>\n   );\n"
+                },
+                {
+                    "date": 1642923363803,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,10 +34,10 @@\n         }\n       `}\n     >\n       <h4>{customer}</h4>\n-      <p className={css`font-size: 14px;`}>{address}</p>\n-      <p className={css`font-size: 12px; color: var(---muted-text);`}>\n+      <p className={css`font-size: 14px; margin: 0`}>{address}</p>\n+      <p className={css`font-size: 12px; color: var(--muted-text);`}>\n         {city}, {zipCode}\n       </p>\n     </Link>\n   );\n"
+                },
+                {
+                    "date": 1642923447534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n       `}\n     >\n       <h4>{customer}</h4>\n       <p className={css`font-size: 14px; margin: 0`}>{address}</p>\n-      <p className={css`font-size: 12px; color: var(--muted-text);`}>\n+      <p className={css`font-size: 12px; color: var(--muted-text); margin: 0`}>\n         {city}, {zipCode}\n       </p>\n     </Link>\n   );\n"
+                },
+                {
+                    "date": 1642923453031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,10 +34,10 @@\n         }\n       `}\n     >\n       <h4>{customer}</h4>\n-      <p className={css`font-size: 14px; margin: 0`}>{address}</p>\n-      <p className={css`font-size: 12px; color: var(--muted-text); margin: 0`}>\n+      <p className={css`font-size: 14px; margin: 0;`}>{address}</p>\n+      <p className={css`font-size: 12px; color: var(--muted-text); margin: 0;`}>\n         {city}, {zipCode}\n       </p>\n     </Link>\n   );\n"
+                },
+                {
+                    "date": 1642923499956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: calc(33.33% - 5rem);\n-        border-color: ${isActive && 'var(--primary-color)'};\n+        border-color: ${isActive && \"var(--primary-color)\"};\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n@@ -34,10 +34,23 @@\n         }\n       `}\n     >\n       <h4>{customer}</h4>\n-      <p className={css`font-size: 14px; margin: 0;`}>{address}</p>\n-      <p className={css`font-size: 12px; color: var(--muted-text); margin: 0;`}>\n+      <p\n+        className={css`\n+          font-size: 14px;\n+          margin: 0;\n+        `}\n+      >\n+        {address}\n+      </p>\n+      <p\n+        className={css`\n+          font-size: 12px;\n+          color: var(--muted-text);\n+          margin: 0;\n+        `}\n+      >\n         {city}, {zipCode}\n       </p>\n     </Link>\n   );\n"
+                },
+                {
+                    "date": 1642923553253,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n import { Link } from \"react-router-dom\";\n import { paperClassName } from \"../../../components/paper\";\n+import { Tag } from \"../../../components/Tag\";\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n   listData: DeliveryItem;\n@@ -22,9 +23,8 @@\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: calc(33.33% - 5rem);\n-        border-color: ${isActive && \"var(--primary-color)\"};\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n@@ -34,8 +34,9 @@\n         }\n       `}\n     >\n       <h4>{customer}</h4>\n+     {isActive && <Tag label=\"Active\" type=\"success\"/>}\n       <p\n         className={css`\n           font-size: 14px;\n           margin: 0;\n"
+                },
+                {
+                    "date": 1642923585002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,10 +33,11 @@\n           transition: 0.3s ease-in;\n         }\n       `}\n     >\n+             {isActive && <Tag label=\"Active\" type=\"success\"/>}\n       <h4>{customer}</h4>\n-     {isActive && <Tag label=\"Active\" type=\"success\"/>}\n+\n       <p\n         className={css`\n           font-size: 14px;\n           margin: 0;\n"
+                },
+                {
+                    "date": 1642923675165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,9 @@\n     <Link\n       to={`details/${id}`}\n       className={css`\n         display: block;\n+        position: relative;\n         ${paperClassName};\n         cursor: pointer;\n         transition: 0.3s ease-out;\n         outline: 0;\n@@ -33,9 +34,11 @@\n           transition: 0.3s ease-in;\n         }\n       `}\n     >\n-             {isActive && <Tag label=\"Active\" type=\"success\"/>}\n+      {isActive && <div className={css`position: absolute; right: 1rem; top: 1rem;`}>\n+          <Tag label=\"Active\" type=\"success\"/>\n+          </div>}\n       <h4>{customer}</h4>\n \n       <p\n         className={css`\n"
+                },
+                {
+                    "date": 1642924313578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: calc(33.33% - 5rem);\n+        margin: 1rem;\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642924332208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: calc(33.33% - 5rem);\n-        margin: 1rem;\n+        margin: 1rem 0.5rem;\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642924360312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,10 +23,10 @@\n         transition: 0.3s ease-out;\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n-        width: calc(33.33% - 5rem);\n-        margin: 1rem 0.5rem;\n+        width: calc(33.33% - 6rem);\n+        margin: 0.5rem;\n         &:hover,\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n"
+                },
+                {
+                    "date": 1642928182008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,14 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n import { Link } from \"react-router-dom\";\n+import { TDeliveryItemDetails } from \"../../../api/types\";\n import { paperClassName } from \"../../../components/paper\";\n import { Tag } from \"../../../components/Tag\";\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n-  listData: DeliveryItem;\n+  listData: TDeliveryItemDetails;\n   isActive: boolean;\n };\n export const ListItem = ({ listData, isActive }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n"
+                },
+                {
+                    "date": 1642928195002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,8 @@\n import { Link } from \"react-router-dom\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n import { paperClassName } from \"../../../components/paper\";\n import { Tag } from \"../../../components/Tag\";\n-import { DeliveryItem } from \"../types\";\n \n type Props = {\n   listData: TDeliveryItemDetails;\n   isActive: boolean;\n"
+                },
+                {
+                    "date": 1642929529453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   listData: TDeliveryItemDetails;\n   isActive: boolean;\n };\n export const ListItem = ({ listData, isActive }: Props) => {\n-  const { id, address, city, zipCode, latitude, longitude, customer } =\n+  const { id, address, city, zipCode, latitude, longitude, customer, status } =\n     listData;\n   return (\n     <Link\n       to={`details/${id}`}\n@@ -35,11 +35,26 @@\n           transition: 0.3s ease-in;\n         }\n       `}\n     >\n-      {isActive && <div className={css`position: absolute; right: 1rem; top: 1rem;`}>\n-          <Tag label=\"Active\" type=\"success\"/>\n-          </div>}\n+      {isActive && (\n+        <div\n+          className={css`\n+            position: absolute;\n+            right: 1rem;\n+            top: 1rem;\n+          `}\n+        >\n+          {status ? (\n+            <Tag\n+              label={status}\n+              type={status === \"delivered\" ? \"success\" : \"danger\"}\n+            />\n+          ) : (\n+            <Tag label=\"Active\" type=\"success\" />\n+          )}\n+        </div>\n+      )}\n       <h4>{customer}</h4>\n \n       <p\n         className={css`\n"
+                },
+                {
+                    "date": 1642929614076,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,9 @@\n             <Tag label=\"Active\" type=\"success\" />\n           )}\n         </div>\n       )}\n-      <h4>{customer}</h4>\n+      <h4 className={css`font-weight: bold;`}>{customer}</h4>\n \n       <p\n         className={css`\n           font-size: 14px;\n"
+                },
+                {
+                    "date": 1642929631928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n           transition: 0.3s ease-in;\n         }\n       `}\n     >\n-      {isActive && (\n+      {(isActive || status) && (\n         <div\n           className={css`\n             position: absolute;\n             right: 1rem;\n"
+                },
+                {
+                    "date": 1642929646311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,14 +53,20 @@\n             <Tag label=\"Active\" type=\"success\" />\n           )}\n         </div>\n       )}\n-      <h4 className={css`font-weight: bold;`}>{customer}</h4>\n+      <h4\n+        className={css`\n+          font-weight: bold;\n+        `}\n+      >\n+        {customer}\n+      </h4>\n \n       <p\n         className={css`\n           font-size: 14px;\n-          margin: 0;\n+          margin-top: 0;\n         `}\n       >\n         {address}\n       </p>\n"
+                },
+                {
+                    "date": 1642929782820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,11 +54,8 @@\n           )}\n         </div>\n       )}\n       <h4\n-        className={css`\n-          font-weight: bold;\n-        `}\n       >\n         {customer}\n       </h4>\n \n"
+                },
+                {
+                    "date": 1642929803860,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,8 +62,9 @@\n       <p\n         className={css`\n           font-size: 14px;\n           margin-top: 0;\n+          margin-bottom: 0.5rem;\n         `}\n       >\n         {address}\n       </p>\n"
+                },
+                {
+                    "date": 1642929855957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   listData: TDeliveryItemDetails;\n   isActive: boolean;\n };\n export const ListItem = ({ listData, isActive }: Props) => {\n-  const { id, address, city, zipCode, latitude, longitude, customer, status } =\n+  const { id, address, city, zipCode, customer, status } =\n     listData;\n   return (\n     <Link\n       to={`details/${id}`}\n"
+                },
+                {
+                    "date": 1642930357392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { css } from \"@emotion/css\";\n+import { css, cx } from \"@emotion/css\";\n import React from \"react\";\n import { Link } from \"react-router-dom\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n import { paperClassName } from \"../../../components/paper\";\n@@ -32,8 +32,11 @@\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n           border-color: #fff;\n           transition: 0.3s ease-in;\n+          & .muted-sub-heading {\n+              color: #eee;\n+          }\n         }\n       `}\n     >\n       {(isActive || status) && (\n@@ -68,13 +71,13 @@\n       >\n         {address}\n       </p>\n       <p\n-        className={css`\n+        className={cx(css`\n           font-size: 12px;\n           color: var(--muted-text);\n           margin: 0;\n-        `}\n+        `, \"muted-sub-heading\")}\n       >\n         {city}, {zipCode}\n       </p>\n     </Link>\n"
+                },
+                {
+                    "date": 1642930389188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,8 +75,9 @@\n         className={cx(css`\n           font-size: 12px;\n           color: var(--muted-text);\n           margin: 0;\n+          transition: 0.3s ease-in;\n         `, \"muted-sub-heading\")}\n       >\n         {city}, {zipCode}\n       </p>\n"
+                },
+                {
+                    "date": 1642930401965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n           border-color: #fff;\n           transition: 0.3s ease-in;\n           & .muted-sub-heading {\n-              color: #eee;\n+              color: #ccc;\n           }\n         }\n       `}\n     >\n"
+                },
+                {
+                    "date": 1642930414797,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n           border-color: #fff;\n           transition: 0.3s ease-in;\n           & .muted-sub-heading {\n-              color: #ccc;\n+              color: #ddd;\n           }\n         }\n       `}\n     >\n"
+                },
+                {
+                    "date": 1642933369410,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { css, cx } from \"@emotion/css\";\n import React from \"react\";\n import { Link } from \"react-router-dom\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n-import { paperClassName } from \"../../../components/paper\";\n+import { paperClassName } from \"../../../components/Paper\";\n import { Tag } from \"../../../components/Tag\";\n \n type Props = {\n   listData: TDeliveryItemDetails;\n"
+                },
+                {
+                    "date": 1642939222178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         display: block;\n         position: relative;\n         ${paperClassName};\n         cursor: pointer;\n-        transition: 0.3s ease-out;\n+        transition: all 0.3s cubic-bezier(0.05, 0.03, 0.35, 1);\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: calc(33.33% - 6rem);\n@@ -31,9 +31,8 @@\n           color: #fff;\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n           border-color: #fff;\n-          transition: 0.3s ease-in;\n           & .muted-sub-heading {\n               color: #ddd;\n           }\n         }\n"
+                },
+                {
+                    "date": 1642939261990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n-          border-color: #fff;\n+          transform: translateY(5px);\n           & .muted-sub-heading {\n               color: #ddd;\n           }\n         }\n"
+                },
+                {
+                    "date": 1642939288419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n-          transform: translateY(5px);\n+          transform: translateY(5px) scale(1.05);\n           & .muted-sub-heading {\n               color: #ddd;\n           }\n         }\n"
+                },
+                {
+                    "date": 1642939296523,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n-          transform: translateY(5px) scale(1.05);\n+          transform: translateY(5px) scale(1.01);\n           & .muted-sub-heading {\n               color: #ddd;\n           }\n         }\n"
+                },
+                {
+                    "date": 1642939304447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n-          transform: translateY(5px) scale(1.01);\n+          transform: translateY(10px) scale(1.01);\n           & .muted-sub-heading {\n               color: #ddd;\n           }\n         }\n"
+                },
+                {
+                    "date": 1642939310364,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n-          transform: translateY(10px) scale(1.01);\n+          transform: translateY(-10px) scale(1.01);\n           & .muted-sub-heading {\n               color: #ddd;\n           }\n         }\n"
+                },
+                {
+                    "date": 1642939334324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         display: block;\n         position: relative;\n         ${paperClassName};\n         cursor: pointer;\n-        transition: all 0.3s cubic-bezier(0.05, 0.03, 0.35, 1);\n+        transition: all 0.2s cubic-bezier(0.05, 0.03, 0.35, 1);\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: calc(33.33% - 6rem);\n@@ -30,9 +30,9 @@\n         &:focus {\n           color: #fff;\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n-          transform: translateY(-10px) scale(1.01);\n+          transform: translateY(-5px) scale(1.01);\n           & .muted-sub-heading {\n               color: #ddd;\n           }\n         }\n"
+                },
+                {
+                    "date": 1642939370193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,16 +19,17 @@\n         display: block;\n         position: relative;\n         ${paperClassName};\n         cursor: pointer;\n-        transition: all 0.2s cubic-bezier(0.05, 0.03, 0.35, 1);\n+        transition: all 0.3s cubic-bezier(0.05, 0.03, 0.35, 1);\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: calc(33.33% - 6rem);\n         margin: 0.5rem;\n         &:hover,\n         &:focus {\n+          transition: 0.3s ease-in;\n           color: #fff;\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#ccc);\n           transform: translateY(-5px) scale(1.01);\n"
+                },
+                {
+                    "date": 1642939391873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         display: block;\n         position: relative;\n         ${paperClassName};\n         cursor: pointer;\n-        transition: all 0.3s cubic-bezier(0.05, 0.03, 0.35, 1);\n+        transition: all 0.3s ease-out;\n         outline: 0;\n         color: inherit;\n         text-decoration: none;\n         width: calc(33.33% - 6rem);\n"
+                },
+                {
+                    "date": 1642939426441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n         &:focus {\n           transition: 0.3s ease-in;\n           color: #fff;\n           background-color: var(--primary-color);\n-          box-shadow: 0px 0px 15px 6px var(#ccc);\n+          box-shadow: 0px 0px 15px 6px var(#333);\n           transform: translateY(-5px) scale(1.01);\n           & .muted-sub-heading {\n               color: #ddd;\n           }\n"
+                },
+                {
+                    "date": 1642939448312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n           transition: 0.3s ease-in;\n           color: #fff;\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#333);\n-          transform: translateY(-5px) scale(1.01);\n+          transform: translateY(-2px) scale(1.01);\n           & .muted-sub-heading {\n               color: #ddd;\n           }\n         }\n"
+                },
+                {
+                    "date": 1642939478345,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,9 @@\n   listData: TDeliveryItemDetails;\n   isActive: boolean;\n };\n export const ListItem = ({ listData, isActive }: Props) => {\n-  const { id, address, city, zipCode, customer, status } =\n-    listData;\n+  const { id, address, city, zipCode, customer, status } = listData;\n   return (\n     <Link\n       to={`details/${id}`}\n       className={css`\n@@ -33,9 +32,9 @@\n           background-color: var(--primary-color);\n           box-shadow: 0px 0px 15px 6px var(#333);\n           transform: translateY(-2px) scale(1.01);\n           & .muted-sub-heading {\n-              color: #ddd;\n+            color: #ddd;\n           }\n         }\n       `}\n     >\n@@ -56,12 +55,9 @@\n             <Tag label=\"Active\" type=\"success\" />\n           )}\n         </div>\n       )}\n-      <h4\n-      >\n-        {customer}\n-      </h4>\n+      <h4>{customer}</h4>\n \n       <p\n         className={css`\n           font-size: 14px;\n@@ -71,14 +67,17 @@\n       >\n         {address}\n       </p>\n       <p\n-        className={cx(css`\n-          font-size: 12px;\n-          color: var(--muted-text);\n-          margin: 0;\n-          transition: 0.3s ease-in;\n-        `, \"muted-sub-heading\")}\n+        className={cx(\n+          css`\n+            font-size: 12px;\n+            color: var(--muted-text);\n+            margin: 0;\n+            transition: 0.3s ease-in;\n+          `,\n+          \"muted-sub-heading\"\n+        )}\n       >\n         {city}, {zipCode}\n       </p>\n     </Link>\n"
+                }
+            ],
+            "date": 1642854476528,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport { DeliveryItem } from '../types';\n\n\nexport const ListItem = ({id, address, city, zipCode, latitude, longitude,customer}: DeliveryItem) => {\n  return <div>\n      <h4>\n      {customer}\n      </h4>\n      <p>{address}</p>\n  </div>;\n};\n"
+        }
+    ]
+}

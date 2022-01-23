@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/features/deliveries/pages/Details.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1642839198358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642839206500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import React, { useState } from 'react';\n \n import { useAppSelector, useAppDispatch } from '../../../store/hooks';\n+import { selectCount } from '../state/selectors';\n \n export function Details() {\n   const count = useAppSelector(selectCount);\n   const dispatch = useAppDispatch();\n"
+                },
+                {
+                    "date": 1642839212027,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,14 +3,9 @@\n import { useAppSelector, useAppDispatch } from '../../../store/hooks';\n import { selectCount } from '../state/selectors';\n \n export function Details() {\n-  const count = useAppSelector(selectCount);\n-  const dispatch = useAppDispatch();\n-  const [incrementAmount, setIncrementAmount] = useState('2');\n \n-  const incrementValue = Number(incrementAmount) || 0;\n-\n   return (\n     <div>\n      details per item\n     </div>\n"
+                },
+                {
+                    "date": 1642839218904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,6 @@\n-import React, { useState } from 'react';\n+import React from 'react';\n \n-import { useAppSelector, useAppDispatch } from '../../../store/hooks';\n-import { selectCount } from '../state/selectors';\n-\n export function Details() {\n \n   return (\n     <div>\n"
+                }
+            ],
+            "date": 1642839198358,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\n\nimport { useAppSelector, useAppDispatch } from '../../../store/hooks';\n\nexport function Details() {\n  const count = useAppSelector(selectCount);\n  const dispatch = useAppDispatch();\n  const [incrementAmount, setIncrementAmount] = useState('2');\n\n  const incrementValue = Number(incrementAmount) || 0;\n\n  return (\n    <div>\n     details per item\n    </div>\n  );\n}\n"
+        }
+    ]
+}

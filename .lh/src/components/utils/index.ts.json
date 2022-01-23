@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/utils/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1642932769242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642932775642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { TColorType } from \"../types\";\n \n-const getTypeColor = (type: TColorType) => {\n+export const getTypeColor = (type: TColorType) => {\n   if (type === \"success\") {\n     return \"green\";\n   }\n   if (type === \"danger\") {\n"
+                }
+            ],
+            "date": 1642932769242,
+            "name": "Commit-0",
+            "content": "import { TColorType } from \"../types\";\n\nconst getTypeColor = (type: TColorType) => {\n  if (type === \"success\") {\n    return \"green\";\n  }\n  if (type === \"danger\") {\n    return \"red\";\n  }\n\n  return \"var(--primary-color)\";\n};\n"
+        }
+    ]
+}

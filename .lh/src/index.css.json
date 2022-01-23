@@ -1,0 +1,110 @@
+{
+    "sourceFile": "src/index.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 23,
+            "patches": [
+                {
+                    "date": 1642858072569,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642858092206,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n   --primary-color: #3b1ac8;\n   --background: #f4f6fb;\n+  background-color: var(--background);\n }\n \n code {\n   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n"
+                },
+                {
+                    "date": 1642858153581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n   --primary-color: #3b1ac8;\n   --background: #f4f6fb;\n+  --paper: '#fff';\n   background-color: var(--background);\n }\n \n code {\n"
+                },
+                {
+                    "date": 1642858171325,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n   --primary-color: #3b1ac8;\n   --background: #f4f6fb;\n-  --paper: '#fff';\n+  --paper: #fff;\n   background-color: var(--background);\n }\n \n code {\n"
+                },
+                {
+                    "date": 1642858310058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n     sans-serif;\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n+ /* css variable */\n   --primary-color: #3b1ac8;\n   --background: #f4f6fb;\n   --paper: #fff;\n   background-color: var(--background);\n"
+                },
+                {
+                    "date": 1642858317906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n  /* css variable */\n   --primary-color: #3b1ac8;\n   --background: #f4f6fb;\n   --paper: #fff;\n+  \n   background-color: var(--background);\n }\n \n code {\n"
+                },
+                {
+                    "date": 1642858852942,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   --primary-color: #3b1ac8;\n   --background: #f4f6fb;\n   --paper: #fff;\n   \n-  background-color: var(--background);\n+  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);\n }\n \n code {\n   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n"
+                },
+                {
+                    "date": 1642858892306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,10 @@\n  /* css variable */\n   --primary-color: #3b1ac8;\n   --background: #f4f6fb;\n   --paper: #fff;\n-  \n+}\n+html {\n   background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);\n }\n \n code {\n"
+                },
+                {
+                    "date": 1642858908561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n   --background: #f4f6fb;\n   --paper: #fff;\n }\n html {\n+  height: 100%;\n   background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);\n }\n \n code {\n"
+                },
+                {
+                    "date": 1642858930257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n }\n html {\n   height: 100%;\n   background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);\n+  overflow: auto;\n }\n \n code {\n   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n"
+                },
+                {
+                    "date": 1642859003860,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,16 +6,12 @@\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n  /* css variable */\n   --primary-color: #3b1ac8;\n-  --background: #f4f6fb;\n+  --background: #e6e9ee;\n   --paper: #fff;\n+  background-color: var(--background);\n }\n-html {\n-  height: 100%;\n-  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);\n-  overflow: auto;\n-}\n \n code {\n   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n     monospace;\n"
+                },
+                {
+                    "date": 1642859016889,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,17 @@\n+html {\n+   /* css variable */\n+   --primary-color: #3b1ac8;\n+   --background: #e6e9ee;\n+   --paper: #fff;\n+}\n body {\n   margin: 0;\n   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n     sans-serif;\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n- /* css variable */\n-  --primary-color: #3b1ac8;\n-  --background: #e6e9ee;\n-  --paper: #fff;\n   background-color: var(--background);\n }\n \n code {\n"
+                },
+                {
+                    "date": 1642859062515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n html {\n    /* css variable */\n-   --primary-color: #3b1ac8;\n+   --primary-color: ##1263d2;\n    --background: #e6e9ee;\n    --paper: #fff;\n }\n body {\n"
+                },
+                {
+                    "date": 1642863822739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,11 @@\n html {\n    /* css variable */\n-   --primary-color: ##1263d2;\n+   --primary-color: #1263d2;\n    --background: #e6e9ee;\n    --paper: #fff;\n+   --text: #333;\n+   --muted-text: #777\n }\n body {\n   margin: 0;\n   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n"
+                },
+                {
+                    "date": 1642863875562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n     sans-serif;\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n   background-color: var(--background);\n+  color: var(--text)\n }\n \n code {\n   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n"
+                },
+                {
+                    "date": 1642924551190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,15 +7,15 @@\n    --muted-text: #777\n }\n body {\n   margin: 0;\n-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n+  font-family: 'Padauk', 'Roboto', 'Oxygen',\n     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n     sans-serif;\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n   background-color: var(--background);\n-  color: var(--text)\n+  color: var(--text);\n }\n \n code {\n   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n"
+                },
+                {
+                    "date": 1642924576332,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n   background-color: var(--background);\n   color: var(--text);\n+  font-size: 18px;\n }\n \n code {\n   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n"
+                },
+                {
+                    "date": 1642924586078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n    --background: #e6e9ee;\n    --paper: #fff;\n    --text: #333;\n    --muted-text: #777\n+   font-size: 18px;\n }\n body {\n   margin: 0;\n   font-family: 'Padauk', 'Roboto', 'Oxygen',\n@@ -14,9 +15,9 @@\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n   background-color: var(--background);\n   color: var(--text);\n-  font-size: 18px;\n+\n }\n \n code {\n   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n"
+                },
+                {
+                    "date": 1642924595850,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n    --background: #e6e9ee;\n    --paper: #fff;\n    --text: #333;\n    --muted-text: #777\n-   font-size: 18px;\n+   font-size: 20px;\n }\n body {\n   margin: 0;\n   font-family: 'Padauk', 'Roboto', 'Oxygen',\n"
+                },
+                {
+                    "date": 1642924670715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n    --background: #e6e9ee;\n    --paper: #fff;\n    --text: #333;\n    --muted-text: #777\n-   font-size: 20px;\n }\n body {\n   margin: 0;\n   font-family: 'Padauk', 'Roboto', 'Oxygen',\n"
+                },
+                {
+                    "date": 1642924691581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n    --muted-text: #777\n }\n body {\n   margin: 0;\n-  font-family: 'Padauk', 'Roboto', 'Oxygen',\n+  font-family: 'Comfortaa', 'Roboto', 'Oxygen',\n     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n     sans-serif;\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n"
+                },
+                {
+                    "date": 1642929758778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n    --muted-text: #777\n }\n body {\n   margin: 0;\n-  font-family: 'Comfortaa', 'Roboto', 'Oxygen',\n+  font-family: 'Inter', 'Roboto', 'Oxygen',\n     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n     sans-serif;\n   -webkit-font-smoothing: antialiased;\n   -moz-osx-font-smoothing: grayscale;\n"
+                },
+                {
+                    "date": 1642933735681,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n html {\n    /* css variable */\n    --primary-color: #1263d2;\n+   --contrast-primary-text: #fff;\n    --background: #e6e9ee;\n    --paper: #fff;\n    --text: #333;\n    --muted-text: #777\n"
+                },
+                {
+                    "date": 1642948533084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,4 @@\n   background-color: var(--background);\n   color: var(--text);\n \n }\n-\n-code {\n-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n-    monospace;\n-}\n"
+                }
+            ],
+            "date": 1642858072569,
+            "name": "Commit-0",
+            "content": "body {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n    sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  --primary-color: #3b1ac8;\n  --background: #f4f6fb;\n}\n\ncode {\n  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n    monospace;\n}\n"
+        }
+    ]
+}

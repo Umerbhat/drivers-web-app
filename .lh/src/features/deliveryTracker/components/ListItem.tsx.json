@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/features/deliveryTracker/components/ListItem.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1642948059125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642948098584,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n   isActive: boolean;\n };\n export const ListItem = ({ listData, isActive }: Props) => {\n   const { id, address, city, zipCode, customer, status } = listData;\n+  const tagType = status === \"delivered\" ? \"success\" : \"danger\";\n   return (\n     <Link\n       to={`details/${id}`}\n       className={css`\n@@ -46,12 +47,9 @@\n             top: 1rem;\n           `}\n         >\n           {status ? (\n-            <Tag\n-              label={status}\n-              type={status === \"delivered\" ? \"success\" : \"danger\"}\n-            />\n+            <Tag label={status} type={tagType} />\n           ) : (\n             <Tag label=\"Active\" type=\"success\" />\n           )}\n         </div>\n"
+                },
+                {
+                    "date": 1642948415344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,16 +3,23 @@\n import { Link } from \"react-router-dom\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n import { paperClassName } from \"../../../components/Paper\";\n import { Tag } from \"../../../components/Tag\";\n+import { DeliveryStatusTag } from \"./DeliveryStatusTag\";\n \n type Props = {\n   listData: TDeliveryItemDetails;\n   isActive: boolean;\n };\n export const ListItem = ({ listData, isActive }: Props) => {\n-  const { id, address, city, zipCode, customer, status } = listData;\n-  const tagType = status === \"delivered\" ? \"success\" : \"danger\";\n+  const {\n+    id,\n+    address,\n+    city,\n+    zipCode,\n+    customer,\n+    status: deliveryStatus,\n+  } = listData;\n   return (\n     <Link\n       to={`details/${id}`}\n       className={css`\n@@ -38,23 +45,9 @@\n           }\n         }\n       `}\n     >\n-      {(isActive || status) && (\n-        <div\n-          className={css`\n-            position: absolute;\n-            right: 1rem;\n-            top: 1rem;\n-          `}\n-        >\n-          {status ? (\n-            <Tag label={status} type={tagType} />\n-          ) : (\n-            <Tag label=\"Active\" type=\"success\" />\n-          )}\n-        </div>\n-      )}\n+      <DeliveryStatusTag isActive={isActive} deliveryStatus={deliveryStatus} />\n       <h4>{customer}</h4>\n \n       <p\n         className={css`\n"
+                },
+                {
+                    "date": 1642948571622,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n import React from \"react\";\n import { Link } from \"react-router-dom\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n import { paperClassName } from \"../../../components/Paper\";\n-import { Tag } from \"../../../components/Tag\";\n import { DeliveryStatusTag } from \"./DeliveryStatusTag\";\n \n type Props = {\n   listData: TDeliveryItemDetails;\n"
+                }
+            ],
+            "date": 1642948059125,
+            "name": "Commit-0",
+            "content": "import { css, cx } from \"@emotion/css\";\nimport React from \"react\";\nimport { Link } from \"react-router-dom\";\nimport { TDeliveryItemDetails } from \"../../../api/types\";\nimport { paperClassName } from \"../../../components/Paper\";\nimport { Tag } from \"../../../components/Tag\";\n\ntype Props = {\n  listData: TDeliveryItemDetails;\n  isActive: boolean;\n};\nexport const ListItem = ({ listData, isActive }: Props) => {\n  const { id, address, city, zipCode, customer, status } = listData;\n  return (\n    <Link\n      to={`details/${id}`}\n      className={css`\n        display: block;\n        position: relative;\n        ${paperClassName};\n        cursor: pointer;\n        transition: all 0.3s ease-out;\n        outline: 0;\n        color: inherit;\n        text-decoration: none;\n        width: calc(33.33% - 6rem);\n        margin: 0.5rem;\n        &:hover,\n        &:focus {\n          transition: 0.3s ease-in;\n          color: #fff;\n          background-color: var(--primary-color);\n          box-shadow: 0px 0px 15px 6px var(#333);\n          transform: translateY(-2px) scale(1.01);\n          & .muted-sub-heading {\n            color: #ddd;\n          }\n        }\n      `}\n    >\n      {(isActive || status) && (\n        <div\n          className={css`\n            position: absolute;\n            right: 1rem;\n            top: 1rem;\n          `}\n        >\n          {status ? (\n            <Tag\n              label={status}\n              type={status === \"delivered\" ? \"success\" : \"danger\"}\n            />\n          ) : (\n            <Tag label=\"Active\" type=\"success\" />\n          )}\n        </div>\n      )}\n      <h4>{customer}</h4>\n\n      <p\n        className={css`\n          font-size: 14px;\n          margin-top: 0;\n          margin-bottom: 0.5rem;\n        `}\n      >\n        {address}\n      </p>\n      <p\n        className={cx(\n          css`\n            font-size: 12px;\n            color: var(--muted-text);\n            margin: 0;\n            transition: 0.3s ease-in;\n          `,\n          \"muted-sub-heading\"\n        )}\n      >\n        {city}, {zipCode}\n      </p>\n    </Link>\n  );\n};\n"
+        }
+    ]
+}

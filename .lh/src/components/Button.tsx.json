@@ -1,0 +1,182 @@
+{
+    "sourceFile": "src/components/Button.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 41,
+            "patches": [
+                {
+                    "date": 1642864156013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642864235278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n \n \n export const Button = (props: HTMLButtonElement) => {\n     const {type = 'button', ...restButtonProps} = props\n-  return <button type={type} {...restButtonProps}></button>;\n+  return <button type={type as React.ButtonHTMLAttributes<HTMLButtonElement>['type']} {...restButtonProps}></button>;\n };\n"
+                },
+                {
+                    "date": 1642864321815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n import React from 'react';\n \n \n-export const Button = (props: HTMLButtonElement) => {\n-    const {type = 'button', ...restButtonProps} = props\n-  return <button type={type as React.ButtonHTMLAttributes<HTMLButtonElement>['type']} {...restButtonProps}></button>;\n+export const Button = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => {\n+  return <button {...props}></button>;\n };\n"
+                },
+                {
+                    "date": 1642864415041,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,10 @@\n+import { css } from '@emotion/css';\n import React from 'react';\n \n \n export const Button = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => {\n-  return <button {...props}></button>;\n+  return <button className={css`\n+     &:hover, &:focus{\n+     background-color: var(---primary-color);}\n+  `} {...props}></button>;\n };\n"
+                },
+                {
+                    "date": 1642864506890,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,22 @@\n-import { css } from '@emotion/css';\n-import React from 'react';\n+import { css } from \"@emotion/css\";\n+import React from \"react\";\n \n-\n-export const Button = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => {\n-  return <button className={css`\n-     &:hover, &:focus{\n-     background-color: var(---primary-color);}\n-  `} {...props}></button>;\n+export const Button = (\n+  props: React.ButtonHTMLAttributes<HTMLButtonElement>\n+) => {\n+  return (\n+    <button\n+      className={css`\n+        border: 2px solid var(--primary-color);\n+        transition: all 0.25s ease-out;\n+        &:hover,\n+        &:focus {\n+          transition: all 0.25s ease-in;\n+          border-color: transparent;\n+          background-color: var(--primary-color);\n+        }\n+      `}\n+      {...props}\n+    ></button>\n+  );\n };\n"
+                },
+                {
+                    "date": 1642864576842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,12 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n \n+type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n+    label: string\n+}\n export const Button = (\n-  props: React.ButtonHTMLAttributes<HTMLButtonElement>\n+  props: ButtonProp\n ) => {\n   return (\n     <button\n       className={css`\n"
+                },
+                {
+                    "date": 1642864627209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,12 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n \n type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n-    label: string\n-}\n-export const Button = (\n-  props: ButtonProp\n-) => {\n+  label: string;\n+};\n+export const Button = (props: ButtonProp) => {\n+    const {label, ...buttonAttributes} = props\n   return (\n     <button\n       className={css`\n         border: 2px solid var(--primary-color);\n@@ -18,8 +17,8 @@\n           border-color: transparent;\n           background-color: var(--primary-color);\n         }\n       `}\n-      {...props}\n-    ></button>\n+      {...buttonAttributes}\n+    >{label}</button>\n   );\n };\n"
+                },
+                {
+                    "date": 1642864693187,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n \n type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n-  label: string;\n+    children: string;\n };\n export const Button = (props: ButtonProp) => {\n-    const {label, ...buttonAttributes} = props\n+  const { children, ...buttonAttributes } = props;\n   return (\n     <button\n       className={css`\n         border: 2px solid var(--primary-color);\n@@ -18,7 +18,9 @@\n           background-color: var(--primary-color);\n         }\n       `}\n       {...buttonAttributes}\n-    >{label}</button>\n+    >\n+      {children}\n+    </button>\n   );\n };\n"
+                },
+                {
+                    "date": 1642865034108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,15 +8,25 @@\n   const { children, ...buttonAttributes } = props;\n   return (\n     <button\n       className={css`\n-        border: 2px solid var(--primary-color);\n-        transition: all 0.25s ease-out;\n+        border-radius: 5px;\n+        border-style: none;\n+        background-image: linear-gradient(#8614f8 0, var(--primary-color) 100%);\n+        box-shadow: rgba(245, 244, 247, .25) 0 1px 1px inset;\n+        font-size: 16px;\n+        font-weight: 500;\n+        height: 60px;\n+        line-height: 60px;\n+        outline: 0;\n+        text-align: center;\n+        transition: all .3s cubic-bezier(.05, .03, .35, 1);\n+        user-select: none;\n+        -webkit-user-select: none;\n+        touch-action: manipulation;\n         &:hover,\n         &:focus {\n-          transition: all 0.25s ease-in;\n-          border-color: transparent;\n-          background-color: var(--primary-color);\n+            opacity: .7;\n         }\n       `}\n       {...buttonAttributes}\n     >\n"
+                },
+                {
+                    "date": 1642865043800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     <button\n       className={css`\n         border-radius: 5px;\n         border-style: none;\n-        background-image: linear-gradient(#8614f8 0, var(--primary-color) 100%);\n+        background-image: linear-gradient(#8614f8 0, #760be0 100%);\n         box-shadow: rgba(245, 244, 247, .25) 0 1px 1px inset;\n         font-size: 16px;\n         font-weight: 500;\n         height: 60px;\n"
+                },
+                {
+                    "date": 1642865061944,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n         border-radius: 5px;\n         border-style: none;\n         background-image: linear-gradient(#8614f8 0, #760be0 100%);\n         box-shadow: rgba(245, 244, 247, .25) 0 1px 1px inset;\n+        color: #fff;\n         font-size: 16px;\n         font-weight: 500;\n         height: 60px;\n         line-height: 60px;\n"
+                },
+                {
+                    "date": 1642865079495,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n         transition: all .3s cubic-bezier(.05, .03, .35, 1);\n         user-select: none;\n         -webkit-user-select: none;\n         touch-action: manipulation;\n+        padding: 1rem;\n         &:hover,\n         &:focus {\n             opacity: .7;\n         }\n"
+                },
+                {
+                    "date": 1642865091316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         transition: all .3s cubic-bezier(.05, .03, .35, 1);\n         user-select: none;\n         -webkit-user-select: none;\n         touch-action: manipulation;\n-        padding: 1rem;\n+        padding: 0 1rem;\n         &:hover,\n         &:focus {\n             opacity: .7;\n         }\n"
+                },
+                {
+                    "date": 1642865140727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,10 @@\n         transition: all .3s cubic-bezier(.05, .03, .35, 1);\n         user-select: none;\n         -webkit-user-select: none;\n         touch-action: manipulation;\n-        padding: 0 1rem;\n+        padding: 0 2rem;\n+        cursor: pointer;\n         &:hover,\n         &:focus {\n             opacity: .7;\n         }\n"
+                },
+                {
+                    "date": 1642865167058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,9 @@\n         border-style: none;\n         background-image: linear-gradient(#8614f8 0, #760be0 100%);\n         box-shadow: rgba(245, 244, 247, .25) 0 1px 1px inset;\n         color: #fff;\n-        font-size: 16px;\n-        font-weight: 500;\n+        font-weight: bold;\n         height: 60px;\n         line-height: 60px;\n         outline: 0;\n         text-align: center;\n"
+                },
+                {
+                    "date": 1642865173356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n         border-style: none;\n         background-image: linear-gradient(#8614f8 0, #760be0 100%);\n         box-shadow: rgba(245, 244, 247, .25) 0 1px 1px inset;\n         color: #fff;\n+        font-size: 16px;\n         font-weight: bold;\n         height: 60px;\n         line-height: 60px;\n         outline: 0;\n"
+                },
+                {
+                    "date": 1642865234182,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     <button\n       className={css`\n         border-radius: 5px;\n         border-style: none;\n-        background-image: linear-gradient(#8614f8 0, #760be0 100%);\n+        background-image: linear-gradient(var(--primary-color) 0, var(--muted-text) 100%);\n         box-shadow: rgba(245, 244, 247, .25) 0 1px 1px inset;\n         color: #fff;\n         font-size: 16px;\n         font-weight: bold;\n"
+                },
+                {
+                    "date": 1642865350066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,35 +1,40 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n \n type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n-    children: string;\n+  children: string;\n+  type?: 'primary' | 'success'\n+  variant?: 'contained' | 'outlined'\n };\n export const Button = (props: ButtonProp) => {\n-  const { children, ...buttonAttributes } = props;\n+  const { children, type=\"primary\", ...buttonAttributes } = props;\n   return (\n     <button\n       className={css`\n         border-radius: 5px;\n         border-style: none;\n-        background-image: linear-gradient(var(--primary-color) 0, var(--muted-text) 100%);\n-        box-shadow: rgba(245, 244, 247, .25) 0 1px 1px inset;\n+        background-image: linear-gradient(\n+          var(--primary-color) 0,\n+          var(--muted-text) 100%\n+        );\n+        box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n         color: #fff;\n         font-size: 16px;\n         font-weight: bold;\n         height: 60px;\n         line-height: 60px;\n         outline: 0;\n         text-align: center;\n-        transition: all .3s cubic-bezier(.05, .03, .35, 1);\n+        transition: all 0.3s cubic-bezier(0.05, 0.03, 0.35, 1);\n         user-select: none;\n         -webkit-user-select: none;\n         touch-action: manipulation;\n         padding: 0 2rem;\n         cursor: pointer;\n         &:hover,\n         &:focus {\n-            opacity: .7;\n+          opacity: 0.7;\n         }\n       `}\n       {...buttonAttributes}\n     >\n"
+                },
+                {
+                    "date": 1642865371795,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,12 +12,9 @@\n     <button\n       className={css`\n         border-radius: 5px;\n         border-style: none;\n-        background-image: linear-gradient(\n-          var(--primary-color) 0,\n-          var(--muted-text) 100%\n-        );\n+        background: var(---primary-color);\n         box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n         color: #fff;\n         font-size: 16px;\n         font-weight: bold;\n"
+                },
+                {
+                    "date": 1642865383472,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     <button\n       className={css`\n         border-radius: 5px;\n         border-style: none;\n-        background: var(---primary-color);\n+        background: var(--primary-color);\n         box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n         color: #fff;\n         font-size: 16px;\n         font-weight: bold;\n"
+                },
+                {
+                    "date": 1642865530228,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,16 +5,25 @@\n   children: string;\n   type?: 'primary' | 'success'\n   variant?: 'contained' | 'outlined'\n };\n+\n+const getButtonColor = (type: 'primary' | 'success') => {\n+    if(type===\"success\"){\n+        return  css` background: green;`\n+    }\n+ \n+    return css` background: var(--primary-color);`\n+\n+}\n export const Button = (props: ButtonProp) => {\n   const { children, type=\"primary\", ...buttonAttributes } = props;\n   return (\n     <button\n       className={css`\n         border-radius: 5px;\n         border-style: none;\n-        background: var(--primary-color);\n+       ${getButtonColor}\n         box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n         color: #fff;\n         font-size: 16px;\n         font-weight: bold;\n"
+                },
+                {
+                    "date": 1642865539265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     <button\n       className={css`\n         border-radius: 5px;\n         border-style: none;\n-       ${getButtonColor}\n+       ${getButtonColor(type)};\n         box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n         color: #fff;\n         font-size: 16px;\n         font-weight: bold;\n"
+                },
+                {
+                    "date": 1642865544757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,28 +2,31 @@\n import React from \"react\";\n \n type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n   children: string;\n-  type?: 'primary' | 'success'\n-  variant?: 'contained' | 'outlined'\n+  type?: \"primary\" | \"success\";\n+  variant?: \"contained\" | \"outlined\";\n };\n \n-const getButtonColor = (type: 'primary' | 'success') => {\n-    if(type===\"success\"){\n-        return  css` background: green;`\n-    }\n- \n-    return css` background: var(--primary-color);`\n+const getButtonColor = (type: \"primary\" | \"success\") => {\n+  if (type === \"success\") {\n+    return css`\n+      background: green;\n+    `;\n+  }\n \n-}\n+  return css`\n+    background: var(--primary-color);\n+  `;\n+};\n export const Button = (props: ButtonProp) => {\n-  const { children, type=\"primary\", ...buttonAttributes } = props;\n+  const { children, type = \"primary\", ...buttonAttributes } = props;\n   return (\n     <button\n       className={css`\n         border-radius: 5px;\n         border-style: none;\n-       ${getButtonColor(type)};\n+        ${getButtonColor(type)};\n         box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n         color: #fff;\n         font-size: 16px;\n         font-weight: bold;\n"
+                },
+                {
+                    "date": 1642865630303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import React from \"react\";\n \n type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n   children: string;\n-  type?: \"primary\" | \"success\";\n+  buttonType?: \"primary\" | \"success\";\n   variant?: \"contained\" | \"outlined\";\n };\n \n const getButtonColor = (type: \"primary\" | \"success\") => {\n@@ -18,15 +18,15 @@\n     background: var(--primary-color);\n   `;\n };\n export const Button = (props: ButtonProp) => {\n-  const { children, type = \"primary\", ...buttonAttributes } = props;\n+  const { children, buttonType = \"primary\", ...buttonAttributes } = props;\n   return (\n     <button\n       className={css`\n         border-radius: 5px;\n         border-style: none;\n-        ${getButtonColor(type)};\n+        ${getButtonColor(buttonType)};\n         box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n         color: #fff;\n         font-size: 16px;\n         font-weight: bold;\n"
+                },
+                {
+                    "date": 1642919177297,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,8 +43,12 @@\n         &:hover,\n         &:focus {\n           opacity: 0.7;\n         }\n+        &:disabled {\n+            background-color: #ccc;\n+            box-shadow: none;\n+        }\n       `}\n       {...buttonAttributes}\n     >\n       {children}\n"
+                },
+                {
+                    "date": 1642919246415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,15 +39,16 @@\n         -webkit-user-select: none;\n         touch-action: manipulation;\n         padding: 0 2rem;\n         cursor: pointer;\n-        &:hover,\n-        &:focus {\n+        &:hover:not(:disabled),\n+        &:focus:not(:disabled) {\n           opacity: 0.7;\n         }\n         &:disabled {\n             background-color: #ccc;\n             box-shadow: none;\n+            cursor: not-allowed;\n         }\n       `}\n       {...buttonAttributes}\n     >\n"
+                },
+                {
+                    "date": 1642919662242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,12 +18,12 @@\n     background: var(--primary-color);\n   `;\n };\n export const Button = (props: ButtonProp) => {\n-  const { children, buttonType = \"primary\", ...buttonAttributes } = props;\n+  const { children, buttonType = \"primary\", className, ...buttonAttributes } = props;\n   return (\n     <button\n-      className={css`\n+      className={cx(css`\n         border-radius: 5px;\n         border-style: none;\n         ${getButtonColor(buttonType)};\n         box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n@@ -48,9 +48,9 @@\n             background-color: #ccc;\n             box-shadow: none;\n             cursor: not-allowed;\n         }\n-      `}\n+      `, className)}\n       {...buttonAttributes}\n     >\n       {children}\n     </button>\n"
+                },
+                {
+                    "date": 1642919669633,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { css } from \"@emotion/css\";\n+import { cx, css } from \"@emotion/css\";\n import React from \"react\";\n \n type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n   children: string;\n"
+                },
+                {
+                    "date": 1642919746073,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,18 +2,23 @@\n import React from \"react\";\n \n type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n   children: string;\n-  buttonType?: \"primary\" | \"success\";\n+  buttonType?: \"primary\" | \"success\" | \"danger\";\n   variant?: \"contained\" | \"outlined\";\n };\n \n-const getButtonColor = (type: \"primary\" | \"success\") => {\n+const getButtonColor = (type: \"primary\" | \"success\" | \"danger\") => {\n   if (type === \"success\") {\n     return css`\n       background: green;\n     `;\n   }\n+  if(type===\"danger\"){\n+    return css`\n+    background: red;\n+  `; \n+  }\n \n   return css`\n     background: var(--primary-color);\n   `;\n"
+                },
+                {
+                    "date": 1642919945208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,12 +44,14 @@\n         -webkit-user-select: none;\n         touch-action: manipulation;\n         padding: 0 2rem;\n         cursor: pointer;\n-        &:hover:not(:disabled),\n-        &:focus:not(:disabled) {\n+        &:hover:not(:disabled){\n           opacity: 0.7;\n         }\n+        &:focus:not(:disabled) {\n+          border-color: white\n+        }\n         &:disabled {\n             background-color: #ccc;\n             box-shadow: none;\n             cursor: not-allowed;\n"
+                },
+                {
+                    "date": 1642919964511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,14 +44,12 @@\n         -webkit-user-select: none;\n         touch-action: manipulation;\n         padding: 0 2rem;\n         cursor: pointer;\n-        &:hover:not(:disabled){\n+        &:hover:not(:disabled),\n+        &:focus:not(:disabled) {\n           opacity: 0.7;\n         }\n-        &:focus:not(:disabled) {\n-          border-color: white\n-        }\n         &:disabled {\n             background-color: #ccc;\n             box-shadow: none;\n             cursor: not-allowed;\n"
+                },
+                {
+                    "date": 1642920205330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,8 +47,9 @@\n         cursor: pointer;\n         &:hover:not(:disabled),\n         &:focus:not(:disabled) {\n           opacity: 0.7;\n+          transform: scale(1.05) translateY(-2px);\n         }\n         &:disabled {\n             background-color: #ccc;\n             box-shadow: none;\n"
+                },
+                {
+                    "date": 1642920223887,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,8 @@\n         padding: 0 2rem;\n         cursor: pointer;\n         &:hover:not(:disabled),\n         &:focus:not(:disabled) {\n-          opacity: 0.7;\n           transform: scale(1.05) translateY(-2px);\n         }\n         &:disabled {\n             background-color: #ccc;\n"
+                },
+                {
+                    "date": 1642920303545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,14 +43,16 @@\n         user-select: none;\n         -webkit-user-select: none;\n         touch-action: manipulation;\n         padding: 0 2rem;\n+        opacity: 0.9;\n         cursor: pointer;\n         &:hover:not(:disabled),\n         &:focus:not(:disabled) {\n           transform: scale(1.05) translateY(-2px);\n         }\n         &:disabled {\n+            opacity: 1\n             background-color: #ccc;\n             box-shadow: none;\n             cursor: not-allowed;\n         }\n"
+                },
+                {
+                    "date": 1642920312467,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,12 +47,12 @@\n         opacity: 0.9;\n         cursor: pointer;\n         &:hover:not(:disabled),\n         &:focus:not(:disabled) {\n+            opacity: 1\n           transform: scale(1.05) translateY(-2px);\n         }\n         &:disabled {\n-            opacity: 1\n             background-color: #ccc;\n             box-shadow: none;\n             cursor: not-allowed;\n         }\n"
+                },
+                {
+                    "date": 1642925869920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,8 +34,9 @@\n         box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n         color: #fff;\n         font-size: 16px;\n         font-weight: bold;\n+        font-family: inherit;\n         height: 60px;\n         line-height: 60px;\n         outline: 0;\n         text-align: center;\n@@ -47,9 +48,9 @@\n         opacity: 0.9;\n         cursor: pointer;\n         &:hover:not(:disabled),\n         &:focus:not(:disabled) {\n-            opacity: 1\n+            opacity: 1;\n           transform: scale(1.05) translateY(-2px);\n         }\n         &:disabled {\n             background-color: #ccc;\n"
+                },
+                {
+                    "date": 1642932436352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,53 +12,61 @@\n     return css`\n       background: green;\n     `;\n   }\n-  if(type===\"danger\"){\n+  if (type === \"danger\") {\n     return css`\n-    background: red;\n-  `; \n+      background: red;\n+    `;\n   }\n \n   return css`\n     background: var(--primary-color);\n   `;\n };\n export const Button = (props: ButtonProp) => {\n-  const { children, buttonType = \"primary\", className, ...buttonAttributes } = props;\n+  const {\n+    children,\n+    buttonType = \"primary\",\n+    className,\n+    ...buttonAttributes\n+  } = props;\n   return (\n     <button\n-      className={cx(css`\n-        border-radius: 5px;\n-        border-style: none;\n-        ${getButtonColor(buttonType)};\n-        box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n-        color: #fff;\n-        font-size: 16px;\n-        font-weight: bold;\n-        font-family: inherit;\n-        height: 60px;\n-        line-height: 60px;\n-        outline: 0;\n-        text-align: center;\n-        transition: all 0.3s cubic-bezier(0.05, 0.03, 0.35, 1);\n-        user-select: none;\n-        -webkit-user-select: none;\n-        touch-action: manipulation;\n-        padding: 0 2rem;\n-        opacity: 0.9;\n-        cursor: pointer;\n-        &:hover:not(:disabled),\n-        &:focus:not(:disabled) {\n+      className={cx(\n+        css`\n+          border-radius: 5px;\n+          border-style: none;\n+          ${getButtonColor(buttonType)};\n+          box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n+          color: #fff;\n+          font-size: 16px;\n+          font-weight: bold;\n+          font-family: inherit;\n+          height: 60px;\n+          line-height: 60px;\n+          outline: 0;\n+          text-align: center;\n+          transition: all 0.3s cubic-bezier(0.05, 0.03, 0.35, 1);\n+          user-select: none;\n+          -webkit-user-select: none;\n+          touch-action: manipulation;\n+          padding: 0 2rem;\n+          opacity: 0.9;\n+          cursor: pointer;\n+          &:hover:not(:disabled),\n+          &:focus:not(:disabled) {\n             opacity: 1;\n-          transform: scale(1.05) translateY(-2px);\n-        }\n-        &:disabled {\n+            transform: scale(1.05) translateY(-2px);\n+          }\n+          &:disabled {\n             background-color: #ccc;\n             box-shadow: none;\n             cursor: not-allowed;\n-        }\n-      `, className)}\n+          }\n+        `,\n+        className\n+      )}\n       {...buttonAttributes}\n     >\n       {children}\n     </button>\n"
+                },
+                {
+                    "date": 1642932503685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { cx, css } from \"@emotion/css\";\n import React from \"react\";\n \n-type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n+export type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n   children: string;\n   buttonType?: \"primary\" | \"success\" | \"danger\";\n   variant?: \"contained\" | \"outlined\";\n };\n"
+                },
+                {
+                    "date": 1642932845244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,29 +1,14 @@\n import { cx, css } from \"@emotion/css\";\n import React from \"react\";\n+import { getTypeColor } from \"./utils\";\n \n export type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n   children: string;\n   buttonType?: \"primary\" | \"success\" | \"danger\";\n   variant?: \"contained\" | \"outlined\";\n };\n \n-const getButtonColor = (type: \"primary\" | \"success\" | \"danger\") => {\n-  if (type === \"success\") {\n-    return css`\n-      background: green;\n-    `;\n-  }\n-  if (type === \"danger\") {\n-    return css`\n-      background: red;\n-    `;\n-  }\n-\n-  return css`\n-    background: var(--primary-color);\n-  `;\n-};\n export const Button = (props: ButtonProp) => {\n   const {\n     children,\n     buttonType = \"primary\",\n@@ -35,9 +20,9 @@\n       className={cx(\n         css`\n           border-radius: 5px;\n           border-style: none;\n-          ${getButtonColor(buttonType)};\n+          background-color: ${getTypeColor(buttonType)};\n           box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;\n           color: #fff;\n           font-size: 16px;\n           font-weight: bold;\n"
+                },
+                {
+                    "date": 1642932859433,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,12 @@\n import { cx, css } from \"@emotion/css\";\n import React from \"react\";\n+import { TColorType } from \"./types\";\n import { getTypeColor } from \"./utils\";\n \n export type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n   children: string;\n-  buttonType?: \"primary\" | \"success\" | \"danger\";\n+  buttonType?: TColorType;\n   variant?: \"contained\" | \"outlined\";\n };\n \n export const Button = (props: ButtonProp) => {\n"
+                },
+                {
+                    "date": 1642932876192,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,8 @@\n \n export type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n   children: string;\n   buttonType?: TColorType;\n-  variant?: \"contained\" | \"outlined\";\n };\n \n export const Button = (props: ButtonProp) => {\n   const {\n"
+                },
+                {
+                    "date": 1642932913932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import React from \"react\";\n import { TColorType } from \"./types\";\n import { getTypeColor } from \"./utils\";\n \n-export type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n+type ButtonProp = React.ButtonHTMLAttributes<HTMLButtonElement> & {\n   children: string;\n   buttonType?: TColorType;\n };\n \n"
+                }
+            ],
+            "date": 1642864156013,
+            "name": "Commit-0",
+            "content": "import React from 'react';\n\n\nexport const Button = (props: HTMLButtonElement) => {\n    const {type = 'button', ...restButtonProps} = props\n  return <button type={type} {...restButtonProps}></button>;\n};\n"
+        }
+    ]
+}

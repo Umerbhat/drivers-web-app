@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/features/deliveryTracker/components/DeliveryStatusTag.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1642948262601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642948325455,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { TPostStatusParams } from \"../../../api/types\";\n import { Tag } from \"../../../components/Tag\";\n \n type Props = {\n-  deliveryStatus: TPostStatusParams[\"status\"];\n+  deliveryStatus?: TPostStatusParams[\"status\"];\n   isActive: boolean;\n };\n \n export const DeliveryStatusTag = ({ deliveryStatus, isActive }: Props) => {\n"
+                },
+                {
+                    "date": 1642948335799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,12 +9,12 @@\n \n export const DeliveryStatusTag = ({ deliveryStatus, isActive }: Props) => {\n   const tagType = deliveryStatus === \"delivered\" ? \"success\" : \"danger\";\n   return (\n-    <div>\n+    <>\n       {isActive && <Tag label=\"Active\" type=\"primary\" />}\n       {!isActive && !!deliveryStatus && (\n         <Tag label={deliveryStatus} type={tagType} />\n       )}\n-    </div>\n+    </>\n   );\n };\n"
+                }
+            ],
+            "date": 1642948262601,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\nimport { TPostStatusParams } from \"../../../api/types\";\nimport { Tag } from \"../../../components/Tag\";\n\ntype Props = {\n  deliveryStatus: TPostStatusParams[\"status\"];\n  isActive: boolean;\n};\n\nexport const DeliveryStatusTag = ({ deliveryStatus, isActive }: Props) => {\n  const tagType = deliveryStatus === \"delivered\" ? \"success\" : \"danger\";\n  return (\n    <div>\n      {isActive && <Tag label=\"Active\" type=\"primary\" />}\n      {!isActive && !!deliveryStatus && (\n        <Tag label={deliveryStatus} type={tagType} />\n      )}\n    </div>\n  );\n};\n"
+        }
+    ]
+}

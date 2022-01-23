@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/features/deliveries/pages/Listing.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1642839184436,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1642839184436,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\nimport { useAppSelector, useAppDispatch } from '../../../store/hooks';\nimport { selectCount } from '../state/selectors';\n\nexport function Listing() {\n  const count = useAppSelector(selectCount);\n  const dispatch = useAppDispatch();\n  const [incrementAmount, setIncrementAmount] = useState('2');\n\n  const incrementValue = Number(incrementAmount) || 0;\n\n  return (\n    <div>\n     deliveries list here\n    </div>\n  );\n}\n"
+        }
+    ]
+}

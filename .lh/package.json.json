@@ -1,0 +1,58 @@
+{
+    "sourceFile": "package.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1642951949407,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642952093815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,11 +45,5 @@\n     \"@react-mock/fetch\": \"^0.3.0\",\n     \"isomorphic-fetch\": \"^3.0.0\",\n     \"jest-fetch-mock\": \"^3.0.3\"\n   },\n-  \"jest\": {\n-    \"automock\": false,\n-    \"setupFiles\": [\n-      \"./setupJest.js\"\n-    ]\n-  }\n }\n"
+                },
+                {
+                    "date": 1642952272261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   },\n   \"scripts\": {\n     \"start\": \"react-scripts start\",\n     \"build\": \"react-scripts build\",\n-    \"test\": \"react-scripts test\",\n+    \"test\": \"react-scripts test  --setupFiles ./setupJest.js\",\n     \"eject\": \"react-scripts eject\"\n   },\n   \"eslintConfig\": {\n     \"extends\": \"react-app\"\n@@ -44,6 +44,6 @@\n   \"devDependencies\": {\n     \"@react-mock/fetch\": \"^0.3.0\",\n     \"isomorphic-fetch\": \"^3.0.0\",\n     \"jest-fetch-mock\": \"^3.0.3\"\n-  },\n+  }\n }\n"
+                },
+                {
+                    "date": 1642952313624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   },\n   \"scripts\": {\n     \"start\": \"react-scripts start\",\n     \"build\": \"react-scripts build\",\n-    \"test\": \"react-scripts test  --setupFiles ./setupJest.js\",\n+    \"test\": \"react-scripts test  --setupFiles ../setupJest.js\",\n     \"eject\": \"react-scripts eject\"\n   },\n   \"eslintConfig\": {\n     \"extends\": \"react-app\"\n"
+                },
+                {
+                    "date": 1642952326815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   },\n   \"scripts\": {\n     \"start\": \"react-scripts start\",\n     \"build\": \"react-scripts build\",\n-    \"test\": \"react-scripts test  --setupFiles ../setupJest.js\",\n+    \"test\": \"react-scripts test  --setupFiles setupJest.js\",\n     \"eject\": \"react-scripts eject\"\n   },\n   \"eslintConfig\": {\n     \"extends\": \"react-app\"\n"
+                },
+                {
+                    "date": 1642952350164,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   },\n   \"scripts\": {\n     \"start\": \"react-scripts start\",\n     \"build\": \"react-scripts build\",\n-    \"test\": \"react-scripts test  --setupFiles setupJest.js\",\n+    \"test\": \"react-scripts test  --setupFiles ./setupJest.js\",\n     \"eject\": \"react-scripts eject\"\n   },\n   \"eslintConfig\": {\n     \"extends\": \"react-app\"\n"
+                },
+                {
+                    "date": 1642952452090,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   },\n   \"scripts\": {\n     \"start\": \"react-scripts start\",\n     \"build\": \"react-scripts build\",\n-    \"test\": \"react-scripts test  --setupFiles ./setupJest.js\",\n+    \"test\": \"react-scripts test  --setupFiles ./src/setupJest.js\",\n     \"eject\": \"react-scripts eject\"\n   },\n   \"eslintConfig\": {\n     \"extends\": \"react-app\"\n"
+                },
+                {
+                    "date": 1642957310346,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   },\n   \"scripts\": {\n     \"start\": \"react-scripts start\",\n     \"build\": \"react-scripts build\",\n-    \"test\": \"react-scripts test  --setupFiles ./src/setupJest.js\",\n+    \"test\": \"react-scripts test  --setupFiles ./src/setupJest.js --env=jest-environment-jsdom-sixteen\",\n     \"eject\": \"react-scripts eject\"\n   },\n   \"eslintConfig\": {\n     \"extends\": \"react-app\"\n@@ -43,7 +43,8 @@\n   },\n   \"devDependencies\": {\n     \"@react-mock/fetch\": \"^0.3.0\",\n     \"isomorphic-fetch\": \"^3.0.0\",\n+    \"jest-environment-jsdom-sixteen\": \"^2.0.0\",\n     \"jest-fetch-mock\": \"^3.0.3\"\n   }\n }\n"
+                },
+                {
+                    "date": 1642963085772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   },\n   \"scripts\": {\n     \"start\": \"react-scripts start\",\n     \"build\": \"react-scripts build\",\n-    \"test\": \"react-scripts test  --setupFiles ./src/setupJest.js --env=jest-environment-jsdom-sixteen\",\n+    \"test\": \"react-scripts test  --setupFiles ./src/setupJest.js\",\n     \"eject\": \"react-scripts eject\"\n   },\n   \"eslintConfig\": {\n     \"extends\": \"react-app\"\n@@ -42,9 +42,10 @@\n     ]\n   },\n   \"devDependencies\": {\n     \"@react-mock/fetch\": \"^0.3.0\",\n+    \"@types/redux-mock-store\": \"^1.0.3\",\n     \"isomorphic-fetch\": \"^3.0.0\",\n-    \"jest-environment-jsdom-sixteen\": \"^2.0.0\",\n-    \"jest-fetch-mock\": \"^3.0.3\"\n+    \"jest-fetch-mock\": \"^3.0.3\",\n+    \"redux-mock-store\": \"^1.5.4\"\n   }\n }\n"
+                },
+                {
+                    "date": 1642963100374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,8 @@\n   },\n   \"devDependencies\": {\n     \"@react-mock/fetch\": \"^0.3.0\",\n     \"@types/redux-mock-store\": \"^1.0.3\",\n-    \"isomorphic-fetch\": \"^3.0.0\",\n     \"jest-fetch-mock\": \"^3.0.3\",\n     \"redux-mock-store\": \"^1.5.4\"\n   }\n }\n"
+                },
+                {
+                    "date": 1642963110498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,8 @@\n       \"last 1 safari version\"\n     ]\n   },\n   \"devDependencies\": {\n-    \"@react-mock/fetch\": \"^0.3.0\",\n     \"@types/redux-mock-store\": \"^1.0.3\",\n     \"jest-fetch-mock\": \"^3.0.3\",\n     \"redux-mock-store\": \"^1.5.4\"\n   }\n"
+                }
+            ],
+            "date": 1642951949407,
+            "name": "Commit-0",
+            "content": "{\n  \"name\": \"drivers-web-app\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"dependencies\": {\n    \"@emotion/css\": \"^11.7.1\",\n    \"@reduxjs/toolkit\": \"^1.7.1\",\n    \"@testing-library/jest-dom\": \"^5.16.1\",\n    \"@testing-library/react\": \"^12.1.2\",\n    \"@testing-library/user-event\": \"^7.2.1\",\n    \"@types/jest\": \"^27.4.0\",\n    \"@types/node\": \"^12.20.42\",\n    \"@types/react\": \"^16.14.21\",\n    \"@types/react-dom\": \"^16.9.14\",\n    \"@types/react-redux\": \"^7.1.22\",\n    \"react\": \"^17.0.2\",\n    \"react-dom\": \"^17.0.2\",\n    \"react-redux\": \"^7.2.6\",\n    \"react-router-dom\": \"6\",\n    \"react-scripts\": \"^3.0.1\",\n    \"typescript\": \"~4.1.5\"\n  },\n  \"scripts\": {\n    \"start\": \"react-scripts start\",\n    \"build\": \"react-scripts build\",\n    \"test\": \"react-scripts test\",\n    \"eject\": \"react-scripts eject\"\n  },\n  \"eslintConfig\": {\n    \"extends\": \"react-app\"\n  },\n  \"browserslist\": {\n    \"production\": [\n      \">0.2%\",\n      \"not dead\",\n      \"not op_mini all\"\n    ],\n    \"development\": [\n      \"last 1 chrome version\",\n      \"last 1 firefox version\",\n      \"last 1 safari version\"\n    ]\n  },\n  \"devDependencies\": {\n    \"@react-mock/fetch\": \"^0.3.0\",\n    \"isomorphic-fetch\": \"^3.0.0\",\n    \"jest-fetch-mock\": \"^3.0.3\"\n  },\n  \"jest\": {\n    \"automock\": false,\n    \"setupFiles\": [\n      \"./setupJest.js\"\n    ]\n  }\n}\n"
+        }
+    ]
+}

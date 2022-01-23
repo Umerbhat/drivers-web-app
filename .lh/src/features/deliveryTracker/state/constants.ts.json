@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/features/deliveryTracker/state/constants.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1642944921789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642963352573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n export const FETCH_DELIVERY_LIST = \"deliveryList/fetchAllDeliveryList\";\n-export const FETCH_DELIVERY = \"deliveryList/fetchDelivery\"\n-export const POST_DELIVERY_STATUS = \"deliveryList/postDeliveryStatus\"\n\\ No newline at end of file\n+export const FETCH_DELIVERY = \"deliveryList/fetchDelivery\";\n+export const POST_DELIVERY_STATUS = \"deliveryList/postDeliveryStatus\";\n"
+                }
+            ],
+            "date": 1642944921789,
+            "name": "Commit-0",
+            "content": "export const FETCH_DELIVERY_LIST = \"deliveryList/fetchAllDeliveryList\";\nexport const FETCH_DELIVERY = \"deliveryList/fetchDelivery\"\nexport const POST_DELIVERY_STATUS = \"deliveryList/postDeliveryStatus\""
+        }
+    ]
+}

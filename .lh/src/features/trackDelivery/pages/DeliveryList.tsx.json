@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/features/trackDelivery/pages/DeliveryList.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1642941254569,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1642941254569,
+            "name": "Commit-0",
+            "content": "import { css } from \"@emotion/css\";\nimport { createAction } from \"@reduxjs/toolkit\";\nimport React, { useEffect, useState } from \"react\";\nimport { TDeliveryItemDetails } from \"../../../api/types\";\nimport { Loader } from \"../../../components/Loader\";\nimport { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\nimport { ListItem } from \"../components/ListItem\";\nimport { FETCH_DELIVERIES } from \"../state/constants\";\nimport { getDeliveryList } from \"../state/middleware\";\nimport {\n  getDeliveryListData,\n  getDeliveryListApiStatus,\n  getActiveDeliveryId,\n} from \"../state/selectors\";\n\nexport function DeliveryListList() {\n  // const count = useAppSelector(activeDeliveryId);\n  const { ids: listIds, entities } = useAppSelector(getDeliveryListData);\n  const status = useAppSelector(getDeliveryListApiStatus);\n  const dispatch = useAppDispatch();\n  const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n  useEffect(() => {\n    dispatch(getDeliveryList());\n  }, [dispatch]);\n\n  return (\n    <div>\n      {status ===\"loading\" && (\n\n          <Loader />\n      )}\n      <div\n        className={css`\n          display: flex;\n          flex-wrap: wrap;\n          justify-content: flex-start;\n          margin: 0 -4rem;\n        `}\n      >\n        {listIds.map((id) => (\n          <ListItem\n            key={id}\n            listData={entities[id] as TDeliveryItemDetails}\n            isActive={activeDeliveryId === id}\n          />\n        ))}\n      </div>\n    </div>\n  );\n}\n"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/store/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1642835416793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642835439282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';\n+\n import rootReducer from './rootReducer';\n \n export const store = configureStore({\n   reducer: rootReducer,\n"
+                }
+            ],
+            "date": 1642835416793,
+            "name": "Commit-0",
+            "content": "import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';\nimport rootReducer from './rootReducer';\n\nexport const store = configureStore({\n  reducer: rootReducer,\n});\n\nexport type AppDispatch = typeof store.dispatch;\nexport type RootState = ReturnType<typeof store.getState>;\nexport type AppThunk<ReturnType = void> = ThunkAction<\n  ReturnType,\n  RootState,\n  unknown,\n  Action<string>\n>;\n"
+        }
+    ]
+}

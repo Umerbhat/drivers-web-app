@@ -1,0 +1,58 @@
+{
+    "sourceFile": "src/Routes.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1642842992305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642842999591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import * as React from \"react\";\n import { Routes, Route, Link } from \"react-router-dom\";\n import \"./App.css\";\n \n-function AppRoutes() {\n+export function AppRoutes() {\n   return (\n       <Routes>\n         <Route path=\"/\" element={<Home />} />\n         <Route path=\"about\" element={<About />} />\n"
+                },
+                {
+                    "date": 1642843224879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,13 @@\n import * as React from \"react\";\n-import { Routes, Route, Link } from \"react-router-dom\";\n-import \"./App.css\";\n+import { Routes, Route } from \"react-router-dom\";\n+import { DeliveriesList } from \"./features/deliveries/pages/DeliveriesList\";\n+import { DeliveryDetails } from \"./features/deliveries/pages/DeliveryDetails\";\n \n export function AppRoutes() {\n   return (\n       <Routes>\n-        <Route path=\"/\" element={<Home />} />\n-        <Route path=\"about\" element={<About />} />\n+        <Route path=\"/\" element={<DeliveriesList />} />\n+        <Route path=\"about\" element={<DeliveryDetails />} />\n       </Routes>\n   );\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642843377152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,8 @@\n export function AppRoutes() {\n   return (\n       <Routes>\n         <Route path=\"/\" element={<DeliveriesList />} />\n-        <Route path=\"about\" element={<DeliveryDetails />} />\n+        <Route path=\"/details/:deliveryId\" element={<DeliveryDetails />} />\n       </Routes>\n   );\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642843673561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,8 @@\n export function AppRoutes() {\n   return (\n       <Routes>\n         <Route path=\"/\" element={<DeliveriesList />} />\n-        <Route path=\"/details/:deliveryId\" element={<DeliveryDetails />} />\n+        <Route path=\"details/:deliveryId\" element={<DeliveryDetails />} />\n       </Routes>\n   );\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642843729672,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import { DeliveriesList } from \"./features/deliveries/pages/DeliveriesList\";\n import { DeliveryDetails } from \"./features/deliveries/pages/DeliveryDetails\";\n \n export function AppRoutes() {\n+    console.log(\"app\")\n   return (\n       <Routes>\n         <Route path=\"/\" element={<DeliveriesList />} />\n         <Route path=\"details/:deliveryId\" element={<DeliveryDetails />} />\n"
+                },
+                {
+                    "date": 1642940466945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n import * as React from \"react\";\n import { Routes, Route } from \"react-router-dom\";\n-import { DeliveriesList } from \"./features/deliveries/pages/DeliveriesList\";\n+import { DeliveryListList } from \"./features/deliveries/pages/DeliveryListList\";\n import { DeliveryDetails } from \"./features/deliveries/pages/DeliveryDetails\";\n \n export function AppRoutes() {\n     console.log(\"app\")\n   return (\n       <Routes>\n-        <Route path=\"/\" element={<DeliveriesList />} />\n+        <Route path=\"/\" element={<DeliveryListList />} />\n         <Route path=\"details/:deliveryId\" element={<DeliveryDetails />} />\n       </Routes>\n   );\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642940493284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import * as React from \"react\";\n import { Routes, Route } from \"react-router-dom\";\n-import { DeliveryListList } from \"./features/deliveries/pages/DeliveryListList\";\n-import { DeliveryDetails } from \"./features/deliveries/pages/DeliveryDetails\";\n+import { DeliveryListList } from \"./features/deliveryList/pages/DeliveryListList\";\n+import { DeliveryDetails } from \"./features/deliveryList/pages/DeliveryDetails\";\n \n export function AppRoutes() {\n     console.log(\"app\")\n   return (\n"
+                },
+                {
+                    "date": 1642940722032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import * as React from \"react\";\n import { Routes, Route } from \"react-router-dom\";\n-import { DeliveryListList } from \"./features/deliveryList/pages/DeliveryListList\";\n+import { DeliveryListList } from \"./features/deliveryList/pages/DeliveryList\";\n import { DeliveryDetails } from \"./features/deliveryList/pages/DeliveryDetails\";\n \n export function AppRoutes() {\n     console.log(\"app\")\n"
+                },
+                {
+                    "date": 1642940839299,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import * as React from \"react\";\n import { Routes, Route } from \"react-router-dom\";\n-import { DeliveryListList } from \"./features/deliveryList/pages/DeliveryList\";\n-import { DeliveryDetails } from \"./features/deliveryList/pages/DeliveryDetails\";\n+import { DeliveryListList } from \"./features/trackDelivery/pages/DeliveryList\";\n+import { DeliveryDetails } from \"./features/trackDelivery/pages/DeliveryDetails\";\n \n export function AppRoutes() {\n     console.log(\"app\")\n   return (\n"
+                },
+                {
+                    "date": 1642941769935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,10 @@\n import * as React from \"react\";\n import { Routes, Route } from \"react-router-dom\";\n-import { DeliveryListList } from \"./features/trackDelivery/pages/DeliveryList\";\n-import { DeliveryDetails } from \"./features/trackDelivery/pages/DeliveryDetails\";\n+import { DeliveryListList } from \"./features/deliveryTracker/pages/DeliveryList\";\n+import { DeliveryDetails } from \"./features/deliveryTracker/pages/DeliveryDetails\";\n \n export function AppRoutes() {\n-    console.log(\"app\")\n   return (\n       <Routes>\n         <Route path=\"/\" element={<DeliveryListList />} />\n         <Route path=\"details/:deliveryId\" element={<DeliveryDetails />} />\n"
+                }
+            ],
+            "date": 1642842992305,
+            "name": "Commit-0",
+            "content": "import * as React from \"react\";\nimport { Routes, Route, Link } from \"react-router-dom\";\nimport \"./App.css\";\n\nfunction AppRoutes() {\n  return (\n      <Routes>\n        <Route path=\"/\" element={<Home />} />\n        <Route path=\"about\" element={<About />} />\n      </Routes>\n  );\n}"
+        }
+    ]
+}

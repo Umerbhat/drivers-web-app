@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/features/deliveryTracker/components/ItemActions.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1642947604801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642947618099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,16 +8,16 @@\n type Props = {\n   isActive: boolean;\n   onMakeDeliveryActive: () => void;\n   activeDeliveryId: string | null;\n-  markStatus: (status: TPostStatusParams[\"status\"]) => void;\n+  onMarkDeliveryStatus: (status: TPostStatusParams[\"status\"]) => void;\n };\n \n export const ItemActions = ({\n   isActive,\n   activeDeliveryId,\n   onMakeDeliveryActive,\n-  markStatus,\n+  onMarkDeliveryStatus,\n }: Props) => {\n   return (\n     <>\n       <Link\n@@ -40,18 +40,18 @@\n         {isActive ? (\n           <>\n             <Button\n               buttonType=\"primary\"\n-              onClick={() => markStatus(\"delivered\")}\n+              onClick={() => onMarkDeliveryStatus(\"delivered\")}\n               className={css`\n                 margin-right: 2rem;\n               `}\n             >\n               Mark Delivered\n             </Button>\n             <Button\n               buttonType=\"danger\"\n-              onClick={() => markStatus(\"undelivered\")}\n+              onClick={() => onMarkDeliveryStatus(\"undelivered\")}\n             >\n               Mark Undelivered\n             </Button>\n           </>\n"
+                },
+                {
+                    "date": 1642947648937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,16 +5,16 @@\n import { Button } from \"../../../components/Button\";\n import { Paper } from \"../../../components/Paper\";\n \n type Props = {\n-  isActive: boolean;\n+  isActiveDelivery: boolean;\n   onMakeDeliveryActive: () => void;\n   activeDeliveryId: string | null;\n   onMarkDeliveryStatus: (status: TPostStatusParams[\"status\"]) => void;\n };\n \n export const ItemActions = ({\n-  isActive,\n+  isActiveDelivery,\n   activeDeliveryId,\n   onMakeDeliveryActive,\n   onMarkDeliveryStatus,\n }: Props) => {\n@@ -36,9 +36,9 @@\n           justify-content: center;\n           flex-wrap: wrap;\n         `}\n       >\n-        {isActive ? (\n+        {isActiveDelivery ? (\n           <>\n             <Button\n               buttonType=\"primary\"\n               onClick={() => onMarkDeliveryStatus(\"delivered\")}\n"
+                },
+                {
+                    "date": 1642948044195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n           color: inherit;\n           margin-top: 1rem;\n         `}\n       >\n-        Back to deliveryList\n+        Back to List\n       </Link>\n       <Paper\n         className={css`\n           display: flex;\n"
+                }
+            ],
+            "date": 1642947604801,
+            "name": "Commit-0",
+            "content": "import { css } from \"@emotion/css\";\nimport React from \"react\";\nimport { Link } from \"react-router-dom\";\nimport { TPostStatusParams } from \"../../../api/types\";\nimport { Button } from \"../../../components/Button\";\nimport { Paper } from \"../../../components/Paper\";\n\ntype Props = {\n  isActive: boolean;\n  onMakeDeliveryActive: () => void;\n  activeDeliveryId: string | null;\n  markStatus: (status: TPostStatusParams[\"status\"]) => void;\n};\n\nexport const ItemActions = ({\n  isActive,\n  activeDeliveryId,\n  onMakeDeliveryActive,\n  markStatus,\n}: Props) => {\n  return (\n    <>\n      <Link\n        to=\"/\"\n        className={css`\n          display: inline-block;\n          color: inherit;\n          margin-top: 1rem;\n        `}\n      >\n        Back to deliveryList\n      </Link>\n      <Paper\n        className={css`\n          display: flex;\n          justify-content: center;\n          flex-wrap: wrap;\n        `}\n      >\n        {isActive ? (\n          <>\n            <Button\n              buttonType=\"primary\"\n              onClick={() => markStatus(\"delivered\")}\n              className={css`\n                margin-right: 2rem;\n              `}\n            >\n              Mark Delivered\n            </Button>\n            <Button\n              buttonType=\"danger\"\n              onClick={() => markStatus(\"undelivered\")}\n            >\n              Mark Undelivered\n            </Button>\n          </>\n        ) : (\n          <Button\n            buttonType=\"success\"\n            onClick={onMakeDeliveryActive}\n            disabled={!!activeDeliveryId}\n          >\n            Make Active\n          </Button>\n        )}\n      </Paper>\n    </>\n  );\n};\n"
+        }
+    ]
+}

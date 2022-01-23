@@ -1,0 +1,142 @@
+{
+    "sourceFile": "src/features/deliveries/components/InfoCard.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 31,
+            "patches": [
+                {
+                    "date": 1642860607076,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642860766750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n-import { css } from '@emotion/css';\n-import React from 'react';\n-import { paperClassName } from '../../../components/paper';\n+import { css } from \"@emotion/css\";\n+import React from \"react\";\n+import { paperClassName } from \"../../../components/paper\";\n \n type Props = {};\n \n-const InfoCard = (props: Props) => {\n-  return <div className={\n-    paperClassName}></div>;\n+export const InfoCard = (props: Props) => {\n+  return <div className={paperClassName}></div>;\n };\n"
+                },
+                {
+                    "date": 1642860862785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,14 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n import { paperClassName } from \"../../../components/paper\";\n+import { DeliveryItem } from \"../types\";\n \n-type Props = {};\n+type Props = {\n+    details: DeliveryItem;\n+};\n \n-export const InfoCard = (props: Props) => {\n+export const InfoCard = ({details}: Props) => {\n+    const { id, address, city, zipCode, latitude, longitude, customer } =\n+    details;\n   return <div className={paperClassName}></div>;\n };\n"
+                },
+                {
+                    "date": 1642860895412,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,6 +9,8 @@\n \n export const InfoCard = ({details}: Props) => {\n     const { id, address, city, zipCode, latitude, longitude, customer } =\n     details;\n-  return <div className={paperClassName}></div>;\n+  return <div className={paperClassName}>\n+      {customer}\n+  </div>;\n };\n"
+                },
+                {
+                    "date": 1642863157578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n+import { Information } from \"../../../components/Information\";\n import { paperClassName } from \"../../../components/paper\";\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n@@ -10,7 +11,11 @@\n export const InfoCard = ({details}: Props) => {\n     const { id, address, city, zipCode, latitude, longitude, customer } =\n     details;\n   return <div className={paperClassName}>\n-      {customer}\n+      <Information label=\"Customer Name\" value={customer}/>\n+      <Information label=\"Address\" value={address}/>\n+      <Information label=\"City\" value={city}/>\n+      <Information label=\"Zip Code\" value={zipCode}/>\n+      <Information label=\"Lat-Lng\" value={`${latitude}-${longitude}`}/>\n   </div>;\n };\n"
+                },
+                {
+                    "date": 1642863185386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n export const InfoCard = ({details}: Props) => {\n     const { id, address, city, zipCode, latitude, longitude, customer } =\n     details;\n   return <div className={paperClassName}>\n+      <h2>#Order: {id}</h2>\n       <Information label=\"Customer Name\" value={customer}/>\n       <Information label=\"Address\" value={address}/>\n       <Information label=\"City\" value={city}/>\n       <Information label=\"Zip Code\" value={zipCode}/>\n"
+                },
+                {
+                    "date": 1642863235350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n };\n \n export const InfoCard = ({details}: Props) => {\n     const { id, address, city, zipCode, latitude, longitude, customer } =\n-    details;\n+    details || {};\n   return <div className={paperClassName}>\n       <h2>#Order: {id}</h2>\n       <Information label=\"Customer Name\" value={customer}/>\n       <Information label=\"Address\" value={address}/>\n"
+                },
+                {
+                    "date": 1642863401910,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,11 +12,13 @@\n     const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n   return <div className={paperClassName}>\n       <h2>#Order: {id}</h2>\n+      <div className={css`display: 'flex'`}>\n       <Information label=\"Customer Name\" value={customer}/>\n       <Information label=\"Address\" value={address}/>\n       <Information label=\"City\" value={city}/>\n       <Information label=\"Zip Code\" value={zipCode}/>\n       <Information label=\"Lat-Lng\" value={`${latitude}-${longitude}`}/>\n+      </div>\n   </div>;\n };\n"
+                },
+                {
+                    "date": 1642863412634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,21 +4,27 @@\n import { paperClassName } from \"../../../components/paper\";\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n-    details: DeliveryItem;\n+  details: DeliveryItem;\n };\n \n-export const InfoCard = ({details}: Props) => {\n-    const { id, address, city, zipCode, latitude, longitude, customer } =\n+export const InfoCard = ({ details }: Props) => {\n+  const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n-  return <div className={paperClassName}>\n+  return (\n+    <div className={paperClassName}>\n       <h2>#Order: {id}</h2>\n-      <div className={css`display: 'flex'`}>\n-      <Information label=\"Customer Name\" value={customer}/>\n-      <Information label=\"Address\" value={address}/>\n-      <Information label=\"City\" value={city}/>\n-      <Information label=\"Zip Code\" value={zipCode}/>\n-      <Information label=\"Lat-Lng\" value={`${latitude}-${longitude}`}/>\n+      <div\n+        className={css`\n+          display: flex;\n+        `}\n+      >\n+        <Information label=\"Customer Name\" value={customer} />\n+        <Information label=\"Address\" value={address} />\n+        <Information label=\"City\" value={city} />\n+        <Information label=\"Zip Code\" value={zipCode} />\n+        <Information label=\"Lat-Lng\" value={`${latitude}-${longitude}`} />\n       </div>\n-  </div>;\n+    </div>\n+  );\n };\n"
+                },
+                {
+                    "date": 1642863534090,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,9 @@\n       <h2>#Order: {id}</h2>\n       <div\n         className={css`\n           display: flex;\n+          flex-wrap: wrap\n         `}\n       >\n         <Information label=\"Customer Name\" value={customer} />\n         <Information label=\"Address\" value={address} />\n"
+                },
+                {
+                    "date": 1642917676932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,16 +16,16 @@\n       <h2>#Order: {id}</h2>\n       <div\n         className={css`\n           display: flex;\n-          flex-wrap: wrap\n+          flex-wrap: wrap;\n         `}\n       >\n         <Information label=\"Customer Name\" value={customer} />\n         <Information label=\"Address\" value={address} />\n         <Information label=\"City\" value={city} />\n         <Information label=\"Zip Code\" value={zipCode} />\n-        <Information label=\"Lat-Lng\" value={`${latitude}-${longitude}`} />\n+        <Information label=\"Lat/Lng\" value={`${latitude}/${longitude}`} />\n       </div>\n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1642917687479,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         <Information label=\"Customer Name\" value={customer} />\n         <Information label=\"Address\" value={address} />\n         <Information label=\"City\" value={city} />\n         <Information label=\"Zip Code\" value={zipCode} />\n-        <Information label=\"Lat/Lng\" value={`${latitude}/${longitude}`} />\n+        <Information label=\"Lat / Lng\" value={`${latitude} / ${longitude}`} />\n       </div>\n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1642920447223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,11 +5,12 @@\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n   details: DeliveryItem;\n+  isActive: boolean;\n };\n \n-export const InfoCard = ({ details }: Props) => {\n+export const InfoCard = ({ details, isActive }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n   return (\n     <div className={paperClassName}>\n"
+                },
+                {
+                    "date": 1642920994916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n   return (\n     <div className={paperClassName}>\n-      <h2>#Order: {id}</h2>\n+      <h2>#Order: {id} </h2>\n       <div\n         className={css`\n           display: flex;\n           flex-wrap: wrap;\n"
+                },
+                {
+                    "date": 1642921129872,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n import { Information } from \"../../../components/Information\";\n import { paperClassName } from \"../../../components/paper\";\n+import { Tag } from \"../../../components/Tag\";\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n   details: DeliveryItem;\n@@ -13,9 +14,9 @@\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n   return (\n     <div className={paperClassName}>\n-      <h2>#Order: {id} </h2>\n+      <h2>#Order: {id} <Tag label={\"Active\"} type=\"warning\"/></h2>\n       <div\n         className={css`\n           display: flex;\n           flex-wrap: wrap;\n"
+                },
+                {
+                    "date": 1642921497977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,10 @@\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n   return (\n     <div className={paperClassName}>\n-      <h2>#Order: {id} <Tag label={\"Active\"} type=\"warning\"/></h2>\n+      <h2>#Order: {id}</h2> \n+      <Tag label={\"Active\"} type=\"warning\"/>\n       <div\n         className={css`\n           display: flex;\n           flex-wrap: wrap;\n"
+                },
+                {
+                    "date": 1642921538467,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,16 +14,18 @@\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n   return (\n     <div className={paperClassName}>\n+    <div className={css`display: flex; justify-content:space-between;`}>\n       <h2>#Order: {id}</h2> \n       <Tag label={\"Active\"} type=\"warning\"/>\n       <div\n         className={css`\n           display: flex;\n           flex-wrap: wrap;\n         `}\n       >\n+    </div>\n         <Information label=\"Customer Name\" value={customer} />\n         <Information label=\"Address\" value={address} />\n         <Information label=\"City\" value={city} />\n         <Information label=\"Zip Code\" value={zipCode} />\n"
+                },
+                {
+                    "date": 1642921554075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,18 +14,23 @@\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n   return (\n     <div className={paperClassName}>\n-    <div className={css`display: flex; justify-content:space-between;`}>\n-      <h2>#Order: {id}</h2> \n-      <Tag label={\"Active\"} type=\"warning\"/>\n       <div\n         className={css`\n           display: flex;\n-          flex-wrap: wrap;\n+          justify-content: space-between;\n         `}\n       >\n-    </div>\n+        <h2>#Order: {id}</h2>\n+        <Tag label={\"Active\"} type=\"warning\" />\n+        </div>\n+        <div\n+          className={css`\n+            display: flex;\n+            flex-wrap: wrap;\n+          `}\n+        ></div>\n         <Information label=\"Customer Name\" value={customer} />\n         <Information label=\"Address\" value={address} />\n         <Information label=\"City\" value={city} />\n         <Information label=\"Zip Code\" value={zipCode} />\n"
+                },
+                {
+                    "date": 1642921576083,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,9 @@\n       <div\n         className={css`\n           display: flex;\n           justify-content: space-between;\n+          align-items: center;\n         `}\n       >\n         <h2>#Order: {id}</h2>\n         <Tag label={\"Active\"} type=\"warning\" />\n"
+                },
+                {
+                    "date": 1642921616332,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,17 +21,11 @@\n           justify-content: space-between;\n           align-items: center;\n         `}\n       >\n-        <h2>#Order: {id}</h2>\n-        <Tag label={\"Active\"} type=\"warning\" />\n-        </div>\n-        <div\n-          className={css`\n-            display: flex;\n-            flex-wrap: wrap;\n-          `}\n-        ></div>\n+  \n+     <h2>#Order: {id}</h2>\n+        <Tag label={\"Active\"} type=\"warning\" /></div>\n         <Information label=\"Customer Name\" value={customer} />\n         <Information label=\"Address\" value={address} />\n         <Information label=\"City\" value={city} />\n         <Information label=\"Zip Code\" value={zipCode} />\n"
+                },
+                {
+                    "date": 1642921644197,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,23 +14,24 @@\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n   return (\n     <div className={paperClassName}>\n-      <div\n+         <div\n         className={css`\n           display: flex;\n           justify-content: space-between;\n           align-items: center;\n         `}\n       >\n-  \n-     <h2>#Order: {id}</h2>\n-        <Tag label={\"Active\"} type=\"warning\" /></div>\n+        <h2>#Order: {id}</h2>\n+        <Tag label={\"Active\"} type=\"warning\" />\n+        </div>\n+     \n         <Information label=\"Customer Name\" value={customer} />\n         <Information label=\"Address\" value={address} />\n         <Information label=\"City\" value={city} />\n         <Information label=\"Zip Code\" value={zipCode} />\n         <Information label=\"Lat / Lng\" value={`${latitude} / ${longitude}`} />\n-      </div>\n+ \n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1642921700820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,24 +14,23 @@\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n   return (\n     <div className={paperClassName}>\n-         <div\n+      <div\n         className={css`\n           display: flex;\n-          justify-content: space-between;\n+          justify-content: left;\n           align-items: center;\n         `}\n       >\n         <h2>#Order: {id}</h2>\n         <Tag label={\"Active\"} type=\"warning\" />\n-        </div>\n-     \n-        <Information label=\"Customer Name\" value={customer} />\n-        <Information label=\"Address\" value={address} />\n-        <Information label=\"City\" value={city} />\n-        <Information label=\"Zip Code\" value={zipCode} />\n-        <Information label=\"Lat / Lng\" value={`${latitude} / ${longitude}`} />\n- \n+      </div>\n+\n+      <Information label=\"Customer Name\" value={customer} />\n+      <Information label=\"Address\" value={address} />\n+      <Information label=\"City\" value={city} />\n+      <Information label=\"Zip Code\" value={zipCode} />\n+      <Information label=\"Lat / Lng\" value={`${latitude} / ${longitude}`} />\n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1642921725476,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n           justify-content: left;\n           align-items: center;\n         `}\n       >\n-        <h2>#Order: {id}</h2>\n+        <h2 className={css`margin-right: 1rem;`}>#Order: {id}</h2>\n         <Tag label={\"Active\"} type=\"warning\" />\n       </div>\n \n       <Information label=\"Customer Name\" value={customer} />\n"
+                },
+                {
+                    "date": 1642921769108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,16 +21,28 @@\n           justify-content: left;\n           align-items: center;\n         `}\n       >\n-        <h2 className={css`margin-right: 1rem;`}>#Order: {id}</h2>\n+        <h2\n+          className={css`\n+            margin-right: 1rem;\n+          `}\n+        >\n+          #Order: {id}\n+        </h2>\n         <Tag label={\"Active\"} type=\"warning\" />\n       </div>\n-\n-      <Information label=\"Customer Name\" value={customer} />\n-      <Information label=\"Address\" value={address} />\n-      <Information label=\"City\" value={city} />\n-      <Information label=\"Zip Code\" value={zipCode} />\n-      <Information label=\"Lat / Lng\" value={`${latitude} / ${longitude}`} />\n+      <div\n+        className={css`\n+          display: flex;\n+          flex-wrap: wrap;\n+        `}\n+      >\n+        <Information label=\"Customer Name\" value={customer} />\n+        <Information label=\"Address\" value={address} />\n+        <Information label=\"City\" value={city} />\n+        <Information label=\"Zip Code\" value={zipCode} />\n+        <Information label=\"Lat / Lng\" value={`${latitude} / ${longitude}`} />\n+      </div>\n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1642921816318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n           `}\n         >\n           #Order: {id}\n         </h2>\n-        <Tag label={\"Active\"} type=\"warning\" />\n+        <Tag label={\"Active\"} type=\"success\" />\n       </div>\n       <div\n         className={css`\n           display: flex;\n"
+                },
+                {
+                    "date": 1642921929545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n           `}\n         >\n           #Order: {id}\n         </h2>\n-        <Tag label={\"Active\"} type=\"success\" />\n+        {isActive && <Tag label={\"Active\"} type=\"success\" />}\n       </div>\n       <div\n         className={css`\n           display: flex;\n"
+                },
+                {
+                    "date": 1642928130222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,14 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n+import { TDeliveryItemDetails } from \"../../../api/types\";\n import { Information } from \"../../../components/Information\";\n import { paperClassName } from \"../../../components/paper\";\n import { Tag } from \"../../../components/Tag\";\n import { DeliveryItem } from \"../types\";\n \n type Props = {\n-  details: DeliveryItem;\n+  details: TDeliveryItemDetails;\n   isActive: boolean;\n };\n \n export const InfoCard = ({ details, isActive }: Props) => {\n"
+                },
+                {
+                    "date": 1642928199946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,8 @@\n import { TDeliveryItemDetails } from \"../../../api/types\";\n import { Information } from \"../../../components/Information\";\n import { paperClassName } from \"../../../components/paper\";\n import { Tag } from \"../../../components/Tag\";\n-import { DeliveryItem } from \"../types\";\n \n type Props = {\n   details: TDeliveryItemDetails;\n   isActive: boolean;\n"
+                },
+                {
+                    "date": 1642929138651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n \n export const InfoCard = ({ details, isActive }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n+  const deliveryStatus = details.status\n   return (\n     <div className={paperClassName}>\n       <div\n         className={css`\n"
+                },
+                {
+                    "date": 1642929262039,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,10 @@\n           `}\n         >\n           #Order: {id}\n         </h2>\n-        {isActive && <Tag label={\"Active\"} type=\"success\" />}\n+        {isActive && !deliveryStatus && <Tag label={\"Active\"} type=\"success\" />}\n+        {!isActive && deliveryStatus && <Tag label={deliveryStatus} type={deliveryStatus==='delivered'?\"success\":\"danger\"} />}\n       </div>\n       <div\n         className={css`\n           display: flex;\n"
+                },
+                {
+                    "date": 1642929338225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n export const InfoCard = ({ details, isActive }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n-  const deliveryStatus = details.status\n+  const deliveryStatus = details.status;\n   return (\n     <div className={paperClassName}>\n       <div\n         className={css`\n@@ -29,10 +29,15 @@\n           `}\n         >\n           #Order: {id}\n         </h2>\n-        {isActive && !deliveryStatus && <Tag label={\"Active\"} type=\"success\" />}\n-        {!isActive && deliveryStatus && <Tag label={deliveryStatus} type={deliveryStatus==='delivered'?\"success\":\"danger\"} />}\n+        {isActive && <Tag label={\"Active\"} type=\"success\" />}\n+        {!isActive && deliveryStatus && (\n+          <Tag\n+            label={deliveryStatus}\n+            type={deliveryStatus === \"delivered\" ? \"success\" : \"danger\"}\n+          />\n+        )}\n       </div>\n       <div\n         className={css`\n           display: flex;\n"
+                },
+                {
+                    "date": 1642933437796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { css } from \"@emotion/css\";\n import React from \"react\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n import { Information } from \"../../../components/Information\";\n-import { paperClassName } from \"../../../components/paper\";\n+import { Paper, paperClassName } from \"../../../components/Paper\";\n import { Tag } from \"../../../components/Tag\";\n \n type Props = {\n   details: TDeliveryItemDetails;\n@@ -14,9 +14,9 @@\n   const { id, address, city, zipCode, latitude, longitude, customer } =\n     details || {};\n   const deliveryStatus = details.status;\n   return (\n-    <div className={paperClassName}>\n+    <Paper>\n       <div\n         className={css`\n           display: flex;\n           justify-content: left;\n@@ -49,7 +49,7 @@\n         <Information label=\"City\" value={city} />\n         <Information label=\"Zip Code\" value={zipCode} />\n         <Information label=\"Lat / Lng\" value={`${latitude} / ${longitude}`} />\n       </div>\n-    </div>\n+    </Paper>\n   );\n };\n"
+                }
+            ],
+            "date": 1642860607076,
+            "name": "Commit-0",
+            "content": "import { css } from '@emotion/css';\nimport React from 'react';\nimport { paperClassName } from '../../../components/paper';\n\ntype Props = {};\n\nconst InfoCard = (props: Props) => {\n  return <div className={\n    paperClassName}></div>;\n};\n"
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+{
+    "sourceFile": "src/features/deliveryTracker/pages/DeliveryList.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1642943720748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642944059387,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,16 +11,18 @@\n   getDeliveryListData,\n   getDeliveryListApiStatus,\n   getActiveDeliveryId,\n } from \"../state/selectors\";\n+import { setActiveDelivery } from \"../state/slice\";\n \n export function DeliveryListList() {\n   // const count = useAppSelector(activeDeliveryId);\n   const { ids: listIds, entities } = useAppSelector(getDeliveryListData);\n   const status = useAppSelector(getDeliveryListApiStatus);\n   const dispatch = useAppDispatch();\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n   useEffect(() => {\n+    dispatch(setActiveDelivery(\"abc\"))\n     dispatch(getDeliveryList());\n   }, [dispatch]);\n \n   return (\n"
+                },
+                {
+                    "date": 1642944389008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import { Loader } from \"../../../components/Loader\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n import { FETCH_DELIVERIES } from \"../state/constants\";\n-import { getDeliveryList } from \"../state/actions\";\n+import { getDeliveryList } from \"../state/preliminaryActions\";\n import {\n   getDeliveryListData,\n   getDeliveryListApiStatus,\n   getActiveDeliveryId,\n"
+                },
+                {
+                    "date": 1642944620234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import { Loader } from \"../../../components/Loader\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n import { FETCH_DELIVERIES } from \"../state/constants\";\n-import { getDeliveryList } from \"../state/preliminaryActions\";\n+import { getDeliveryList } from \"../state/asyncActions\";\n import {\n   getDeliveryListData,\n   getDeliveryListApiStatus,\n   getActiveDeliveryId,\n"
+                },
+                {
+                    "date": 1642944921788,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import { TDeliveryItemDetails } from \"../../../api/types\";\n import { Loader } from \"../../../components/Loader\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n-import { FETCH_DELIVERIES } from \"../state/constants\";\n+import { FETCH_DELIVERY_LIST } from \"../state/constants\";\n import { getDeliveryList } from \"../state/asyncActions\";\n import {\n   getDeliveryListData,\n   getDeliveryListApiStatus,\n"
+                },
+                {
+                    "date": 1642945851630,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,5 @@\n import { css } from \"@emotion/css\";\n-import { createAction } from \"@reduxjs/toolkit\";\n import React, { useEffect, useState } from \"react\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n import { Loader } from \"../../../components/Loader\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n"
+                },
+                {
+                    "date": 1642945857969,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,10 @@\n import { css } from \"@emotion/css\";\n-import React, { useEffect, useState } from \"react\";\n+import React, { useEffect } from \"react\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n import { Loader } from \"../../../components/Loader\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n-import { FETCH_DELIVERY_LIST } from \"../state/constants\";\n import { getDeliveryList } from \"../state/asyncActions\";\n import {\n   getDeliveryListData,\n   getDeliveryListApiStatus,\n"
+                },
+                {
+                    "date": 1642945865073,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,8 @@\n } from \"../state/selectors\";\n import { setActiveDelivery } from \"../state/slice\";\n \n export function DeliveryListList() {\n-  // const count = useAppSelector(activeDeliveryId);\n   const { ids: listIds, entities } = useAppSelector(getDeliveryListData);\n   const status = useAppSelector(getDeliveryListApiStatus);\n   const dispatch = useAppDispatch();\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n"
+                },
+                {
+                    "date": 1642945872257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,8 @@\n   const status = useAppSelector(getDeliveryListApiStatus);\n   const dispatch = useAppDispatch();\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n   useEffect(() => {\n-    dispatch(setActiveDelivery(\"abc\"))\n     dispatch(getDeliveryList());\n   }, [dispatch]);\n \n   return (\n"
+                },
+                {
+                    "date": 1642945930690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,8 @@\n   getDeliveryListData,\n   getDeliveryListApiStatus,\n   getActiveDeliveryId,\n } from \"../state/selectors\";\n-import { setActiveDelivery } from \"../state/slice\";\n \n export function DeliveryListList() {\n   const { ids: listIds, entities } = useAppSelector(getDeliveryListData);\n   const status = useAppSelector(getDeliveryListApiStatus);\n@@ -22,12 +21,10 @@\n   }, [dispatch]);\n \n   return (\n     <div>\n-      {status ===\"loading\" && (\n-\n-          <Loader />\n-      )}\n+      {status === \"loading\" && <Loader />}\n+      {status === \"failed\" && \"Something went wrong...\"}\n       <div\n         className={css`\n           display: flex;\n           flex-wrap: wrap;\n"
+                },
+                {
+                    "date": 1642946003162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n   const { ids: listIds, entities } = useAppSelector(getDeliveryListData);\n   const status = useAppSelector(getDeliveryListApiStatus);\n   const dispatch = useAppDispatch();\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n+\n   useEffect(() => {\n     dispatch(getDeliveryList());\n   }, [dispatch]);\n \n"
+                },
+                {
+                    "date": 1642946203906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n } from \"../state/selectors\";\n \n export function DeliveryListList() {\n   const { ids: listIds, entities } = useAppSelector(getDeliveryListData);\n-  const status = useAppSelector(getDeliveryListApiStatus);\n+  const apiStatus = useAppSelector(getDeliveryListApiStatus);\n   const dispatch = useAppDispatch();\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n \n   useEffect(() => {\n@@ -22,10 +22,10 @@\n   }, [dispatch]);\n \n   return (\n     <div>\n-      {status === \"loading\" && <Loader />}\n-      {status === \"failed\" && \"Something went wrong...\"}\n+      {apiStatus === \"loading\" && <Loader />}\n+      {apiStatus === \"failed\" && \"Something went wrong...\"}\n       <div\n         className={css`\n           display: flex;\n           flex-wrap: wrap;\n"
+                }
+            ],
+            "date": 1642943720748,
+            "name": "Commit-0",
+            "content": "import { css } from \"@emotion/css\";\nimport { createAction } from \"@reduxjs/toolkit\";\nimport React, { useEffect, useState } from \"react\";\nimport { TDeliveryItemDetails } from \"../../../api/types\";\nimport { Loader } from \"../../../components/Loader\";\nimport { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\nimport { ListItem } from \"../components/ListItem\";\nimport { FETCH_DELIVERIES } from \"../state/constants\";\nimport { getDeliveryList } from \"../state/actions\";\nimport {\n  getDeliveryListData,\n  getDeliveryListApiStatus,\n  getActiveDeliveryId,\n} from \"../state/selectors\";\n\nexport function DeliveryListList() {\n  // const count = useAppSelector(activeDeliveryId);\n  const { ids: listIds, entities } = useAppSelector(getDeliveryListData);\n  const status = useAppSelector(getDeliveryListApiStatus);\n  const dispatch = useAppDispatch();\n  const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n  useEffect(() => {\n    dispatch(getDeliveryList());\n  }, [dispatch]);\n\n  return (\n    <div>\n      {status ===\"loading\" && (\n\n          <Loader />\n      )}\n      <div\n        className={css`\n          display: flex;\n          flex-wrap: wrap;\n          justify-content: flex-start;\n          margin: 0 -4rem;\n        `}\n      >\n        {listIds.map((id) => (\n          <ListItem\n            key={id}\n            listData={entities[id] as TDeliveryItemDetails}\n            isActive={activeDeliveryId === id}\n          />\n        ))}\n      </div>\n    </div>\n  );\n}\n"
+        }
+    ]
+}

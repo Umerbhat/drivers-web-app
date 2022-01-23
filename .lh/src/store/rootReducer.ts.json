@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/store/rootReducer.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1642843477000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642843493769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import deliveriesReducer from '../features/counter/counterSlice';\n+import deliveriesReducer from '../features/deliveries/state/reducer';\n \n export default {\n     deliveries: deliveriesReducer,\n   }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642934409896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import deliveriesReducer from '../features/deliveries/state/reducer';\n+import deliveriesReducer from '../features/deliveries/state/slice';\n \n export default {\n     deliveries: deliveriesReducer,\n   }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642940493392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import deliveriesReducer from '../features/deliveries/state/slice';\n+import deliveryListReducer from '../features/deliveryList/state/slice';\n \n export default {\n-    deliveries: deliveriesReducer,\n+    deliveryList: deliveryListReducer,\n   }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642940837794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import deliveryListReducer from '../features/deliveryList/state/slice';\n+import deliveryListReducer from '../features/trackDelivery/state/slice';\n \n export default {\n     deliveryList: deliveryListReducer,\n   }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642941201592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import deliveryListReducer from '../features/trackDelivery/state/slice';\n+import trackDeliveryReducer from '../features/trackDelivery/state/slice';\n \n export default {\n-    deliveryList: deliveryListReducer,\n+  trackDelivery: trackDeliveryReducer,\n   }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642941769935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import trackDeliveryReducer from '../features/trackDelivery/state/slice';\n+import deliveryTrackerReducer from '../features/deliveryTracker/state/slice';\n \n export default {\n-  trackDelivery: trackDeliveryReducer,\n+  deliveryTracker: deliveryTrackerReducer,\n   }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1642843477000,
+            "name": "Commit-0",
+            "content": "import deliveriesReducer from '../features/counter/counterSlice';\n\nexport default {\n    deliveries: deliveriesReducer,\n  }"
+        }
+    ]
+}

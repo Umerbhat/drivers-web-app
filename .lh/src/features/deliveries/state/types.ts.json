@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/features/deliveries/state/types.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1642935091132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642935417351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,12 @@\n-export type TApiStatus = \"idle\" | \"loading\" | \"failed\" | \"success\";\n\\ No newline at end of file\n+import { TDeliveryItemDetails } from \"../../../api/types\";\n+\n+export type TApiStatus = \"idle\" | \"loading\" | \"failed\" | \"success\";\n+export type DeliveriesState  = {\n+    data: {\n+      ids: string[];\n+      entities: Record<string, TDeliveryItemDetails>;\n+    };\n+    status: TApiStatus;\n+    deliveryStatus: TApiStatus;\n+    activeDeliveryId: null | string;\n+  }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642935566342,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { TDeliveryItemDetails } from \"../../../api/types\";\n \n export type TApiStatus = \"idle\" | \"loading\" | \"failed\" | \"success\";\n-export type DeliveriesState  = {\n+export type TDeliveriesState  = {\n     data: {\n       ids: string[];\n       entities: Record<string, TDeliveryItemDetails>;\n     };\n"
+                },
+                {
+                    "date": 1642935880678,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,10 @@\n+import { EntityState } from \"@reduxjs/toolkit\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n \n export type TApiStatus = \"idle\" | \"loading\" | \"failed\" | \"success\";\n export type TDeliveriesState  = {\n-    data: {\n-      ids: string[];\n-      entities: Record<string, TDeliveryItemDetails>;\n-    };\n+    data: EntityState<TDeliveryItemDetails>;\n     status: TApiStatus;\n     deliveryStatus: TApiStatus;\n     activeDeliveryId: null | string;\n   }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642935972395,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { TDeliveryItemDetails } from \"../../../api/types\";\n \n export type TApiStatus = \"idle\" | \"loading\" | \"failed\" | \"success\";\n export type TDeliveriesState  = {\n-    data: EntityState<TDeliveryItemDetails>;\n+    data: EntityState<TDeliveryItemDetails | {}>;\n     status: TApiStatus;\n     deliveryStatus: TApiStatus;\n     activeDeliveryId: null | string;\n   }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642940466903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { EntityState } from \"@reduxjs/toolkit\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n \n export type TApiStatus = \"idle\" | \"loading\" | \"failed\" | \"success\";\n-export type TDeliveriesState  = {\n+export type TDeliveryListState  = {\n     data: EntityState<TDeliveryItemDetails | {}>;\n     status: TApiStatus;\n     deliveryStatus: TApiStatus;\n     activeDeliveryId: null | string;\n"
+                }
+            ],
+            "date": 1642935091132,
+            "name": "Commit-0",
+            "content": "export type TApiStatus = \"idle\" | \"loading\" | \"failed\" | \"success\";"
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "sourceFile": "src/features/deliveryTracker/components/InfoCard.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1642947756330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642947832879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,9 @@\n   isActive: boolean;\n };\n \n export const InfoCard = ({ details, isActive }: Props) => {\n-  const { id, address, city, zipCode, latitude, longitude, customer } =\n-    details;\n+  const { id, address, city, zipCode, latitude, longitude, customer } = details;\n   const deliveryStatus = details.status;\n   return (\n     <Paper>\n       <div\n@@ -29,10 +28,10 @@\n           `}\n         >\n           #Order: {id}\n         </h2>\n-        {isActive && <Tag label={\"Active\"} type=\"success\" />}\n-        {!isActive && deliveryStatus && (\n+        {isActive && <Tag label=\"Active\" type=\"success\" />}\n+        {!isActive && !!deliveryStatus && (\n           <Tag\n             label={deliveryStatus}\n             type={deliveryStatus === \"delivered\" ? \"success\" : \"danger\"}\n           />\n"
+                },
+                {
+                    "date": 1642947904203,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n \n export const InfoCard = ({ details, isActive }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } = details;\n   const deliveryStatus = details.status;\n+  const tagType = deliveryStatus === \"delivered\" ? \"success\" : \"danger\" \n   return (\n     <Paper>\n       <div\n         className={css`\n@@ -28,13 +29,13 @@\n           `}\n         >\n           #Order: {id}\n         </h2>\n-        {isActive && <Tag label=\"Active\" type=\"success\" />}\n+        {isActive && <Tag label=\"Active\" type=\"primary\" />}\n         {!isActive && !!deliveryStatus && (\n           <Tag\n             label={deliveryStatus}\n-            type={deliveryStatus === \"delivered\" ? \"success\" : \"danger\"}\n+            type={tagType}\n           />\n         )}\n       </div>\n       <div\n"
+                },
+                {
+                    "date": 1642947946677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n export const InfoCard = ({ details, isActive }: Props) => {\n   const { id, address, city, zipCode, latitude, longitude, customer } = details;\n   const deliveryStatus = details.status;\n-  const tagType = deliveryStatus === \"delivered\" ? \"success\" : \"danger\" \n+  const tagType = deliveryStatus === \"delivered\" ? \"success\" : \"danger\";\n   return (\n     <Paper>\n       <div\n         className={css`\n"
+                },
+                {
+                    "date": 1642947990327,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,18 @@\n   isActive: boolean;\n };\n \n export const InfoCard = ({ details, isActive }: Props) => {\n-  const { id, address, city, zipCode, latitude, longitude, customer } = details;\n-  const deliveryStatus = details.status;\n+  const {\n+    id,\n+    address,\n+    city,\n+    zipCode,\n+    latitude,\n+    longitude,\n+    customer,\n+    status: deliveryStatus,\n+  } = details;\n   const tagType = deliveryStatus === \"delivered\" ? \"success\" : \"danger\";\n   return (\n     <Paper>\n       <div\n@@ -31,12 +39,9 @@\n           #Order: {id}\n         </h2>\n         {isActive && <Tag label=\"Active\" type=\"primary\" />}\n         {!isActive && !!deliveryStatus && (\n-          <Tag\n-            label={deliveryStatus}\n-            type={tagType}\n-          />\n+          <Tag label={deliveryStatus} type={tagType} />\n         )}\n       </div>\n       <div\n         className={css`\n"
+                },
+                {
+                    "date": 1642948338557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import { TDeliveryItemDetails } from \"../../../api/types\";\n import { Information } from \"../../../components/Information\";\n import { Paper } from \"../../../components/Paper\";\n import { Tag } from \"../../../components/Tag\";\n+import { DeliveryStatusTag } from \"./DeliveryStatusTag\";\n \n type Props = {\n   details: TDeliveryItemDetails;\n   isActive: boolean;\n@@ -37,12 +38,9 @@\n           `}\n         >\n           #Order: {id}\n         </h2>\n-        {isActive && <Tag label=\"Active\" type=\"primary\" />}\n-        {!isActive && !!deliveryStatus && (\n-          <Tag label={deliveryStatus} type={tagType} />\n-        )}\n+        <DeliveryStatusTag isActive={isActive} deliveryStatus={deliveryStatus}/>\n       </div>\n       <div\n         className={css`\n           display: flex;\n"
+                },
+                {
+                    "date": 1642948345199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,8 @@\n     longitude,\n     customer,\n     status: deliveryStatus,\n   } = details;\n-  const tagType = deliveryStatus === \"delivered\" ? \"success\" : \"danger\";\n   return (\n     <Paper>\n       <div\n         className={css`\n"
+                },
+                {
+                    "date": 1642948576650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n import React from \"react\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n import { Information } from \"../../../components/Information\";\n import { Paper } from \"../../../components/Paper\";\n-import { Tag } from \"../../../components/Tag\";\n import { DeliveryStatusTag } from \"./DeliveryStatusTag\";\n \n type Props = {\n   details: TDeliveryItemDetails;\n"
+                },
+                {
+                    "date": 1642963388896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,12 @@\n           `}\n         >\n           #Order: {id}\n         </h2>\n-        <DeliveryStatusTag isActive={isActive} deliveryStatus={deliveryStatus}/>\n+        <DeliveryStatusTag\n+          isActive={isActive}\n+          deliveryStatus={deliveryStatus}\n+        />\n       </div>\n       <div\n         className={css`\n           display: flex;\n"
+                }
+            ],
+            "date": 1642947756330,
+            "name": "Commit-0",
+            "content": "import { css } from \"@emotion/css\";\nimport React from \"react\";\nimport { TDeliveryItemDetails } from \"../../../api/types\";\nimport { Information } from \"../../../components/Information\";\nimport { Paper } from \"../../../components/Paper\";\nimport { Tag } from \"../../../components/Tag\";\n\ntype Props = {\n  details: TDeliveryItemDetails;\n  isActive: boolean;\n};\n\nexport const InfoCard = ({ details, isActive }: Props) => {\n  const { id, address, city, zipCode, latitude, longitude, customer } =\n    details;\n  const deliveryStatus = details.status;\n  return (\n    <Paper>\n      <div\n        className={css`\n          display: flex;\n          justify-content: left;\n          align-items: center;\n        `}\n      >\n        <h2\n          className={css`\n            margin-right: 1rem;\n          `}\n        >\n          #Order: {id}\n        </h2>\n        {isActive && <Tag label={\"Active\"} type=\"success\" />}\n        {!isActive && deliveryStatus && (\n          <Tag\n            label={deliveryStatus}\n            type={deliveryStatus === \"delivered\" ? \"success\" : \"danger\"}\n          />\n        )}\n      </div>\n      <div\n        className={css`\n          display: flex;\n          flex-wrap: wrap;\n        `}\n      >\n        <Information label=\"Customer Name\" value={customer} />\n        <Information label=\"Address\" value={address} />\n        <Information label=\"City\" value={city} />\n        <Information label=\"Zip Code\" value={zipCode} />\n        <Information label=\"Lat / Lng\" value={`${latitude} / ${longitude}`} />\n      </div>\n    </Paper>\n  );\n};\n"
+        }
+    ]
+}

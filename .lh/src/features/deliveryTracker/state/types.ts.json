@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/features/deliveryTracker/state/types.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1642944638826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642945091226,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,22 @@\n import { EntityState } from \"@reduxjs/toolkit\";\n import { TDeliveryItemDetails } from \"../../../api/types\";\n+import {\n+  FETCH_DELIVERY,\n+  FETCH_DELIVERY_LIST,\n+  POST_DELIVERY_STATUS,\n+} from \"./constants\";\n \n export type TApiStatus = \"idle\" | \"loading\" | \"failed\" | \"success\";\n \n-export type TDeliveryListState  = {\n\\ No newline at end of file\n-    data: EntityState<TDeliveryItemDetails | {}>;\n-    status: TApiStatus;\n-    deliveryStatus: TApiStatus;\n-    activeDeliveryId: null | string;\n-  }\n+export type TDeliveryListState = {\n+  data: EntityState<TDeliveryItemDetails | {}>;\n+  apiStatus: Record<\n+    | typeof FETCH_DELIVERY_LIST\n+    | typeof FETCH_DELIVERY\n+    | typeof POST_DELIVERY_STATUS,\n+    TApiStatus\n+  >;\n+  status: TApiStatus;\n+  deliveryStatus: TApiStatus;\n+  activeDeliveryId: null | string;\n+};\n"
+                },
+                {
+                    "date": 1642956893312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,6 @@\n     | typeof FETCH_DELIVERY\n     | typeof POST_DELIVERY_STATUS,\n     TApiStatus\n   >;\n-  status: TApiStatus;\n-  deliveryStatus: TApiStatus;\n   activeDeliveryId: null | string;\n };\n"
+                }
+            ],
+            "date": 1642944638826,
+            "name": "Commit-0",
+            "content": "import { EntityState } from \"@reduxjs/toolkit\";\nimport { TDeliveryItemDetails } from \"../../../api/types\";\n\nexport type TApiStatus = \"idle\" | \"loading\" | \"failed\" | \"success\";\n\nexport type TDeliveryListState  = {\n    data: EntityState<TDeliveryItemDetails | {}>;\n    status: TApiStatus;\n    deliveryStatus: TApiStatus;\n    activeDeliveryId: null | string;\n  }"
+        }
+    ]
+}

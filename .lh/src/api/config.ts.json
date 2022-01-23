@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/api/config.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1642833900199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642932414640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-export const API_BASE_URL = \"https://60e84194673e350017c21844.mockapi.io/api\"\n\\ No newline at end of file\n+export const API_BASE_URL = \"https://60e84194673e350017c21844.mockapi.io/api\";\n"
+                }
+            ],
+            "date": 1642833900199,
+            "name": "Commit-0",
+            "content": "export const API_BASE_URL = \"https://60e84194673e350017c21844.mockapi.io/api\""
+        }
+    ]
+}

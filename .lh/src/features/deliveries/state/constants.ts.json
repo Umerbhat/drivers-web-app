@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/features/deliveries/state/constants.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1642940466824,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642940493282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n-export const FETCH_DELIVERIES = \"deliveries/fetchAllDeliveryList\";\n-export const FETCH_DELIVERY = \"deliveries/fetchDelivery\"\n-export const POST_DELIVERY_STATUS = \"deliveries/postDeliveryStatus\"\n\\ No newline at end of file\n+export const FETCH_DELIVERIES = \"deliveryList/fetchAllDeliveryList\";\n+export const FETCH_DELIVERY = \"deliveryList/fetchDelivery\"\n+export const POST_DELIVERY_STATUS = \"deliveryList/postDeliveryStatus\"\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1642940466824,
+            "name": "Commit-0",
+            "content": "export const FETCH_DELIVERIES = \"deliveries/fetchAllDeliveryList\";\nexport const FETCH_DELIVERY = \"deliveries/fetchDelivery\"\nexport const POST_DELIVERY_STATUS = \"deliveries/postDeliveryStatus\""
+        }
+    ]
+}

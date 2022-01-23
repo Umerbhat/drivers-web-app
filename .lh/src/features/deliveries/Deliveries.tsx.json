@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/features/deliveries/Deliveries.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1642833001632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642833040729,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,50 +19,8 @@\n   const incrementValue = Number(incrementAmount) || 0;\n \n   return (\n     <div>\n-      <div className={styles.row}>\n-        <button\n-          className={styles.button}\n-          aria-label=\"Decrement value\"\n-          onClick={() => dispatch(decrement())}\n-        >\n-          -\n-        </button>\n-        <span className={styles.value}>{count}</span>\n-        <button\n-          className={styles.button}\n-          aria-label=\"Increment value\"\n-          onClick={() => dispatch(increment())}\n-        >\n-          +\n-        </button>\n-      </div>\n-      <div className={styles.row}>\n-        <input\n-          className={styles.textbox}\n-          aria-label=\"Set increment amount\"\n-          value={incrementAmount}\n-          onChange={(e) => setIncrementAmount(e.target.value)}\n-        />\n-        <button\n-          className={styles.button}\n-          onClick={() => dispatch(incrementByAmount(incrementValue))}\n-        >\n-          Add Amount\n-        </button>\n-        <button\n-          className={styles.asyncButton}\n-          onClick={() => dispatch(incrementAsync(incrementValue))}\n-        >\n-          Add Async\n-        </button>\n-        <button\n-          className={styles.button}\n-          onClick={() => dispatch(incrementIfOdd(incrementValue))}\n-        >\n-          Add If Odd\n-        </button>\n-      </div>\n+     deliveries list here\n     </div>\n   );\n }\n"
+                }
+            ],
+            "date": 1642833001632,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\n\nimport { useAppSelector, useAppDispatch } from '../../app/hooks';\nimport {\n  decrement,\n  increment,\n  incrementByAmount,\n  incrementAsync,\n  incrementIfOdd,\n  selectCount,\n} from './reducer';\nimport styles from './Counter.module.css';\n\nexport function Deliveries() {\n  const count = useAppSelector(selectCount);\n  const dispatch = useAppDispatch();\n  const [incrementAmount, setIncrementAmount] = useState('2');\n\n  const incrementValue = Number(incrementAmount) || 0;\n\n  return (\n    <div>\n      <div className={styles.row}>\n        <button\n          className={styles.button}\n          aria-label=\"Decrement value\"\n          onClick={() => dispatch(decrement())}\n        >\n          -\n        </button>\n        <span className={styles.value}>{count}</span>\n        <button\n          className={styles.button}\n          aria-label=\"Increment value\"\n          onClick={() => dispatch(increment())}\n        >\n          +\n        </button>\n      </div>\n      <div className={styles.row}>\n        <input\n          className={styles.textbox}\n          aria-label=\"Set increment amount\"\n          value={incrementAmount}\n          onChange={(e) => setIncrementAmount(e.target.value)}\n        />\n        <button\n          className={styles.button}\n          onClick={() => dispatch(incrementByAmount(incrementValue))}\n        >\n          Add Amount\n        </button>\n        <button\n          className={styles.asyncButton}\n          onClick={() => dispatch(incrementAsync(incrementValue))}\n        >\n          Add Async\n        </button>\n        <button\n          className={styles.button}\n          onClick={() => dispatch(incrementIfOdd(incrementValue))}\n        >\n          Add If Odd\n        </button>\n      </div>\n    </div>\n  );\n}\n"
+        }
+    ]
+}

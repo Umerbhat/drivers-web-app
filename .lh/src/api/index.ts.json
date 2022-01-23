@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/api/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1642833689038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642833759823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-export {fetchDeliveries, fetchDeliveryDetails} from './services'\n\\ No newline at end of file\n+export {fetchDeliveries, fetchDeliveryDetails} from './services/deliveries.services'\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642932418827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,4 @@\n-export {fetchDeliveries, fetchDeliveryDetails} from './services/deliveries.services'\n\\ No newline at end of file\n+export {\n+  fetchDeliveries,\n+  fetchDeliveryDetails,\n+} from \"./services/deliveries.services\";\n"
+                },
+                {
+                    "date": 1642940466903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n export {\n-  fetchDeliveries,\n+  fetchDeliveryList,\n   fetchDeliveryDetails,\n } from \"./services/deliveries.services\";\n"
+                },
+                {
+                    "date": 1642940493280,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n export {\n   fetchDeliveryList,\n   fetchDeliveryDetails,\n-} from \"./services/deliveries.services\";\n+} from \"./services/deliveryList.services\";\n"
+                }
+            ],
+            "date": 1642833689038,
+            "name": "Commit-0",
+            "content": "export {fetchDeliveries, fetchDeliveryDetails} from './services'"
+        }
+    ]
+}

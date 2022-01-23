@@ -1,0 +1,70 @@
+{
+    "sourceFile": "src/features/deliveries/state/selectors.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1642838746553,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642847395018,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,5 +3,5 @@\n \n import { RootState } from \"../../../store\";\n \n // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`\n-export const selectCount = (state: RootState) => state.deliveries.value;\n\\ No newline at end of file\n+export const activeDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642854542233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,5 +3,6 @@\n \n import { RootState } from \"../../../store\";\n \n // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`\n+export const data = (state: RootState) => state.deliveries.data;\n export const activeDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642854575812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,6 @@\n \n import { RootState } from \"../../../store\";\n \n // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`\n-export const data = (state: RootState) => state.deliveries.data;\n+export const deliveriesData = (state: RootState) => state.deliveries.data;\n export const activeDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642859686380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,6 @@\n import { RootState } from \"../../../store\";\n \n // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`\n export const deliveriesData = (state: RootState) => state.deliveries.data;\n+export const deliveriesDataStatus = (state: RootState) => state.deliveries.status;\n export const activeDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642861048297,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,5 +5,6 @@\n \n // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`\n export const deliveriesData = (state: RootState) => state.deliveries.data;\n export const deliveriesDataStatus = (state: RootState) => state.deliveries.status;\n+export const getDeliveryStatus = (state: RootState) => state.deliveries.deliveryStatus;\n export const activeDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642918374115,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,5 +6,5 @@\n // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`\n export const deliveriesData = (state: RootState) => state.deliveries.data;\n export const deliveriesDataStatus = (state: RootState) => state.deliveries.status;\n export const getDeliveryStatus = (state: RootState) => state.deliveries.deliveryStatus;\n-export const activeDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n+export const getActiveDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642939557138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,6 @@\n-// The function below is called a selector and allows us to select a value from\n-// the state. Selectors can also be defined inline where they're used instead of\n-\n import { RootState } from \"../../../store\";\n \n-// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`\n export const deliveriesData = (state: RootState) => state.deliveries.data;\n export const deliveriesDataStatus = (state: RootState) => state.deliveries.status;\n export const getDeliveryStatus = (state: RootState) => state.deliveries.deliveryStatus;\n export const getActiveDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642939700202,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { RootState } from \"../../../store\";\n \n-export const deliveriesData = (state: RootState) => state.deliveries.data;\n+export const getDeliveriesData = (state: RootState) => state.deliveries.data;\n export const deliveriesDataStatus = (state: RootState) => state.deliveries.status;\n export const getDeliveryStatus = (state: RootState) => state.deliveries.deliveryStatus;\n export const getActiveDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642939961135,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { RootState } from \"../../../store\";\n \n export const getDeliveriesData = (state: RootState) => state.deliveries.data;\n-export const deliveriesDataStatus = (state: RootState) => state.deliveries.status;\n+export const getDeliveriesAPIStatus = (state: RootState) => state.deliveries.status;\n export const getDeliveryStatus = (state: RootState) => state.deliveries.deliveryStatus;\n export const getActiveDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642939992929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { RootState } from \"../../../store\";\n \n export const getDeliveriesData = (state: RootState) => state.deliveries.data;\n export const getDeliveriesAPIStatus = (state: RootState) => state.deliveries.status;\n-export const getDeliveryStatus = (state: RootState) => state.deliveries.deliveryStatus;\n+export const getDeliveryApiStatus = (state: RootState) => state.deliveries.deliveryStatus;\n export const getActiveDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642940017146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { RootState } from \"../../../store\";\n \n export const getDeliveriesData = (state: RootState) => state.deliveries.data;\n-export const getDeliveriesAPIStatus = (state: RootState) => state.deliveries.status;\n+export const getDeliveriesApiStatus = (state: RootState) => state.deliveries.status;\n export const getDeliveryApiStatus = (state: RootState) => state.deliveries.deliveryStatus;\n export const getActiveDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642940466908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { RootState } from \"../../../store\";\n \n-export const getDeliveriesData = (state: RootState) => state.deliveries.data;\n-export const getDeliveriesApiStatus = (state: RootState) => state.deliveries.status;\n+export const getDeliveryListData = (state: RootState) => state.deliveries.data;\n+export const getDeliveryListApiStatus = (state: RootState) => state.deliveries.status;\n export const getDeliveryApiStatus = (state: RootState) => state.deliveries.deliveryStatus;\n export const getActiveDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642940493282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { RootState } from \"../../../store\";\n \n-export const getDeliveryListData = (state: RootState) => state.deliveries.data;\n-export const getDeliveryListApiStatus = (state: RootState) => state.deliveries.status;\n-export const getDeliveryApiStatus = (state: RootState) => state.deliveries.deliveryStatus;\n-export const getActiveDeliveryId = (state: RootState) => state.deliveries.activeDeliveryId;\n\\ No newline at end of file\n+export const getDeliveryListData = (state: RootState) => state.deliveryList.data;\n+export const getDeliveryListApiStatus = (state: RootState) => state.deliveryList.status;\n+export const getDeliveryApiStatus = (state: RootState) => state.deliveryList.deliveryStatus;\n+export const getActiveDeliveryId = (state: RootState) => state.deliveryList.activeDeliveryId;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1642838746553,
+            "name": "Commit-0",
+            "content": "// The function below is called a selector and allows us to select a value from\n// the state. Selectors can also be defined inline where they're used instead of\n\nimport { RootState } from \"../../../store\";\n\n// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`\nexport const selectCount = (state: RootState) => state.deliveries.value;"
+        }
+    ]
+}

@@ -1,0 +1,162 @@
+{
+    "sourceFile": "src/features/deliveries/pages/DeliveriesList.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 36,
+            "patches": [
+                {
+                    "date": 1642839295326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642843592146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,13 @@\n-import React, { useState } from 'react';\n-import { useAppSelector, useAppDispatch } from '../../../store/hooks';\n-import { selectCount } from '../state/selectors';\n+import React, { useState } from \"react\";\n+import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n+import { selectCount } from \"../state/selectors\";\n \n export function DeliveriesList() {\n   const count = useAppSelector(selectCount);\n   const dispatch = useAppDispatch();\n-  const [incrementAmount, setIncrementAmount] = useState('2');\n+  const [incrementAmount, setIncrementAmount] = useState(\"2\");\n \n   const incrementValue = Number(incrementAmount) || 0;\n \n-  return (\n-    <div>\n-     deliveries list here\n-    </div>\n-  );\n+  return <div>deliveries list here</div>;\n }\n"
+                },
+                {
+                    "date": 1642847407763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import React, { useState } from \"react\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n-import { selectCount } from \"../state/selectors\";\n+import { activeDeliveryId } from \"../state/selectors\";\n \n export function DeliveriesList() {\n-  const count = useAppSelector(selectCount);\n+  const count = useAppSelector(activeDeliveryId);\n   const dispatch = useAppDispatch();\n   const [incrementAmount, setIncrementAmount] = useState(\"2\");\n \n   const incrementValue = Number(incrementAmount) || 0;\n"
+                },
+                {
+                    "date": 1642847467903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n-import React, { useState } from \"react\";\n+import React, { useEffect, useState } from \"react\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n+import { FETCH_DELIVERIES } from \"../state/actions\";\n import { activeDeliveryId } from \"../state/selectors\";\n \n export function DeliveriesList() {\n   const count = useAppSelector(activeDeliveryId);\n@@ -8,6 +9,10 @@\n   const [incrementAmount, setIncrementAmount] = useState(\"2\");\n \n   const incrementValue = Number(incrementAmount) || 0;\n \n+  useEffect(()=>{\n+    dispatch({type: FETCH_DELIVERIES})\n+  },[])\n+\n   return <div>deliveries list here</div>;\n }\n"
+                },
+                {
+                    "date": 1642847657413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import { createAction } from \"@reduxjs/toolkit\";\n import React, { useEffect, useState } from \"react\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { FETCH_DELIVERIES } from \"../state/actions\";\n import { activeDeliveryId } from \"../state/selectors\";\n@@ -6,13 +7,14 @@\n export function DeliveriesList() {\n   const count = useAppSelector(activeDeliveryId);\n   const dispatch = useAppDispatch();\n   const [incrementAmount, setIncrementAmount] = useState(\"2\");\n+  const fetchDeliveries = createAction<number>(FETCH_DELIVERIES)\n \n   const incrementValue = Number(incrementAmount) || 0;\n \n   useEffect(()=>{\n-    dispatch({type: FETCH_DELIVERIES})\n+    dispatch(fetchDeliveries())\n   },[])\n \n   return <div>deliveries list here</div>;\n }\n"
+                },
+                {
+                    "date": 1642847845117,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n   const incrementValue = Number(incrementAmount) || 0;\n \n   useEffect(()=>{\n-    dispatch(fetchDeliveries())\n+    dispatch(fetchDeliveries(\"1\"))\n   },[])\n \n   return <div>deliveries list here</div>;\n }\n"
+                },
+                {
+                    "date": 1642847853390,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n   const incrementValue = Number(incrementAmount) || 0;\n \n   useEffect(()=>{\n-    dispatch(fetchDeliveries(\"1\"))\n+    dispatch(fetchDeliveries(1))\n   },[])\n \n   return <div>deliveries list here</div>;\n }\n"
+                },
+                {
+                    "date": 1642848829769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,20 +1,20 @@\n import { createAction } from \"@reduxjs/toolkit\";\n import React, { useEffect, useState } from \"react\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { FETCH_DELIVERIES } from \"../state/actions\";\n+import { getDeliveries } from \"../state/middleware\";\n import { activeDeliveryId } from \"../state/selectors\";\n \n export function DeliveriesList() {\n   const count = useAppSelector(activeDeliveryId);\n   const dispatch = useAppDispatch();\n   const [incrementAmount, setIncrementAmount] = useState(\"2\");\n-  const fetchDeliveries = createAction<number>(FETCH_DELIVERIES)\n \n   const incrementValue = Number(incrementAmount) || 0;\n \n   useEffect(()=>{\n-    dispatch(fetchDeliveries(1))\n+    dispatch(getDeliveries())\n   },[])\n \n   return <div>deliveries list here</div>;\n }\n"
+                },
+                {
+                    "date": 1642854736526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,15 @@\n import { createAction } from \"@reduxjs/toolkit\";\n import React, { useEffect, useState } from \"react\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n+import { ListItem } from \"../components/ListItem\";\n import { FETCH_DELIVERIES } from \"../state/actions\";\n import { getDeliveries } from \"../state/middleware\";\n-import { activeDeliveryId } from \"../state/selectors\";\n+import { activeDeliveryId, deliveriesData } from \"../state/selectors\";\n \n export function DeliveriesList() {\n   const count = useAppSelector(activeDeliveryId);\n+  const {ids: listIds, entities} = useAppSelector(deliveriesData)\n   const dispatch = useAppDispatch();\n   const [incrementAmount, setIncrementAmount] = useState(\"2\");\n \n   const incrementValue = Number(incrementAmount) || 0;\n@@ -15,6 +17,6 @@\n   useEffect(()=>{\n     dispatch(getDeliveries())\n   },[])\n \n-  return <div>deliveries list here</div>;\n+  return <div>{listIds.map((id)=> <ListItem key={id} {...entities[id]}/>)}</div>;\n }\n"
+                },
+                {
+                    "date": 1642854876028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,6 +17,6 @@\n   useEffect(()=>{\n     dispatch(getDeliveries())\n   },[])\n \n-  return <div>{listIds.map((id)=> <ListItem key={id} {...entities[id]}/>)}</div>;\n+  return <div>{listIds.map((id)=> <ListItem key={id} listData={entities[id]}/>)}</div>;\n }\n"
+                },
+                {
+                    "date": 1642859664766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,20 +3,28 @@\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n import { FETCH_DELIVERIES } from \"../state/actions\";\n import { getDeliveries } from \"../state/middleware\";\n-import { activeDeliveryId, deliveriesData } from \"../state/selectors\";\n+import { activeDeliveryId, deliveriesData, deliveriesDataStatus } from \"../state/selectors\";\n \n export function DeliveriesList() {\n   const count = useAppSelector(activeDeliveryId);\n-  const {ids: listIds, entities} = useAppSelector(deliveriesData)\n+  const { ids: listIds, entities } = useAppSelector(deliveriesData);\n+  const status = useAppSelector(deliveriesDataStatus);\n   const dispatch = useAppDispatch();\n   const [incrementAmount, setIncrementAmount] = useState(\"2\");\n \n   const incrementValue = Number(incrementAmount) || 0;\n \n-  useEffect(()=>{\n-    dispatch(getDeliveries())\n-  },[])\n+  useEffect(() => {\n+    dispatch(getDeliveries());\n+  }, []);\n \n-  return <div>{listIds.map((id)=> <ListItem key={id} listData={entities[id]}/>)}</div>;\n+  return (\n+    <div>\n+      {status === 'loading' && \"Loading...\"}\n+      {listIds.map((id) => (\n+        <ListItem key={id} listData={entities[id]} />\n+      ))}\n+    </div>\n+  );\n }\n"
+                },
+                {
+                    "date": 1642861045378,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,19 +6,15 @@\n import { getDeliveries } from \"../state/middleware\";\n import { activeDeliveryId, deliveriesData, deliveriesDataStatus } from \"../state/selectors\";\n \n export function DeliveriesList() {\n-  const count = useAppSelector(activeDeliveryId);\n+  // const count = useAppSelector(activeDeliveryId);\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(deliveriesDataStatus);\n   const dispatch = useAppDispatch();\n-  const [incrementAmount, setIncrementAmount] = useState(\"2\");\n-\n-  const incrementValue = Number(incrementAmount) || 0;\n-\n   useEffect(() => {\n     dispatch(getDeliveries());\n-  }, []);\n+  }, [dispatch]);\n \n   return (\n     <div>\n       {status === 'loading' && \"Loading...\"}\n"
+                },
+                {
+                    "date": 1642918631208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n import { FETCH_DELIVERIES } from \"../state/actions\";\n import { getDeliveries } from \"../state/middleware\";\n-import { activeDeliveryId, deliveriesData, deliveriesDataStatus } from \"../state/selectors\";\n+import { deliveriesData, deliveriesDataStatus } from \"../state/selectors\";\n \n export function DeliveriesList() {\n   // const count = useAppSelector(activeDeliveryId);\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n"
+                },
+                {
+                    "date": 1642922657056,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import { css } from \"@emotion/css\";\n import { createAction } from \"@reduxjs/toolkit\";\n import React, { useEffect, useState } from \"react\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n@@ -15,9 +16,9 @@\n     dispatch(getDeliveries());\n   }, [dispatch]);\n \n   return (\n-    <div>\n+    <div className={css`display: flex; flex-wrap: wrap`}>\n       {status === 'loading' && \"Loading...\"}\n       {listIds.map((id) => (\n         <ListItem key={id} listData={entities[id]} />\n       ))}\n"
+                },
+                {
+                    "date": 1642922668652,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     dispatch(getDeliveries());\n   }, [dispatch]);\n \n   return (\n-    <div className={css`display: flex; flex-wrap: wrap`}>\n+    <div className={css`display: flex; flex-wrap: wrap;`}>\n       {status === 'loading' && \"Loading...\"}\n       {listIds.map((id) => (\n         <ListItem key={id} listData={entities[id]} />\n       ))}\n"
+                },
+                {
+                    "date": 1642922859851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     dispatch(getDeliveries());\n   }, [dispatch]);\n \n   return (\n-    <div className={css`display: flex; flex-wrap: wrap;`}>\n+    <div className={css`display: flex; flex-wrap: wrap; margin: 0 1rem;`}>\n       {status === 'loading' && \"Loading...\"}\n       {listIds.map((id) => (\n         <ListItem key={id} listData={entities[id]} />\n       ))}\n"
+                },
+                {
+                    "date": 1642922869526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     dispatch(getDeliveries());\n   }, [dispatch]);\n \n   return (\n-    <div className={css`display: flex; flex-wrap: wrap; margin: 0 1rem;`}>\n+    <div className={css`display: flex; flex-wrap: wrap; margin: 0 -2rem;`}>\n       {status === 'loading' && \"Loading...\"}\n       {listIds.map((id) => (\n         <ListItem key={id} listData={entities[id]} />\n       ))}\n"
+                },
+                {
+                    "date": 1642922883802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     dispatch(getDeliveries());\n   }, [dispatch]);\n \n   return (\n-    <div className={css`display: flex; flex-wrap: wrap; margin: 0 -2rem;`}>\n+    <div className={css`display: flex; flex-wrap: wrap; margin: 0 -4rem;`}>\n       {status === 'loading' && \"Loading...\"}\n       {listIds.map((id) => (\n         <ListItem key={id} listData={entities[id]} />\n       ))}\n"
+                },
+                {
+                    "date": 1642923150681,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,24 +4,25 @@\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n import { FETCH_DELIVERIES } from \"../state/actions\";\n import { getDeliveries } from \"../state/middleware\";\n-import { deliveriesData, deliveriesDataStatus } from \"../state/selectors\";\n+import { deliveriesData, deliveriesDataStatus, getActiveDeliveryId } from \"../state/selectors\";\n \n export function DeliveriesList() {\n   // const count = useAppSelector(activeDeliveryId);\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n   const status = useAppSelector(deliveriesDataStatus);\n   const dispatch = useAppDispatch();\n+  const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n   useEffect(() => {\n     dispatch(getDeliveries());\n   }, [dispatch]);\n \n   return (\n     <div className={css`display: flex; flex-wrap: wrap; margin: 0 -4rem;`}>\n       {status === 'loading' && \"Loading...\"}\n       {listIds.map((id) => (\n-        <ListItem key={id} listData={entities[id]} />\n+        <ListItem key={id} listData={entities[id]} isActive = {activeDeliveryId === id}/>\n       ))}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642924063665,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,13 @@\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n import { FETCH_DELIVERIES } from \"../state/actions\";\n import { getDeliveries } from \"../state/middleware\";\n-import { deliveriesData, deliveriesDataStatus, getActiveDeliveryId } from \"../state/selectors\";\n+import {\n+  deliveriesData,\n+  deliveriesDataStatus,\n+  getActiveDeliveryId,\n+} from \"../state/selectors\";\n \n export function DeliveriesList() {\n   // const count = useAppSelector(activeDeliveryId);\n   const { ids: listIds, entities } = useAppSelector(deliveriesData);\n@@ -17,12 +21,24 @@\n     dispatch(getDeliveries());\n   }, [dispatch]);\n \n   return (\n-    <div className={css`display: flex; flex-wrap: wrap; margin: 0 -4rem;`}>\n-      {status === 'loading' && \"Loading...\"}\n-      {listIds.map((id) => (\n-        <ListItem key={id} listData={entities[id]} isActive = {activeDeliveryId === id}/>\n-      ))}\n+    <div>\n+      {status === \"loading\" && \"Loading...\"}\n+      <div\n+        className={css`\n+          display: flex;\n+          flex-wrap: wrap;\n+          margin: 0 -4rem;\n+        `}\n+      >\n+        {listIds.map((id) => (\n+          <ListItem\n+            key={id}\n+            listData={entities[id]}\n+            isActive={activeDeliveryId === id}\n+          />\n+        ))}\n+      </div>\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642924107997,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,9 @@\n       <div\n         className={css`\n           display: flex;\n           flex-wrap: wrap;\n+          justify-content: flex-start;\n           margin: 0 -4rem;\n         `}\n       >\n         {listIds.map((id) => (\n"
+                },
+                {
+                    "date": 1642930611839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,10 +22,9 @@\n   }, [dispatch]);\n \n   return (\n     <div>\n-      {status === \"loading\" && \"Loading...\"}\n-      <div\n+      {status === \"loading\"? \"Loading...\":<div\n         className={css`\n           display: flex;\n           flex-wrap: wrap;\n           justify-content: flex-start;\n@@ -38,8 +37,9 @@\n             listData={entities[id]}\n             isActive={activeDeliveryId === id}\n           />\n         ))}\n-      </div>\n+      </div>}\n+      \n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642930617166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,24 +22,27 @@\n   }, [dispatch]);\n \n   return (\n     <div>\n-      {status === \"loading\"? \"Loading...\":<div\n-        className={css`\n-          display: flex;\n-          flex-wrap: wrap;\n-          justify-content: flex-start;\n-          margin: 0 -4rem;\n-        `}\n-      >\n-        {listIds.map((id) => (\n-          <ListItem\n-            key={id}\n-            listData={entities[id]}\n-            isActive={activeDeliveryId === id}\n-          />\n-        ))}\n-      </div>}\n-      \n+      {status === \"loading\" ? (\n+        \"Loading...\"\n+      ) : (\n+        <div\n+          className={css`\n+            display: flex;\n+            flex-wrap: wrap;\n+            justify-content: flex-start;\n+            margin: 0 -4rem;\n+          `}\n+        >\n+          {listIds.map((id) => (\n+            <ListItem\n+              key={id}\n+              listData={entities[id]}\n+              isActive={activeDeliveryId === id}\n+            />\n+          ))}\n+        </div>\n+      )}\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642931204475,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { css } from \"@emotion/css\";\n import { createAction } from \"@reduxjs/toolkit\";\n import React, { useEffect, useState } from \"react\";\n+import { Loader } from \"../../../components/Loader\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n import { FETCH_DELIVERIES } from \"../state/actions\";\n import { getDeliveries } from \"../state/middleware\";\n@@ -22,27 +23,24 @@\n   }, [dispatch]);\n \n   return (\n     <div>\n-      {status === \"loading\" ? (\n-        \"Loading...\"\n-      ) : (\n-        <div\n-          className={css`\n-            display: flex;\n-            flex-wrap: wrap;\n-            justify-content: flex-start;\n-            margin: 0 -4rem;\n-          `}\n-        >\n-          {listIds.map((id) => (\n-            <ListItem\n-              key={id}\n-              listData={entities[id]}\n-              isActive={activeDeliveryId === id}\n-            />\n-          ))}\n-        </div>\n-      )}\n+      {status === \"loading\" && <Loader />}\n+      <div\n+        className={css`\n+          display: flex;\n+          flex-wrap: wrap;\n+          justify-content: flex-start;\n+          margin: 0 -4rem;\n+        `}\n+      >\n+        {listIds.map((id) => (\n+          <ListItem\n+            key={id}\n+            listData={entities[id]}\n+            isActive={activeDeliveryId === id}\n+          />\n+        ))}\n+      </div>\n     </div>\n   );\n }\n"
+                },
+                {
+                    "date": 1642931217381,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   }, [dispatch]);\n \n   return (\n     <div>\n-      {status === \"loading\" && <Loader />}\n+      {true&& <Loader />}\n       <div\n         className={css`\n           display: flex;\n           flex-wrap: wrap;\n"
+                },
+                {
+                    "date": 1642931440388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,20 @@\n   }, [dispatch]);\n \n   return (\n     <div>\n-      {true&& <Loader />}\n+      {true && (\n+        <div\n+          className={css`\n+            position: fixed;\n+            top: 50%;\n+            left: 50%;\n+            transform: translate(-50%, -50%);\n+          `}\n+        >\n+          <Loader />\n+        </div>\n+      )}\n       <div\n         className={css`\n           display: flex;\n           flex-wrap: wrap;\n"
+                },
+                {
+                    "date": 1642931453741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,8 +30,9 @@\n             position: fixed;\n             top: 50%;\n             left: 50%;\n             transform: translate(-50%, -50%);\n+            z-index: 1;\n           `}\n         >\n           <Loader />\n         </div>\n"
+                },
+                {
+                    "date": 1642931729976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n             position: fixed;\n             top: 50%;\n             left: 50%;\n             transform: translate(-50%, -50%);\n-            z-index: 1;\n+            z-index: 9;\n           `}\n         >\n           <Loader />\n         </div>\n"
+                },
+                {
+                    "date": 1642931748254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,9 @@\n             top: 50%;\n             left: 50%;\n             transform: translate(-50%, -50%);\n             z-index: 9;\n+            opacity: 0.7;\n           `}\n         >\n           <Loader />\n         </div>\n"
+                },
+                {
+                    "date": 1642931763276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,8 @@\n             top: 50%;\n             left: 50%;\n             transform: translate(-50%, -50%);\n             z-index: 9;\n-            opacity: 0.7;\n           `}\n         >\n           <Loader />\n         </div>\n"
+                },
+                {
+                    "date": 1642931910503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   }, [dispatch]);\n \n   return (\n     <div>\n-      {true && (\n+      {status ===\"loading\" && (\n         <div\n           className={css`\n             position: fixed;\n             top: 50%;\n"
+                },
+                {
+                    "date": 1642933981759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import React, { useEffect, useState } from \"react\";\n import { Loader } from \"../../../components/Loader\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n-import { FETCH_DELIVERIES } from \"../state/actions\";\n+import { FETCH_DELIVERIES } from \"../state/constants\";\n import { getDeliveries } from \"../state/middleware\";\n import {\n   deliveriesData,\n   deliveriesDataStatus,\n@@ -24,19 +24,10 @@\n \n   return (\n     <div>\n       {status ===\"loading\" && (\n-        <div\n-          className={css`\n-            position: fixed;\n-            top: 50%;\n-            left: 50%;\n-            transform: translate(-50%, -50%);\n-            z-index: 9;\n-          `}\n-        >\n+\n           <Loader />\n-        </div>\n       )}\n       <div\n         className={css`\n           display: flex;\n"
+                },
+                {
+                    "date": 1642939023588,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { css } from \"@emotion/css\";\n import { createAction } from \"@reduxjs/toolkit\";\n import React, { useEffect, useState } from \"react\";\n+import { TDeliveryItemDetails } from \"../../../api/types\";\n import { Loader } from \"../../../components/Loader\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n import { FETCH_DELIVERIES } from \"../state/constants\";\n@@ -38,9 +39,9 @@\n       >\n         {listIds.map((id) => (\n           <ListItem\n             key={id}\n-            listData={entities[id]}\n+            listData={entities[id] as TDeliveryItemDetails}\n             isActive={activeDeliveryId === id}\n           />\n         ))}\n       </div>\n"
+                },
+                {
+                    "date": 1642939700204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,16 +7,16 @@\n import { ListItem } from \"../components/ListItem\";\n import { FETCH_DELIVERIES } from \"../state/constants\";\n import { getDeliveries } from \"../state/middleware\";\n import {\n-  deliveriesData,\n+  getDeliveriesData,\n   deliveriesDataStatus,\n   getActiveDeliveryId,\n } from \"../state/selectors\";\n \n export function DeliveriesList() {\n   // const count = useAppSelector(activeDeliveryId);\n-  const { ids: listIds, entities } = useAppSelector(deliveriesData);\n+  const { ids: listIds, entities } = useAppSelector(getDeliveriesData);\n   const status = useAppSelector(deliveriesDataStatus);\n   const dispatch = useAppDispatch();\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1642939961141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,16 +8,16 @@\n import { FETCH_DELIVERIES } from \"../state/constants\";\n import { getDeliveries } from \"../state/middleware\";\n import {\n   getDeliveriesData,\n-  deliveriesDataStatus,\n+  getDeliveriesAPIStatus,\n   getActiveDeliveryId,\n } from \"../state/selectors\";\n \n export function DeliveriesList() {\n   // const count = useAppSelector(activeDeliveryId);\n   const { ids: listIds, entities } = useAppSelector(getDeliveriesData);\n-  const status = useAppSelector(deliveriesDataStatus);\n+  const status = useAppSelector(getDeliveriesAPIStatus);\n   const dispatch = useAppDispatch();\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n   useEffect(() => {\n     dispatch(getDeliveries());\n"
+                },
+                {
+                    "date": 1642940017145,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,16 +8,16 @@\n import { FETCH_DELIVERIES } from \"../state/constants\";\n import { getDeliveries } from \"../state/middleware\";\n import {\n   getDeliveriesData,\n-  getDeliveriesAPIStatus,\n+  getDeliveriesApiStatus,\n   getActiveDeliveryId,\n } from \"../state/selectors\";\n \n export function DeliveriesList() {\n   // const count = useAppSelector(activeDeliveryId);\n   const { ids: listIds, entities } = useAppSelector(getDeliveriesData);\n-  const status = useAppSelector(getDeliveriesAPIStatus);\n+  const status = useAppSelector(getDeliveriesApiStatus);\n   const dispatch = useAppDispatch();\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n   useEffect(() => {\n     dispatch(getDeliveries());\n"
+                },
+                {
+                    "date": 1642940466905,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,23 +5,23 @@\n import { Loader } from \"../../../components/Loader\";\n import { useAppSelector, useAppDispatch } from \"../../../store/hooks\";\n import { ListItem } from \"../components/ListItem\";\n import { FETCH_DELIVERIES } from \"../state/constants\";\n-import { getDeliveries } from \"../state/middleware\";\n+import { getDeliveryList } from \"../state/middleware\";\n import {\n-  getDeliveriesData,\n-  getDeliveriesApiStatus,\n+  getDeliveryListData,\n+  getDeliveryListApiStatus,\n   getActiveDeliveryId,\n } from \"../state/selectors\";\n \n-export function DeliveriesList() {\n+export function DeliveryListList() {\n   // const count = useAppSelector(activeDeliveryId);\n-  const { ids: listIds, entities } = useAppSelector(getDeliveriesData);\n-  const status = useAppSelector(getDeliveriesApiStatus);\n+  const { ids: listIds, entities } = useAppSelector(getDeliveryListData);\n+  const status = useAppSelector(getDeliveryListApiStatus);\n   const dispatch = useAppDispatch();\n   const activeDeliveryId = useAppSelector(getActiveDeliveryId);\n   useEffect(() => {\n-    dispatch(getDeliveries());\n+    dispatch(getDeliveryList());\n   }, [dispatch]);\n \n   return (\n     <div>\n"
+                }
+            ],
+            "date": 1642839295326,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\nimport { useAppSelector, useAppDispatch } from '../../../store/hooks';\nimport { selectCount } from '../state/selectors';\n\nexport function DeliveriesList() {\n  const count = useAppSelector(selectCount);\n  const dispatch = useAppDispatch();\n  const [incrementAmount, setIncrementAmount] = useState('2');\n\n  const incrementValue = Number(incrementAmount) || 0;\n\n  return (\n    <div>\n     deliveries list here\n    </div>\n  );\n}\n"
+        }
+    ]
+}

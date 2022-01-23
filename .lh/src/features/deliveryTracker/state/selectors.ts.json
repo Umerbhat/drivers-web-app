@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/features/deliveryTracker/state/selectors.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1642945589061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1642946726398,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,7 @@\n export const getDeliveryListData = (state: RootState) => state.deliveryTracker.data;\n export const getDeliveryListApiStatus = (state: RootState) => state.deliveryTracker.apiStatus[FETCH_DELIVERY_LIST];\n export const getDeliveryApiStatus = (state: RootState) => state.deliveryTracker.apiStatus[FETCH_DELIVERY];\n export const getMarkDeliveryApiStatus = (state: RootState) => state.deliveryTracker.apiStatus[POST_DELIVERY_STATUS];\n-export const getActiveDeliveryId = (state: RootState) => state.deliveryTracker.activeDeliveryId;\n\\ No newline at end of file\n+export const getActiveDeliveryId = (state: RootState) => state.deliveryTracker.activeDeliveryId;\n+\n+export const getAllData = (state: RootState) => state.deliveryTracker\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642946877762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,5 +6,10 @@\n export const getDeliveryApiStatus = (state: RootState) => state.deliveryTracker.apiStatus[FETCH_DELIVERY];\n export const getMarkDeliveryApiStatus = (state: RootState) => state.deliveryTracker.apiStatus[POST_DELIVERY_STATUS];\n export const getActiveDeliveryId = (state: RootState) => state.deliveryTracker.activeDeliveryId;\n \n-export const getAllData = (state: RootState) => state.deliveryTracker\n\\ No newline at end of file\n+export const getDeliveryDetailsData = (state: RootState) => ({\n+    deliveryListData: getDeliveryListData(state),\n+    deliveryApiStatus: getDeliveryApiStatus(state),\n+    markDeliveryApiStatus: getMarkDeliveryApiStatus(state),\n+    activeDeliveryId: getActiveDeliveryId(state)\n+})\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1642963357771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,24 @@\n import { RootState } from \"../../../store\";\n-import { FETCH_DELIVERY, FETCH_DELIVERY_LIST, POST_DELIVERY_STATUS } from \"./constants\";\n+import {\n+  FETCH_DELIVERY,\n+  FETCH_DELIVERY_LIST,\n+  POST_DELIVERY_STATUS,\n+} from \"./constants\";\n \n-export const getDeliveryListData = (state: RootState) => state.deliveryTracker.data;\n-export const getDeliveryListApiStatus = (state: RootState) => state.deliveryTracker.apiStatus[FETCH_DELIVERY_LIST];\n-export const getDeliveryApiStatus = (state: RootState) => state.deliveryTracker.apiStatus[FETCH_DELIVERY];\n-export const getMarkDeliveryApiStatus = (state: RootState) => state.deliveryTracker.apiStatus[POST_DELIVERY_STATUS];\n-export const getActiveDeliveryId = (state: RootState) => state.deliveryTracker.activeDeliveryId;\n+export const getDeliveryListData = (state: RootState) =>\n+  state.deliveryTracker.data;\n\\ No newline at end of file\n+export const getDeliveryListApiStatus = (state: RootState) =>\n+  state.deliveryTracker.apiStatus[FETCH_DELIVERY_LIST];\n+export const getDeliveryApiStatus = (state: RootState) =>\n+  state.deliveryTracker.apiStatus[FETCH_DELIVERY];\n+export const getMarkDeliveryApiStatus = (state: RootState) =>\n+  state.deliveryTracker.apiStatus[POST_DELIVERY_STATUS];\n+export const getActiveDeliveryId = (state: RootState) =>\n+  state.deliveryTracker.activeDeliveryId;\n \n export const getDeliveryDetailsData = (state: RootState) => ({\n-    deliveryListData: getDeliveryListData(state),\n-    deliveryApiStatus: getDeliveryApiStatus(state),\n-    markDeliveryApiStatus: getMarkDeliveryApiStatus(state),\n-    activeDeliveryId: getActiveDeliveryId(state)\n-})\n+  deliveryListData: getDeliveryListData(state),\n+  deliveryApiStatus: getDeliveryApiStatus(state),\n+  markDeliveryApiStatus: getMarkDeliveryApiStatus(state),\n+  activeDeliveryId: getActiveDeliveryId(state),\n+});\n"
+                }
+            ],
+            "date": 1642945589061,
+            "name": "Commit-0",
+            "content": "import { RootState } from \"../../../store\";\nimport { FETCH_DELIVERY, FETCH_DELIVERY_LIST, POST_DELIVERY_STATUS } from \"./constants\";\n\nexport const getDeliveryListData = (state: RootState) => state.deliveryTracker.data;\nexport const getDeliveryListApiStatus = (state: RootState) => state.deliveryTracker.apiStatus[FETCH_DELIVERY_LIST];\nexport const getDeliveryApiStatus = (state: RootState) => state.deliveryTracker.apiStatus[FETCH_DELIVERY];\nexport const getMarkDeliveryApiStatus = (state: RootState) => state.deliveryTracker.apiStatus[POST_DELIVERY_STATUS];\nexport const getActiveDeliveryId = (state: RootState) => state.deliveryTracker.activeDeliveryId;"
+        }
+    ]
+}
